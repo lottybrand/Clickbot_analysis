@@ -1,0 +1,12 @@
+RESULTS
+
+H1 : no effect of condition on likelihood of getting vaccinated changing. But 15% of ppts (571 who weren't already yes) likelihood to get a future vax increased. Need to make table of befores, afters, by cond, etc, could be similar to Altay, our analysis is just diff. 
+
+H2: Experiment effect on vax attitudes! nice! 
+
+h2_exp: 
+
+          mean   sd 5.5% 94.5% n_eff Rhat
+bPost     0.58 0.05 0.50  0.65  3334    1
+sigmaR    2.00 0.04 1.93  2.07   702    1
+sigmaItem 0.44 0.05 0.37  0.52  1823    1

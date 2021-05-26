@@ -3,14 +3,16 @@ library(rethinking)
 
 #### dataframe for hypothesis 1 - more likely to vaccinate after choice condition ####
 
-#pick variables you need
-h_1_data <- subset(clickbot_analysis, select=c("ID","vax_positive","choice_cond"))
+#pick variables you need (include vax_future_1 to remove those already yes at beginning)
+h_1_data <- subset(clean_clickbot, select=c("ID","vax_positive","choice_cond","vax_future_1"))
 
-#remove duplication from long formatting (will use raw_clickbot for actual analysis)
-h_1_data <- h_1_data[1:10,]
+#remove those who already said yes to begin with as they can't change positively anyway (will check if any changed negatively!)
+# 145 said they would consider vaccine in future before the exp (hmm maybe wording wasn't great here)
+h_1_data <- h_1_data[!(h_1_data$vax_future_1==1),]
 
-#make as large as the real thing will be (this is pilot data of 10, we will require 700, so repeat 70 times)
-h_1_data <- h_1_data[rep(seq_len(nrow(h_1_data)), 70),]
+table(h_1_data$vax_positive, h_1_data$choice_cond)
+
+#need to make a table with vax_future_1 and vax_future_2 in each conditions
 
 model1 <- map2stan(
   alist(
@@ -29,12 +31,16 @@ plot(precis(model1))
 
 h_2_data <- subset(clickbot_analysis, select=c("ID","attitude","att_type","post_rating","choice_cond"))
 
-h_2_data <- h_2_data[rep(seq_len(nrow(h_2_data)), 70),]
+
 
 #coerce index for random effect (think this is done alphabetically so will need to check back with clickbot_analysis)
 h_2_data$att_type <- coerce_index(h_2_data$att_type)
 
+# quick look at the means so no nasty shocks: 
 
+theMeans = tapply(clickbot_analysis$attitude, list(clickbot_analysis$post_rating, clickbot_analysis$choice_cond),mean)
+#one on the left comes first (post_rating)
+theMeans
 
 #null model, just varying intercepts for attitude type and rater (ID)
 
