@@ -2,6 +2,25 @@ RESULTS
 
 H1 : no effect of condition on likelihood of getting vaccinated changing. But 15% of ppts (571 who weren't already yes) likelihood to get a future vax increased. Need to make table of befores, afters, by cond, etc, could be similar to Altay, our analysis is just diff. 
 
+ table(h_1_data$vax_future_1, h_1_data$vax_future_2, h_1_data$choice_cond)
+, ,  = 0
+
+    
+      -1   0   1
+  -1 149  38   2
+  0    1  84  10
+  1    0   2  73
+
+, ,  = 1
+
+    
+      -1   0   1
+  -1 166  24   4
+  0    1  77  15
+  1    0   6  64
+
+
+
 H2: Experiment effect on vax attitudes! nice! 
 
 h2_exp: 
@@ -10,3 +29,31 @@ h2_exp:
 bPost     0.58 0.05 0.50  0.65  3334    1
 sigmaR    2.00 0.04 1.93  2.07   702    1
 sigmaItem 0.44 0.05 0.37  0.52  1823    1
+
+h2_int: 
+
+            mean   sd 5.5% 94.5% n_eff Rhat
+bPost_Cond 0.50 0.06 0.40  0.59  2473    1
+sigmaR     1.99 0.04 1.92  2.06   948    1
+sigmaItem  0.44 0.05 0.37  0.53  2513    1
+
+h2_full: 
+
+            mean   sd  5.5% 94.5% n_eff Rhat
+bPost_Cond -0.09 0.09 -0.24  0.05   961    1
+bPost       0.63 0.06  0.53  0.73  1231    1
+sigmaR      2.00 0.04  1.93  2.07   701    1
+sigmaItem   0.44 0.05  0.38  0.52  1381    1
+
+h2_null: 
+
+          mean   sd 5.5% 94.5% n_eff Rhat
+sigmaR    1.98 0.04 1.91  2.05   635 1.01
+sigmaItem 0.44 0.05 0.37  0.52  1407 1.00
+
+compare(h2_exp,h2_int,h2_full, h2_null)
+           WAIC pWAIC dWAIC weight     SE   dSE
+h2_exp  18187.4 596.2   0.0    0.6 142.88    NA
+h2_full 18188.2 596.1   0.8    0.4 142.76  2.80
+h2_int  18302.0 595.7 114.6    0.0 142.38 18.14
+h2_null 18382.7 594.6 195.3    0.0 141.84 24.90

@@ -4,7 +4,16 @@ library(rethinking)
 #### dataframe for hypothesis 1 - more likely to vaccinate after choice condition ####
 
 #pick variables you need (include vax_future_1 to remove those already yes at beginning)
-h_1_data <- subset(clean_clickbot, select=c("ID","vax_positive","choice_cond","vax_future_1"))
+h_1_data <- subset(clean_clickbot, select=c("ID","vax_positive","choice_cond","vax_future_1","vax_future_2"))
+
+# h_yes_data <- h_1_data[(h_1_data$vax_future_1==1),] 
+h_yes_data <- h_1_data[(h_1_data$vax_future_1==1),] 
+table(h_yes_data$vax_future_2)
+
+#check raw nums
+table(h_1_data$vax_future_1, h_1_data$choice_cond)
+table(h_1_data$vax_future_2, h_1_data$choice_cond)
+
 
 #remove those who already said yes to begin with as they can't change positively anyway (will check if any changed negatively!)
 # 145 said they would consider vaccine in future before the exp (hmm maybe wording wasn't great here)
@@ -60,7 +69,7 @@ h2_null <- map2stan(
   control=list(adapt_delta=0.99, max_treedepth=13),
   chains = 3, cores = 3, iter=1200)
 
-
+precis(h2_null)
 #model testing just the effect of the experiment in general, ie do attitudes change after both conditions
 
 h2_exp <- map2stan(
@@ -130,7 +139,7 @@ precis(h2_full)
 
 #the change in interaction direction confused me, but it's because the effect of condition is smaller than the effect of experiment (= neg interaction effect) 
 
-compare(h2_exp,h2_int,h2_full)
+compare(h2_exp,h2_int,h2_full, h2_null)
 
 # tried a model with both main effects and interaction in here together to help make sense
 
