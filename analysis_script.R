@@ -178,16 +178,15 @@ theMeans
 
 h_3_data <- subset(clickbot_engagement, select=c("ID","engagement_1","eng_type","choice_cond"))
 
-#re order to check this worked
-h3_ordr <- h_3_data[ order(h_3_data$ID), ]
-rm(h3_ordr)
+#re order to check this worked (can just click the ID heading using the window)
+#h3_ordr <- h_3_data[ order(h_3_data$ID), ]
+#rm(h3_ordr)
 
-# get big no. of ppts from pilot: 10 in pilot, 700 in real thing, *70  
-h_3_data <- h_3_data[rep(seq_len(nrow(h_3_data)), 70),]
-
+# make sure you reverse-ordered 'confusing' and 'frustrating' eng_types in data_processing first!! 
 
 #coerce index for random effect (think this is done alphabetically so will need to check back with clickbot_analysis)
 h_3_data$eng_type <- coerce_index(h_3_data$eng_type)
+
 
 #model checking effect of condition on engagement, controlling for ppt and engagement type
 
@@ -211,7 +210,6 @@ h3_model <- map2stan(
 
 precis(h3_model)
 
-#control condition also more engaging here? blimey 
 
 theMeansEng = tapply(h_3_data$engagement_1, list(h_3_data$choice_cond),mean)
 theMeansEng
@@ -238,5 +236,13 @@ DensityPlot_Pre_att
 DensityPlot_Post_att <- ggplot(data=h_2_post, aes(x=attitude, color=choice_cond)) + 
   geom_density(adjust=1.9, alpha=1)+
   scale_x_continuous(name = "Vax Attitude", breaks = seq(1, 7), limits=c(1, 7))
+DensityPlot_Post_att
+
+h_2_data$post_rating <- as.factor(h_2_data$post_rating)
+
+DensityPlot_Post_att <- ggplot(data=h_2_data, aes(x=attitude, color=post_rating)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Vax Attitude", breaks = seq(1, 7), limits=c(1, 7)) +
+  theme_bw()
 DensityPlot_Post_att
 

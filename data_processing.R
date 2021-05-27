@@ -113,7 +113,7 @@ colnames(clean_clickbot)
 
 # four engagement measures converted to one long engagement measure
 clickbot_engagement <- reshape(clean_clickbot, 
-                             varying = list(c(25,26,27,28)),
+                             varying = list(c(24,25,26,27)),
                              v.names = c("engagement"), 
                              direction = "long")
 
@@ -136,15 +136,46 @@ clickbot_engagement$eng_type <- ifelse((clickbot_engagement$eng_type==1),"Engagi
 
 clickbot_engagement$engagement_1 <- ifelse((clickbot_engagement$engagement=="Strongly Disagree"),1,
                                                     ifelse((clickbot_engagement$engagement=="Disagree"),2,
-                                                           ifelse((clickbot_engagement$engagement=="Somewhat disagree"),3,
-                                                                  ifelse((clickbot_engagement$engagement=="Neither agree nor disagree"),4,
-                                                                         ifelse((clickbot_engagement$engagement=="Somewhat agree"),5,
+                                                           ifelse((clickbot_engagement$engagement=="Somewhat Disagree"),3,
+                                                                  ifelse((clickbot_engagement$engagement=="Neither Agree nor Disagree"),4,
+                                                                         ifelse((clickbot_engagement$engagement=="Somewhat Agree"),5,
                                                                                 ifelse((clickbot_engagement$engagement=="Agree"),6,
                                                                                        ifelse((clickbot_engagement$engagement=="Strongly Agree"),7,99)))))))
 
 #make condition binary 
 clickbot_engagement$choice_cond <- ifelse((clickbot_engagement$condition=="choice"),1,0)
 
+# WOOPS ! Need to negative code two of them - doh! 
+# will now use h_3_data to do this as easier to naviate...
+# (created in analysis_script.R) with
+# h_3_data <- subset(clickbot_engagement, select=c("ID","engagement_1","eng_type","choice_cond"))
+
+
+#this is probably the worst way to do it, but, my brain won't do anything else right now. 
+# Sorry everyone reading this code, very sorry. 
+
+#reverse code "confusing" 
+h_3_data$engagement_1 <- ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==1)),7,
+                                ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==2)),6,
+                                   ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==3)),5,
+                                        ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==4)),4,
+                                               ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==5)),3,
+                                                      ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==6)),2,
+                                                             ifelse(((h_3_data$eng_type=="Confusing" & h_3_data$engagement_1==7)),1,h_3_data$engagement_1)))))))
+
+#reverse code "frustrating"
+h_3_data$engagement_1 <- ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==1)),7,
+                                ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==2)),6,
+                                       ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==3)),5,
+                                              ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==4)),4,
+                                                     ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==5)),3,
+                                                            ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==6)),2,
+                                                                   ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==7)),1,h_3_data$engagement_1)))))))
+
+
 # write to csv for now 
 #clickbot_engagement <- write.csv(clickbot_engagement, "clickbot_engagement.csv", row.names=FALSE)
 #clickbot_engagement <- read.csv("clickbot_engagement.csv")
+
+
+
