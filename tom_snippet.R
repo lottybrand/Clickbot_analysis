@@ -41,4 +41,26 @@ p+ geom_histogram()
 
 #now let's look at those dataimte objects
 #this will help https://lubridate.tidyverse.org/
+library(lubridate, warn.conflicts = FALSE)
 
+#e.g.
+df$RecordedDate[1]
+
+#as datetime object
+dmy_hm(df$RecordedDate[1])
+
+#note if you specify wrong structure you get plausible but wrong output
+ymd_hms(df$RecordedDate[1])
+
+#calculate a duration like this, but gives you a duration object
+dur <- as.duration(dmy_hm(df$RecordedDate[2])-dmy_hm(df$RecordedDate[1]))
+
+#convert to an integer number of seconds
+as.numeric(dur,"seconds")
+
+#so if we had two columns, something like this might work
+
+df <- df %>% mutate(timetaken = as.numeric(as.duration(dmy_hm(df$EndDate)-dmy_hm(df$StartDate)),"seconds"))
+
+#here it is subtracting the RecordedDate column from itself, which seems to work
+df <- df %>% mutate(timetaken = as.numeric(as.duration(dmy_hm(df$RecordedDate)-dmy_hm(df$RecordedDate)),"seconds"))
