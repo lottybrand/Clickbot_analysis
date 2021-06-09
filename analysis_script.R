@@ -36,6 +36,8 @@ model1 <- map2stan(
 precis(model1)
 plot(precis(model1))
 
+saveRDS(model1, "model1.rds")
+
 #### dataframe for hypothesis 2 - do post treatment attitudes go up more in choice condition?  ####
 
 h_2_data <- subset(clickbot_analysis, select=c("ID","attitude","att_type","post_rating","choice_cond"))
@@ -71,6 +73,7 @@ h2_null <- map2stan(
 
 precis(h2_null)
 #model testing just the effect of the experiment in general, ie do attitudes change after both conditions
+saveRDS(h2_null, "h2_null.rds")
 
 h2_exp <- map2stan(
   alist(
@@ -91,6 +94,7 @@ h2_exp <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_exp)
+saveRDS(h2_exp, "h2_exp.rds")
 
 #model testing just the effect of the interaction, ie do attitudes change more after seeing the choice condition compared to after seeing the control condition?
 
@@ -113,6 +117,7 @@ h2_int <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_int)
+saveRDS(h2_int, "h2_int.rds")
 
 #full model with both interaction and experiment effects
 
@@ -136,37 +141,38 @@ h2_full <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_full)
+saveRDS(h2_full, "h2_full.rds")
 
 #the change in interaction direction confused me, but it's because the effect of condition is smaller than the effect of experiment (= neg interaction effect) 
 
 compare(h2_exp,h2_int,h2_full, h2_null)
 
-# tried a model with both main effects and interaction in here together to help make sense
+# tried a model with both main effects and interaction in here together to help make sense in the pre-reg run. doesn't make sense as we exp no main effect of cond (no diff before)
 
-h2_full_2 <- map2stan(
-  alist(
-    attitude ~ dordlogit(phi, cutpoints),
-    phi <-  bPost_Cond*post_rating*choice_cond + bPost*post_rating +
-      bCond*choice_cond +
-      aR[ID]*sigmaR +
-      aItem[att_type]*sigmaItem,
-    bPost_Cond ~ dnorm(0,1),
-    bPost ~ dnorm(0,1),
-    bCond ~ dnorm(0,1),
-    aR[ID] ~ dnorm(0,1),
-    aItem[att_type] ~ dnorm(0,1),
-    c(sigmaR, sigmaItem) ~ normal(0,0.1),
-    cutpoints ~ dnorm(0,10)
-  ),
-  data=h_2_data, 
-  constraints = list(sigmaItem = "lower=0", sigmaR = "lower=0"),
-  start = list(cutpoints=c(-2,-1,0,1,2,2.5)),
-  control=list(adapt_delta=0.99, max_treedepth=13),
-  chains = 3, cores = 3, iter=1200)
+#h2_full_2 <- map2stan(
+  # alist(
+  #   attitude ~ dordlogit(phi, cutpoints),
+  #   phi <-  bPost_Cond*post_rating*choice_cond + bPost*post_rating +
+  #     bCond*choice_cond +
+  #     aR[ID]*sigmaR +
+  #     aItem[att_type]*sigmaItem,
+  #   bPost_Cond ~ dnorm(0,1),
+  #   bPost ~ dnorm(0,1),
+  #   bCond ~ dnorm(0,1),
+  #   aR[ID] ~ dnorm(0,1),
+  #   aItem[att_type] ~ dnorm(0,1),
+  #   c(sigmaR, sigmaItem) ~ normal(0,0.1),
+  #   cutpoints ~ dnorm(0,10)
+  # ),
+  # data=h_2_data, 
+  # constraints = list(sigmaItem = "lower=0", sigmaR = "lower=0"),
+  # start = list(cutpoints=c(-2,-1,0,1,2,2.5)),
+  # control=list(adapt_delta=0.99, max_treedepth=13),
+  # chains = 3, cores = 3, iter=1200)
 
-precis(h2_full_2)
+#precis(h2_full_2)
 
-compare(h2_full,h2_full_2)
+#compare(h2_full,h2_full_2)
 # prefers the first model. There is a strong effect of experiment treatment, and neg interaction (goes up more in the control condition!)
 
 theMeans = tapply(clickbot_analysis$attitude, list(clickbot_analysis$post_rating, clickbot_analysis$choice_cond),mean)
@@ -209,6 +215,7 @@ h3_model <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h3_model)
+saveRDS(h3_model, "h3_model.rds")
 
 
 theMeansEng = tapply(h_3_data$engagement_1, list(h_3_data$choice_cond),mean)

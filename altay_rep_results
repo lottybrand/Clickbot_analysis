@@ -1,0 +1,61 @@
+
+results of altay rap: 
+
+Altay: 
+
+Call:
+lm(formula = Beh_post ~ Pre_centered_Beh + Condition, data = A1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.99415  0.00585  0.07284  0.09382  1.09382 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 2.15666    0.01460 147.743  < 2e-16 ***
+Pre_centered_Beh            0.93301    0.01394  66.927  < 2e-16 ***
+ConditionConsentform(test) -0.08797    0.02014  -4.369 1.46e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2549 on 640 degrees of freedom
+Multiple R-squared:  0.8752,	Adjusted R-squared:  0.8748 
+F-statistic:  2244 on 2 and 640 DF,  p-value: < 2.2e-16
+
+Paper: "Participants were more likely to report being willing to take the COVID-19 vaccines after the
+experimental task in the Chatbot Condition than in the Control Condition (ß = 0.12, [0.07,
+0.18], t(640) = 4.37, p < .001)."
+
+Ours: 
+
+Call:
+lm(formula = vax_future_altay ~ centred_beh + condition, data = clean_clickbot)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-1.560e-15 -1.560e-15 -4.000e-16 -3.000e-16  3.369e-13 
+
+Coefficients:
+                  Estimate Std. Error   t value Pr(>|t|)    
+(Intercept)      1.668e+00  6.843e-16 2.437e+15   <2e-16 ***
+centred_beh      1.000e+00  6.103e-16 1.638e+15   <2e-16 ***
+conditioncontrol 1.163e-15  9.665e-16 1.203e+00    0.229    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.293e-14 on 713 degrees of freedom
+Multiple R-squared:      1,	Adjusted R-squared:      1 
+F-statistic: 1.343e+30 on 2 and 713 DF,  p-value: < 2.2e-16
+
+
+Altay's 1,2,3 posts: 
+        Consentform(control) Consentform(test)
+  1                   64                71
+  2                  134               168
+  3                  107                99
+  
+Our posts: 
+      choice condition control
+  1      167            150
+  2      107            124
+  3      83              85
