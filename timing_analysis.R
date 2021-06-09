@@ -104,3 +104,38 @@ median(timing_clickbot$choice_info_time, na.rm = TRUE)/60
 
 p_choice <- ggplot(timing_clickbot,aes(x=choice_info_time))
 p_choice + geom_histogram()
+
+choice_time <- timing_clickbot[(timing_clickbot$choice_info_time<1000),]
+cntrl_time <- timing_clickbot[(timing_clickbot$control_info_time<1000),]
+
+median(choice_time$choice_info_time, na.rm = TRUE)/60
+# [1] 2.781217 median mins for choice
+median(cntrl_time$control_info_time, na.rm = TRUE)/60
+# [1] 3.942783 median mins for control
+
+mean(choice_time$choice_info_time, na.rm = TRUE)/60
+#[1] 3.632293 mean choice
+mean(cntrl_time$control_info_time, na.rm = TRUE)/60
+# [1] 4.305811 mean control
+
+p_choice_a <- ggplot(choice_time,aes(x=choice_info_time))
+p_choice_a + geom_histogram()
+
+p_control_a <- ggplot(cntrl_time,aes(x=control_info_time))
+p_control_a + geom_histogram()
+
+# merge with clean clickbot from here (run data_processing.R)
+clean_clickbot <- timing_clickbot
+
+# okay now subset of above median for cntrl and choice, (167 for choice and 237 for cntrl )
+# and minus outliers (above 1000 secs)
+
+subset_time <- clean_clickbot[which(clean_clickbot$choice_info_time<1000 & clean_clickbot$choice_info_time > 167),]
+summary(subset_time$choice_info_time)
+
+#ugh using which helps I guess but this feels a dumb way to do it:  
+subset_time2 <- clean_clickbot[which(clean_clickbot$control_info_time<1000 & clean_clickbot$control_info_time > 237),]
+summary(subset_time$control_info_time)
+
+#now merge subset_time and subset_time2 ... but we don't want this! we just want to add a column in the original dataframe denoting above median time, to compare to the rest, right? 
+# now my brain has stopped for the day... continue tomorrow
