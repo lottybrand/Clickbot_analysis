@@ -2,6 +2,7 @@
 
 library(tidyverse)
 
+
 #import data
 filename <- 'anonymised_click_bot_abcd_May_25_2021_14.25.csv'
 df <- read.csv(filename)
