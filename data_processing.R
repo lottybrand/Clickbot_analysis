@@ -78,9 +78,10 @@ clickbot_analysis$post_att_2 <- ifelse((clickbot_analysis$post_att=="Strongly Di
 
 #### now merge into one long attitude rating, so can compare pre/post vax atts ####
 
+# remember check col names! These might've changed since the timing_analysis.R script was written. 
 colnames(clickbot_analysis)
 clickbot_analysis_longer <- reshape(clickbot_analysis,  
-                             varying = list(c(49,50)),
+                             varying = list(c(73,74)),
                              v.names = c("attitude"), 
                              direction = "long")
 

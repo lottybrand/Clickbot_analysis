@@ -38,10 +38,17 @@ plot(precis(model1))
 
 saveRDS(model1, "model1.rds")
 
+# analysed it same way as Altay did - no effect of condition, but what about in general, what does its intercepts tell us?
+# think we actually want to see if there are less 'nos' after compared to before exp. Figure out how to recode this way. 
+# so code all No's as 1 and everything else 0 ? then code before vs after? then do 
+
+# no ~ dbinom   a + after exp
+
+# think i need to convert to long format for this
+
 #### dataframe for hypothesis 2 - do post treatment attitudes go up more in choice condition?  ####
 
 h_2_data <- subset(clickbot_analysis, select=c("ID","attitude","att_type","post_rating","choice_cond"))
-
 
 
 #coerce index for random effect (think this is done alphabetically so will need to check back with clickbot_analysis)
