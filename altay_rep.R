@@ -24,8 +24,11 @@ table(clean_clickbot$vax_future_2_altay)
 
 clean_clickbot$centred_beh <- clean_clickbot$vax_future_altay - mean(clean_clickbot$vax_future_altay, na.rm = T)
 
-altay_model <- lm(vax_future_altay ~ centred_beh + condition, data = clean_clickbot) 
+altay_model <- lm(vax_future_2_altay ~ centred_beh + condition, data = clean_clickbot) 
 summary(altay_model)
+
+# this makes sense. Still want to model moves away from No to double-check. so N0 =  1 everything else 0, 
+# predict No's based on before/after and condition, so make wide -- long (and then varying intercept for ppt?)
 
 A1 <- read.csv("A1_altay.csv")
 

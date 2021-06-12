@@ -351,6 +351,9 @@ h2_full_time <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_full_time)
+compare(h2_full_time,h2_int_time,h2_time)
+
+# full is best : 
 
 #           mean   sd 5.5% 94.5% n_eff Rhat
 # bPost_Time 0.48 0.08 0.34  0.61  1281    1
