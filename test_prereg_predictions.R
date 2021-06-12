@@ -6,6 +6,7 @@ library(tidyverse)
 library(rethinking)
 # https://github.com/rmcelreath/rethinking  note the dependencies - 
 # you need stan installed # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+# linux, also this https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux
 ## current status: no focal/20.04 release of https://launchpad.net/~marutter/+archive/ubuntu/c2d4u
 ## upgrade R to 4 or downgrade ubuntu to 18.04?
 # linux, you also need V8 https://github.com/jeroen/V8
