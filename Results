@@ -18,6 +18,29 @@ H1 : no effect of condition on likelihood of getting vaccinated changing. But 15
   -1 166  24   4
   0    1  77  15
   1    0   6  64
+  
+  VAX CHANGE: 
+table(clean_clickbot$vax_change) --> 
+2 = No to Yes. 1 = either No to undecided or Undecided to Yes. 
+0 = unchanged, -1 = either yes to undecided or undecided to no. (there were no -2's - good!)
+
+-1   0   1   2 
+ 10 613  87   6 
+ 
+ OUT OF THESE TEN, 8 went from yes to undecided, and 2 from undecided to no. 
+ Out of those 8, all were neutrals (rather than againsts)
+ 
+ OUT of the 87 who changed for the better, 62 went from No to Undecided, 25 from Undecided to Yes 
+
+
+Okay, were there less No's after the experiment compared to before? Yes! Phew! 
+This makes sense: 
+a is the amount of No's (1 = no) before the experiment, there are mainly No's.
+b is the effect of the experiment, negative, so we reduced nos. :) 
+
+    mean   sd  5.5% 94.5% n_eff Rhat
+a  0.14 0.07  0.02  0.26  3057    1
+b -0.37 0.11 -0.54 -0.20  3329    1
 
 
 
