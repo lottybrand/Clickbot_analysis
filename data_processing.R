@@ -1,6 +1,7 @@
 
-
+####
 #### processing the data for analysis ####
+####
 
 # can start here if haven't ran data_input.R first
 # clean_clickbot <- read.csv("clean_clickbot.csv", stringsAsFactors = FALSE )
@@ -65,6 +66,7 @@ clean_clickbot$choice_info_time <- (clean_clickbot$timing_choice1_Page.Submit + 
 #### make all vax attitude likert ratings wide to long: 5 attitude ratings put into one Pre and one Post item ####
 ####
 
+# let's change the name from clickbot_analysis to long_clickbot
 colnames(clean_clickbot)
 clickbot_analysis <- reshape(clean_clickbot, idvar = "ID", 
                  varying = list(c(4,5,6,7,8),
@@ -128,11 +130,16 @@ rm(clickbot_analysis_longer)
 
 #clickbot_analysis <- write.csv(clickbot_analysis, "clickbot_analysis.csv", row.names=FALSE)
 
+####
+#### make engagement measures long in separate datafile ####
+####
 
-#### make engagement measures long (think we need two diff dataframes for this, check later) ####
+#maybe also change name of this to engagement_clickbot 
 
 #need to go back to clean_clickbot for this
 colnames(clean_clickbot)
+
+
 
 # four engagement measures converted to one long engagement measure
 clickbot_engagement <- reshape(clean_clickbot, 
@@ -165,6 +172,8 @@ clickbot_engagement$engagement_1 <- ifelse((clickbot_engagement$engagement=="Str
                                                                                 ifelse((clickbot_engagement$engagement=="Agree"),6,
                                                                                        ifelse((clickbot_engagement$engagement=="Strongly Agree"),7,99)))))))
 
+# fix these WOOPS bits tomorrow: 
+
 #make condition binary 
 clickbot_engagement$choice_cond <- ifelse((clickbot_engagement$condition=="choice"),1,0)
 
@@ -194,6 +203,7 @@ h_3_data$engagement_1 <- ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$en
                                                      ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==5)),3,
                                                             ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==6)),2,
                                                                    ifelse(((h_3_data$eng_type=="Frustrating" & h_3_data$engagement_1==7)),1,h_3_data$engagement_1)))))))
+
 
 
 # write to csv for now 
