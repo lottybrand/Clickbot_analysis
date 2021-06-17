@@ -28,7 +28,7 @@ altay_model <- lm(vax_future_2_altay ~ centred_beh + condition, data = clean_cli
 summary(altay_model)
 
 # this makes sense. Still want to model moves away from No to double-check. so N0 =  1 everything else 0, 
-# predict No's based on before/after and condition, so make wide -- long (and then varying intercept for ppt?)
+# predict No's based on before/after and condition, so make wide -- long (and then varying intercept for ppt?) back to main analysis
 
 # trying to convert intention to vaccinate (vax_future_1 and vax_future_2) into Nos or not, and predict Nos before and after? (did Nos decrease?)
 # (is it better to do it this way round than predicting Not Nos and seeing if Not Nos increase? should be symmetrical...?)

@@ -1,47 +1,69 @@
+
+
 #### processing the data for analysis ####
 
+# can start here if haven't ran data_input.R first
+# clean_clickbot <- read.csv("clean_clickbot.csv", stringsAsFactors = FALSE )
 
-# create neat ppt IDs
 
-clean_clickbot$ID <- 1:(nrow(clean_clickbot))
-
-# transforming words to numbers! 
-
+# have they had at least one dose of the vaccine yet? yes/no 1/0 
 clean_clickbot$vax_yet_1 <- ifelse((clean_clickbot$vax_yet=="Yes"),1,0)
 
-
-#combine vax_futureY and vax_futureN
+#combine vax_futureY and vax_futureN (whether they have or haven't had vaccine, would they have a (2nd) in future?)
 clean_clickbot$vax_future <- paste(clean_clickbot$vax_futureN,clean_clickbot$vax_futureY)
 clean_clickbot$vax_future <- as.character(clean_clickbot$vax_future)
 
-# code vaccine hesitancy as -1 = No do not want vaccine, 0 = undecided, 1 = yes. 
- 
+# code vaccine hesitancy as -1 = "No do not want vaccine", 0 = "undecided", 1 = yes. 
 clean_clickbot$vax_future_1 <- ifelse(grepl("Yes",clean_clickbot$vax_future),1,
                                 ifelse(grepl("Undecided",clean_clickbot$vax_future),0,
                                        ifelse(grepl("No",clean_clickbot$vax_future),-1, 99)))
                                               
-# answer after experiment 
+# answer after our experiment 
 clean_clickbot$vax_future_2 <- ifelse((clean_clickbot$vax_future_2=="Yes"),1,
                                 ifelse((clean_clickbot$vax_future_2=="Undecided"),0,
                                        ifelse((clean_clickbot$vax_future_2=="No"),-1,99)))
 
-# calculate whether their decision changed after experiment  
+# calculate whether their decision changed after experiment (positive = positive change, 0 stayed same, neg =neg change) 
 clean_clickbot$vax_change <- (clean_clickbot$vax_future_2 - clean_clickbot$vax_future_1)
 
-# column for if positive change
+# column for if positive change, 1, everything else 0
 clean_clickbot$vax_positive <- ifelse((clean_clickbot$vax_change >0),1,0)
 
 
-
 #check this works properly
-vax_att_subset <- subset(clean_clickbot, select=c("vax_future","vax_future_1","vax_future_2","vax_change","vax_positive"))
-
-# for analysis probably want to remove those who started out with "yes" as they are unable to positively change anyway... (and is inconsistent with the attitudes?)
+#vax_att_subset <- subset(clean_clickbot, select=c("vax_future","vax_future_1","vax_future_2","vax_change","vax_positive"))
 
 #make condition binary 
 clean_clickbot$choice_cond <- ifelse((clean_clickbot$condition=="choice"),1,0)
 
+####
+#### continue processing nasty timing data here ####
+####
+
+#f*&^ng character class...
+fckng_chars <- clean_clickbot[,grepl("timing|timer", colnames(clean_clickbot))]
+col.num <- colnames(fckng_chars)
+clean_clickbot[col.num] <- sapply(clean_clickbot[col.num],as.numeric)
+
+# check
+#class(clean_clickbot$timing_info_consent_Page.Submit)
+# yipee
+
+# duration column as numeric
+clean_clickbot$Duration..in.seconds. <- as.numeric(clean_clickbot$Duration..in.seconds.)
+# change its ugly Qualtrics name (what were they thinking?!)
+colnames(clean_clickbot)[colnames(clean_clickbot) == 'Duration..in.seconds.'] <- 'Duration'
+
+# calculate time looking at control info and choice info
+clean_clickbot$control_info_time <- (clean_clickbot$timing_cntrl1_Page.Submit.3 + clean_clickbot$timer_cntrl2_Page.Submit.3 + clean_clickbot$timer_cntrl3_Page.Submit.3 + clean_clickbot$timing_control4_Page.Submit.3)
+clean_clickbot$choice_info_time <- (clean_clickbot$timing_choice1_Page.Submit + clean_clickbot$timing_choice2_Page.Submit + clean_clickbot$timing_choice3_Page.Submit + clean_clickbot$timing_choice4_Page.Submit)
+
+#overwrite now. 
+#write.csv(clean_clickbot, file="clean_clickbot.csv", row.names=FALSE)
+
+####
 #### make all vax attitude likert ratings wide to long: 5 attitude ratings put into one Pre and one Post item ####
+####
 
 colnames(clean_clickbot)
 clickbot_analysis <- reshape(clean_clickbot, idvar = "ID", 
@@ -102,10 +124,10 @@ rm(clickbot_analysis_longer)
 
 
 
-#### jump to here in future ####
+#### can jump to here in future ####
 
-clickbot_analysis <- write.csv(clickbot_analysis, "clickbot_analysis.csv", row.names=FALSE)
-clickbot_analysis <- read.csv("clickbot_analysis.csv")
+#clickbot_analysis <- write.csv(clickbot_analysis, "clickbot_analysis.csv", row.names=FALSE)
+
 
 #### make engagement measures long (think we need two diff dataframes for this, check later) ####
 

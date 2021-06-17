@@ -66,28 +66,9 @@ table(timing_clickbot$timing_control_1_Page.Submit)
 table(timing_clickbot$timing_cntrl1_Page.Submit)
 table(timing_clickbot$timing_cntrl1_Page.Submit.1)
 
-# looks like in the control condition it is just submit3 that recorded... check this adds up so everyone had four recordings for cntrl condition
 
-extra_timings <- timing_clickbot[,grepl("Page.Submit.1|Page.Submit.2|Page.Submit.4", colnames(timing_clickbot))]
-colnames(extra_timings)
 
-timing_clickbot <- timing_clickbot[, !(colnames(timing_clickbot) %in% colnames(extra_timings))]
 
-#remove rest manually
-timing_clickbot[ ,c('timing_cntrl1_Page.Submit', 'timing_control_1_Page.Submit', 'timer_cntrl2_Page.Submit','timing_control2_Page.Submit','timer_cntrl3_Page.Submit','timing_control3_Page.Submit','timing_control4_Page.Submit','timing_control4_Page.Submit.4')] <- list(NULL)
-
-#okay looks good
-timing_clickbot$control_info_time <- (timing_clickbot$timing_cntrl1_Page.Submit.3 + timing_clickbot$timer_cntrl2_Page.Submit.3 + timing_clickbot$timer_cntrl3_Page.Submit.3 + timing_clickbot$timing_control4_Page.Submit.3)
-
-#f*&^ng character class...
-fckng_chars <- timing_clickbot[,grepl("timing|timer", colnames(timing_clickbot))]
-col.num <- colnames(fckng_chars)
-timing_clickbot[col.num] <- sapply(timing_clickbot[col.num],as.numeric)
-
-class(timing_clickbot$timing_info_consent_Page.Submit)
-# yipee 
-
-timing_clickbot$control_info_time <- (timing_clickbot$timing_cntrl1_Page.Submit.3 + timing_clickbot$timer_cntrl2_Page.Submit.3 + timing_clickbot$timer_cntrl3_Page.Submit.3 + timing_clickbot$timing_control4_Page.Submit.3)
 min(timing_clickbot$control_info_time, na.rm = TRUE)
 max(timing_clickbot$control_info_time, na.rm = TRUE)
 median(timing_clickbot$control_info_time, na.rm = TRUE)
@@ -96,7 +77,6 @@ median(timing_clickbot$control_info_time, na.rm = TRUE)/60
 p_control <- ggplot(timing_clickbot,aes(x=control_info_time))
 p_control + geom_histogram()
 
-timing_clickbot$choice_info_time <- (timing_clickbot$timing_choice1_Page.Submit + timing_clickbot$timing_choice2_Page.Submit + timing_clickbot$timing_choice3_Page.Submit + timing_clickbot$timing_choice4_Page.Submit)
 min(timing_clickbot$choice_info_time, na.rm = TRUE)
 max(timing_clickbot$choice_info_time, na.rm = TRUE)
 median(timing_clickbot$choice_info_time, na.rm = TRUE)
@@ -125,7 +105,7 @@ p_control_a <- ggplot(cntrl_time,aes(x=control_info_time))
 p_control_a + geom_histogram()
 
 # merge with clean clickbot from here (run data_processing.R)
-clean_clickbot <- timing_clickbot
+#clean_clickbot <- timing_clickbot
 
 # okay now subset of above median for cntrl and choice, (167 for choice and 237 for cntrl )
 # and minus outliers (above 1000 secs)
@@ -176,6 +156,8 @@ precis(model1.1)
 # a -1.41 0.20 -1.73 -1.09  3793    1
 # b -0.17 0.29 -0.64  0.30  3508    1
 
+saveRDS(model1.1, "model1.1_timing.rds")
+
 # so no effect of condition on intention change just when looking at those spending over 4 minutes 
 
 # need to do same for attitude model 
@@ -210,6 +192,8 @@ precis(model1.2)
 #   mean   sd  5.5% 94.5% n_eff Rhat
 # a -1.73 0.16 -2.00 -1.48  2857    1
 # b  0.21 0.22 -0.15  0.57  2813    1
+
+saveRDS(model1.2, "model1.2_timing.rds")
 
 # so spending over 4 minutes doens't increase likelihood of changing intention. 
 
@@ -305,6 +289,7 @@ precis(h2_time)
 # sigmaR    1.97 0.04 1.90  2.04   808 1.00
 # sigmaItem 0.44 0.05 0.37  0.52  1986 1.00
 
+saveRDS(h2_time, "model_h2_time.rds")
 
 h2_int_time <- map2stan(
   alist(
@@ -331,6 +316,9 @@ precis(h2_int_time)
 # sigmaR     1.99 0.05 1.92  2.07   612 1.01
 # sigmaItem  0.44 0.05 0.37  0.53  1273 1.00
 
+saveRDS(h2_int_time, "model_h2_int_time.rds")
+
+
 h2_full_time <- map2stan(
   alist(
     attitude ~ dordlogit(phi, cutpoints),
@@ -351,6 +339,8 @@ h2_full_time <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_full_time)
+saveRDS(h2_full_time, "model_h2_full_time.rds")
+
 compare(h2_full_time,h2_int_time,h2_time)
 
 # full is best : 
