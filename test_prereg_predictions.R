@@ -2,18 +2,19 @@
 # Loads cleaned data and runs the preregistered analysis on the clickbot data
 # - - - - - - - 
 
-library(tidyverse)
+#library(tidyverse)
+
 library(rethinking)
 # https://github.com/rmcelreath/rethinking  note the dependencies - 
 # you need stan installed # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 # linux, also this https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux
-## current status: no focal/20.04 release of https://launchpad.net/~marutter/+archive/ubuntu/c2d4u
-## upgrade R to 4 or downgrade ubuntu to 18.04?
 # linux, you also need V8 https://github.com/jeroen/V8
+# linux, make sure you upgrade to R 4.0 https://medium.com/@hpgomide/how-to-update-your-r-3-x-to-the-r-4-x-in-your-linux-ubuntu-46e2209409c3
+# linux, then pull from this ppa https://github.com/stan-dev/rstan/issues/886
 
 #recommended options
 options(mc.cores = parallel::detectCores()) #For execution on a local, multicore CPU with excess RAM we recommend calling
-rstan_options(auto_write = TRUE) #To avoid recompilation of unchanged Stan programs, we recommend calling
+rstan_options(auto_write = TRUE,javascript=FALSE) #To avoid recompilation of unchanged Stan programs, we recommend calling
 #set_ulam_cmdstan(TRUE)
 
 #load data cleaned by data_processing.R
@@ -51,11 +52,19 @@ model1 <- map2stan(
     b ~ dnorm(0,1)
   ),
   data=h_1_data, 
-  warmup=1000, iter=4000, chains=1, cores=1)
+  warmup=1000, iter=4000, chains=3, cores=1)
 
 model_stop <- Sys.time()
 
 model_time <- model_stop - model_start
+
+print(model_time) 
+#Tom's xps, 1 chain, 1 core = 26.9s
+#Tom's xps, 4 chain, 4 core = 31.5s
+#Tom's xps, 1 chain, 4 core = 26.5s
+#Tom's xps, 3 chain, 3 core = 26.5s
+#Tom's xps, 3 chain, 1 core = 29.1s / 30.2
+
 
 precis(model1)
 plot(precis(model1))
@@ -97,11 +106,17 @@ h2_null <- map2stan(
   constraints = list(sigmaItem = "lower=0", sigmaR = "lower=0"),
   start = list(cutpoints=c(-2,-1,0,1,2,2.5)),
   control=list(adapt_delta=0.99, max_treedepth=13),
-  chains = 1, cores = 1, iter=1200)
+  chains = 3, cores = 3, iter=1200)
 
 model_stop <- Sys.time()
 
 model_time <- model_stop - model_start
+print(model_time)
+# tom-xps, chains =1, cores =1 8.9 mins
+# tom-xps, chains =3, cores =3 8.9 mins / 11.2
+# tom-xps, chains =3, cores =6 11.1 mins
+# tom-xps, chains =3, cores =1 26.4 mins
+
 
 
 precis(h2_null)
