@@ -1,27 +1,26 @@
 
 library(rethinking)
 
-#### dataframe for hypothesis 1 - more likely to vaccinate after choice condition ####
+####
+#### dataframe for hypothesis 1 - more likely to vaccinate after choice condition? (Intention Change) ####
+####
+
 
 #pick variables you need (include vax_future_1 to remove those already yes at beginning)
 h_1_data <- subset(clean_clickbot, select=c("ID","vax_positive","choice_cond","vax_future_1","vax_future_2"))
 
-# h_yes_data <- h_1_data[(h_1_data$vax_future_1==1),] 
-h_yes_data <- h_1_data[(h_1_data$vax_future_1==1),] 
-table(h_yes_data$vax_future_2)
 
 #check raw nums
 table(h_1_data$vax_future_1, h_1_data$choice_cond)
 table(h_1_data$vax_future_2, h_1_data$choice_cond)
 
 
-#remove those who already said yes to begin with as they can't change positively anyway (will check if any changed negatively!)
-# 145 said they would consider vaccine in future before the exp (hmm maybe wording wasn't great here)
+# remove those who already said yes to begin with as they can't change positively anyway 
 h_1_data <- h_1_data[!(h_1_data$vax_future_1==1),]
 
 table(h_1_data$vax_positive, h_1_data$choice_cond)
 
-#need to make a table with vax_future_1 and vax_future_2 in each conditions
+# model likelihood of attitude changing positively, and effect of condition on this likelihood: 
 
 model1 <- map2stan(
   alist(
@@ -38,15 +37,60 @@ plot(precis(model1))
 
 saveRDS(model1, "model1.rds")
 
-# analysed it same way as Altay did - no effect of condition, but what about in general, what does its intercepts tell us?
-# think we actually want to see if there are less 'nos' after compared to before exp. Figure out how to recode this way. 
-# so code all No's as 1 and everything else 0 ? then code before vs after? then do 
+# also analysed it same way as Altay did (see altay_rep.R file) to compare - still no effect of condition, but what about in general, what does its intercept tell us?
+# altay report similar decrease in "no's" to us. See if there are less 'nos' after compared to before exp. 
+# so code all No's as 1 and everything else 0. then code before vs after. then do 
+# no ~ dbinom   a + after_exp
+# so need to convert to long format for this:
 
-# no ~ dbinom   a + after exp
+# convert intention to vaccinate (vax_future_1 and vax_future_2) into Nos or not, and predict Nos before and after (wide to long):
 
-# think i need to convert to long format for this
+colnames(clean_clickbot)
+clean_clickbot_NOs <- reshape(clean_clickbot,  
+                              varying = list(c("vax_future_1","vax_future_2")),
+                              v.names = c("intention"), 
+                              direction = "long")
 
+#change default 'time' column name to post intention (0 = pre, 1 = post)
+colnames(clean_clickbot_NOs)[colnames(clean_clickbot_NOs) == "time"] <- "post_intention"
+
+#make binary (1 = post rating, 0 = pre rating)
+clean_clickbot_NOs$post_intention <- ifelse((clean_clickbot_NOs$post_intention ==1),0,1)
+
+#make intention binary (1 = No, 0 = everything else)
+clean_clickbot_NOs$intention <- ifelse((clean_clickbot_NOs$intention ==-1),1,0)
+
+# remove that default ids column that reshape makes 
+clean_clickbot_NOs$id <- NULL
+
+#### okay now model to check if there is intention change after the experiment in general ####
+
+#just choose the columns it wants
+no_data <- subset(clean_clickbot_NOs, select=c("ID","intention","post_intention"))
+
+model_nos <- map2stan(
+  alist(
+    intention ~ dbinom(1, p),
+    logit(p) <- a + b*post_intention,
+    a ~ dnorm(0,1),
+    b ~ dnorm(0,1)
+  ),
+  data=no_data, 
+  warmup=1000, iter=4000, chains=3, cores=3)
+
+precis(model_nos)
+saveRDS(model_nos, "model_nos.rds")
+
+# Okay there were less no's after the treatment.
+
+#     mean   sd  5.5% 94.5% n_eff Rhat
+# a  0.14 0.07  0.02  0.26  3057    1
+# b -0.37 0.11 -0.54 -0.20  3329    1
+
+####
 #### dataframe for hypothesis 2 - do post treatment attitudes go up more in choice condition?  ####
+####
+
 
 h_2_data <- subset(clickbot_analysis, select=c("ID","attitude","att_type","post_rating","choice_cond"))
 
@@ -155,6 +199,7 @@ saveRDS(h2_full, "h2_full.rds")
 compare(h2_exp,h2_int,h2_full, h2_null)
 
 # tried a model with both main effects and interaction in here together to help make sense in the pre-reg run. doesn't make sense as we exp no main effect of cond (no diff before)
+# and was worse fitting model anyway during pilot data
 
 #h2_full_2 <- map2stan(
   # alist(
@@ -177,14 +222,10 @@ compare(h2_exp,h2_int,h2_full, h2_null)
   # control=list(adapt_delta=0.99, max_treedepth=13),
   # chains = 3, cores = 3, iter=1200)
 
-#precis(h2_full_2)
+# precis(h2_full_2)
 
-#compare(h2_full,h2_full_2)
-# prefers the first model. There is a strong effect of experiment treatment, and neg interaction (goes up more in the control condition!)
-
-theMeans = tapply(clickbot_analysis$attitude, list(clickbot_analysis$post_rating, clickbot_analysis$choice_cond),mean)
-#one on the left comes first (post_rating)
-theMeans
+# compare(h2_full,h2_full_2)
+# prefers the first model in the pilot. There is a strong effect of experiment treatment, and neg interaction (goes up more in the control condition!)
 
 
 #### dataframe for hypothesis 3 - choice condition is more engaging ####
