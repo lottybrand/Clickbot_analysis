@@ -1,6 +1,16 @@
 
 library(rethinking)
 
+# load cleaned, processed data file
+clean_clickbot <- read.csv("clean_clickbot.csv")
+
+# load long version for attitude analyses
+long_clickbot <- read.csv("long_clickbot.csv")
+
+# load engagement dataframe
+engagement_clickbot <- read.csv("engagement_clickbot.csv")
+
+
 ####
 #### dataframe for hypothesis 1 - more likely to vaccinate after choice condition? (Intention Change) ####
 ####
@@ -11,14 +21,14 @@ h_1_data <- subset(clean_clickbot, select=c("ID","vax_positive","choice_cond","v
 
 
 #check raw nums
-table(h_1_data$vax_future_1, h_1_data$choice_cond)
-table(h_1_data$vax_future_2, h_1_data$choice_cond)
+#table(h_1_data$vax_future_1, h_1_data$choice_cond)
+#table(h_1_data$vax_future_2, h_1_data$choice_cond)
 
 
 # remove those who already said yes to begin with as they can't change positively anyway 
 h_1_data <- h_1_data[!(h_1_data$vax_future_1==1),]
 
-table(h_1_data$vax_positive, h_1_data$choice_cond)
+#table(h_1_data$vax_positive, h_1_data$choice_cond)
 
 # model likelihood of attitude changing positively, and effect of condition on this likelihood: 
 
@@ -42,7 +52,6 @@ saveRDS(model1, "model1.rds")
 # so code all No's as 1 and everything else 0. then code before vs after. then do 
 # no ~ dbinom   a + after_exp
 # so need to convert to long format for this:
-
 # convert intention to vaccinate (vax_future_1 and vax_future_2) into Nos or not, and predict Nos before and after (wide to long):
 
 colnames(clean_clickbot)
@@ -92,17 +101,16 @@ saveRDS(model_nos, "model_nos.rds")
 ####
 
 
-h_2_data <- subset(clickbot_analysis, select=c("ID","attitude","att_type","post_rating","choice_cond"))
+h_2_data <- subset(long_clickbot, select=c("ID","attitude","att_type","post_rating","choice_cond"))
 
 
-#coerce index for random effect (think this is done alphabetically so will need to check back with clickbot_analysis)
+#coerce index for random effect (think this is done alphabetically so will need to check back with long_clickbot)
 h_2_data$att_type <- coerce_index(h_2_data$att_type)
 
 # quick look at the means so no nasty shocks: 
-
-theMeans = tapply(clickbot_analysis$attitude, list(clickbot_analysis$post_rating, clickbot_analysis$choice_cond),mean)
+#theMeans = tapply(long_clickbot$attitude, list(long_clickbot$post_rating, long_clickbot$choice_cond),mean)
 #one on the left comes first (post_rating)
-theMeans
+#theMeans
 
 #null model, just varying intercepts for attitude type and rater (ID)
 
@@ -227,20 +235,14 @@ compare(h2_exp,h2_int,h2_full, h2_null)
 # compare(h2_full,h2_full_2)
 # prefers the first model in the pilot. There is a strong effect of experiment treatment, and neg interaction (goes up more in the control condition!)
 
+####
+#### dataframe for hypothesis 3 - is choice condition is more engaging? ####
+####
 
-#### dataframe for hypothesis 3 - choice condition is more engaging ####
+h_3_data <- subset(engagement_clickbot, select=c("ID","engagement_1","eng_type","choice_cond"))
 
-h_3_data <- subset(clickbot_engagement, select=c("ID","engagement_1","eng_type","choice_cond"))
-
-#re order to check this worked (can just click the ID heading using the window)
-#h3_ordr <- h_3_data[ order(h_3_data$ID), ]
-#rm(h3_ordr)
-
-# make sure you reverse-ordered 'confusing' and 'frustrating' eng_types in data_processing first!! 
-
-#coerce index for random effect (think this is done alphabetically so will need to check back with clickbot_analysis)
+#coerce index for random effect (think this is done alphabetically so will need to check back with long_clickbot
 h_3_data$eng_type <- coerce_index(h_3_data$eng_type)
-
 
 #model checking effect of condition on engagement, controlling for ppt and engagement type
 

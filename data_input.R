@@ -23,6 +23,7 @@ qual_crap <- c("Status","Progress",
                "PROLIFIC_PID")
                
 qualtrics_clickbot <- qualtrics_clickbot[, !(colnames(qualtrics_clickbot) %in% qual_crap)]
+rm(qual_crap)
 
 # remove all the timing columns we're not interested in: 
 unwanted_timings <- qualtrics_clickbot[,grepl("Last.Click|First.Click|Click.Count|Page.Submit.1|Page.Submit.2|Page.Submit.4", colnames(qualtrics_clickbot))]
@@ -31,7 +32,6 @@ rm(unwanted_timings)
 
 # still need to move these ones manually: 
 qualtrics_clickbot[ ,c('timing_cntrl1_Page.Submit', 'timing_control_1_Page.Submit', 'timer_cntrl2_Page.Submit','timing_control2_Page.Submit','timer_cntrl3_Page.Submit','timing_control3_Page.Submit','timing_control4_Page.Submit','timing_control4_Page.Submit.4')] <- list(NULL)
-
 
 ##### remove data that is not complete / was not approved in Prolific #####
 
@@ -45,10 +45,17 @@ raw_clickbot$ID <- 1:(nrow(raw_clickbot))
 
 rm(qualtrics_clickbot)
 
-clean_clickbot <- raw_clickbot
-#write.csv(clean_clickbot, file="clean_clickbot.csv", row.names=FALSE)
+# save raw_clickbot for future
+write.csv(raw_clickbot, file="raw_clickbot.csv", row.names=FALSE)
 
-##### while I'm here I'd like to save the comments and their demogs in a separate file ##### 
+# create clean_clickbot ready for processing in data_processing.R
+clean_clickbot <- raw_clickbot
+
+####
+#### save the comments and their demogs in a separate file ##### 
+####
+
+# should come back to this
 
 # comment_columns <- c("prolif_check","discuss_1","read_1","age","gender","gender_4_TEXT","edu","anything_else","condition","clicked_t","clicked_f")
 # comments_and_demogs <- clean_clickbot[, (colnames(clean_clickbot) %in% comment_columns)]

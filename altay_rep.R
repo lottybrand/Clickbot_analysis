@@ -68,7 +68,7 @@ model_nos <- map2stan(
 
 precis(model_nos)
 
-# yes! There were less no's after the treatment, I think this is what we wanted to find out :)
+# yes! There were less no's after the treatment, this makes sense
 
 #     mean   sd  5.5% 94.5% n_eff Rhat
 # a  0.14 0.07  0.02  0.26  3057    1
