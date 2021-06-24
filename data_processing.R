@@ -43,13 +43,11 @@ clean_clickbot$choice_cond <- ifelse((clean_clickbot$condition=="choice"),1,0)
 
 # sort the f*&^ng character class...
 fckng_chars <- clean_clickbot[,grepl("timing|timer", colnames(clean_clickbot))]
-col.num <- colnames(fckng_chars)
-clean_clickbot[col.num] <- sapply(clean_clickbot[col.num],as.numeric)
+fckng_chars <- colnames(fckng_chars)
+clean_clickbot[fckng_chars] <- sapply(clean_clickbot[fckng_chars],as.numeric)
 
 #remove unnecessary objects
 rm(fckng_chars)
-rm(col.num)
-
 
 # check
 #class(clean_clickbot$timing_info_consent_Page.Submit)
@@ -108,7 +106,6 @@ long_clickbot$post_att_2 <- ifelse((long_clickbot$post_att=="Strongly Disagree")
 
 #### now merge into one long attitude rating, so can compare pre/post vax atts ####
 
-# remember check col names! These might've changed since the timing_analysis.R script was written. 
 colnames(long_clickbot)
 long_clickbot_longer <- reshape(long_clickbot,  
                              varying = list(c("pre_att_1","post_att_2")),
