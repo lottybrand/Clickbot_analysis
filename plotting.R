@@ -1,5 +1,10 @@
+library(plyr)
+library(gghalves) #devtools::install_github('erocoar/gghalves')
+library(tidyverse) 
+library(ggpubr)
 
-
+# load cleaned, processed data file
+clean_clickbot <- read.csv("clean_clickbot.csv")
 
 #### Plotting ####
 
@@ -215,6 +220,8 @@ DensityPlot_pre_post + scale_color_manual(values=c("navajowhite3", "lightsteelbl
 
 
 #### I prefer my raw version ####
+
+
 
 h_2_data$choice_cond <- as.factor(h_2_data$choice_cond)
 h_2_data$time <- ifelse(h_2_data$post_rating==0,"Before","After")
