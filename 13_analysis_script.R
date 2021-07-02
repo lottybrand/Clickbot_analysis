@@ -1,5 +1,7 @@
 
-library(rethinking)
+##### To run our analysis, you must first load these three datasets, and install rethinking:
+
+##### Load data files #####
 
 # load cleaned, processed data file
 clean_clickbot <- read.csv("clean_clickbot.csv")
@@ -10,6 +12,10 @@ long_clickbot <- read.csv("long_clickbot.csv")
 # load engagement dataframe
 engagement_clickbot <- read.csv("engagement_clickbot.csv")
 
+library(rethinking)
+
+##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
+# using the "model_objects" folder to interrogate the model results yourself. 
 
 ####
 #### dataframe for hypothesis 1 - more likely to vaccinate after choice condition? (Intention Change) ####

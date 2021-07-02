@@ -13,8 +13,8 @@ In our control condition, participants did not have a choice of information but 
 
 All dialogues were between 200-500 words in length, consisting of 2 - 3 follow-up questions each. 
 
-**Using this repo: **
+** Using this repo: **
 To reproduce our results, you can simply run
 analysis_script.R 
 
-**To reproduce how we got our final dataframes, you can first run data_inputting.R followed by data_processing.R**
+To reproduce how we got our final dataframes, you can first run data_inputting.R followed by data_processing.R

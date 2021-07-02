@@ -14,15 +14,22 @@
 ##                       LIBRARIES                      ##
 ##########################################################
 
-#install notes and ALL libraries used go here
+# needed for analysis script only:
+library(rethinking)
+
+# needed for plotting script only:
 library(tidyverse)
+library(plyr)
+library(ggplot2)
+library(gghalves)
+library(ggpubr)
 library(here)
 
 ##########################################################
 ##                       SETTINGS                       ##
 ##########################################################
 
-# nothing here yet
+# set working directory to project directory
 
 
 ##########################################################

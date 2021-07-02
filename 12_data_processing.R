@@ -3,7 +3,7 @@
 #### processing the data for analysis ####
 ####
 
-# can start here if haven't ran data_input.R first
+# can start here if haven't run data_input.R first
 # raw_clickbot <- read.csv("raw_clickbot.csv", stringsAsFactors = FALSE )
 # clean_clickbot <- raw_clickbot 
 
@@ -63,7 +63,7 @@ clean_clickbot$control_info_time <- (clean_clickbot$timing_cntrl1_Page.Submit.3 
 clean_clickbot$choice_info_time <- (clean_clickbot$timing_choice1_Page.Submit + clean_clickbot$timing_choice2_Page.Submit + clean_clickbot$timing_choice3_Page.Submit + clean_clickbot$timing_choice4_Page.Submit)
 
 #write now. 
-write.csv(clean_clickbot, file="clean_clickbot.csv", row.names=FALSE)
+#write.csv(clean_clickbot, file="clean_clickbot.csv", row.names=FALSE)
 
 ####
 #### make all vax attitude likert ratings wide to long: 5 attitude ratings put into one Pre and one Post item ####
@@ -127,7 +127,8 @@ rm(long_clickbot_longer)
 
 # perfect now everyone has 10 attitude ratings each, 5 before and 5 after, making 7160 obs. 
 # save long_clickbot as csv
-long_clickbot <- write.csv(long_clickbot, "long_clickbot.csv", row.names=FALSE)
+#long_clickbot <- write.csv(long_clickbot, "long_clickbot.csv", row.names=FALSE)
+
 
 ####
 #### make engagement measures long in separate datafile ####
@@ -197,7 +198,101 @@ engagement_clickbot$engagement_1 <- ifelse(((engagement_clickbot$eng_type=="Frus
 
 
 # write to csv
-engagement_clickbot <- write.csv(engagement_clickbot, "engagement_clickbot.csv", row.names=FALSE)
+#engagement_clickbot <- write.csv(engagement_clickbot, "engagement_clickbot.csv", row.names=FALSE)
+
+####
+##### Converting data to be equivalent to Altay's for plotting #####
+####
+
+# to do the violin version, need to create "slope up" etc, and so need to calculate means on our likert data (PUKE!)
+# i should really write a bloody function here
+
+# likert_switch <- function(x){
+#   mapvalues(clean_clickbot, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+#                               "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+#             to = c(7,6,5,4,3,2,1))
+# }
+
+# att_likerts <- clean_clickbot[,grepl("vax_att", colnames(clean_clickbot))]
+# att_likerts <- colnames(att_likerts)
+# clean_clickbot[att_likerts] <- sapply(clean_clickbot[att_likerts],mapvalues)
+
+## figure out the function later (whaaaaa) repeat five times (SIIIGHH): 
+
+clean_clickbot$vax_att_p1 <- mapvalues(clean_clickbot$vax_att_1, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                          "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                       to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$vax_att_p2 <- mapvalues(clean_clickbot$vax_att_2, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                          "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                       to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$vax_att_p3 <- mapvalues(clean_clickbot$vax_att_3, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                          "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                       to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$vax_att_p4 <- mapvalues(clean_clickbot$vax_att_4, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                          "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                       to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$vax_att_p5 <- mapvalues(clean_clickbot$vax_att_5, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                          "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                       to = c(7,6,5,4,3,2,1))
+
+# post 
+
+clean_clickbot$post_vax_att_p1 <- mapvalues(clean_clickbot$post_vax_att_1, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                                    "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                            to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$post_vax_att_p2 <- mapvalues(clean_clickbot$post_vax_att_2, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                                    "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                            to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$post_vax_att_p3 <- mapvalues(clean_clickbot$post_vax_att_3, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                                    "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                            to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$post_vax_att_p4 <- mapvalues(clean_clickbot$post_vax_att_4, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                                    "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                            to = c(7,6,5,4,3,2,1))
+
+clean_clickbot$post_vax_att_p5 <- mapvalues(clean_clickbot$post_vax_att_5, from = c("Strongly Agree", "Agree", "Somewhat Agree", "Neither Agree nor Disagree",
+                                                                                    "Somewhat Disagree", "Disagree", "Strongly Disagree"),
+                                            to = c(7,6,5,4,3,2,1))
+
+
+# f*&^ng character class strikes again... using numeric on its own screws the order, need as.character first too
+# haven't checked if same problem occurs in Altay delta... will put on to do list...
+fckng_chars <- clean_clickbot[,grepl("vax_att_p", colnames(clean_clickbot))]
+fckng_chars <- colnames(fckng_chars)
+clean_clickbot[fckng_chars] <- sapply(clean_clickbot[fckng_chars],as.character)
+
+# Now numeric too..
+clean_clickbot[fckng_chars] <- sapply(clean_clickbot[fckng_chars],as.numeric)
+# thank god 
+rm(fckng_chars)
+
+clean_clickbot$Att_Pre = (clean_clickbot$vax_att_p1 + clean_clickbot$vax_att_p2 + clean_clickbot$vax_att_p3 + clean_clickbot$vax_att_p4 + clean_clickbot$vax_att_p5)/5
+clean_clickbot$Att_Post = (clean_clickbot$post_vax_att_p1 + clean_clickbot$post_vax_att_p2 + clean_clickbot$post_vax_att_p3 + clean_clickbot$post_vax_att_p4 + clean_clickbot$post_vax_att_p5)/5
+clean_clickbot$attitude_change = clean_clickbot$Att_Post - clean_clickbot$Att_Pre
+
+# make the slopes same as Altay 
+clean_clickbot$Slope_Up = ifelse(clean_clickbot$attitude_change >=0.2, "Up", "0") # 0.2 to do 1pts
+clean_clickbot$Slope_Down = ifelse(clean_clickbot$attitude_change <=-0.2, "Down", "0")
+clean_clickbot$Slope_Neutral = ifelse(clean_clickbot$attitude_change < 0.2&clean_clickbot$attitude_change > -0.2, "Neutral", "0")
+
+
+# they made "D1" using gather(). I'M GOING TO USE RESHAPE() and call it "attitude" not "Score"...!! (and call it plot_data not D1)
+
+plot_data <- reshape(clean_clickbot,  
+                     varying = list(c("Att_Pre","Att_Post")),
+                     v.names = c("attitude"), 
+                     direction = "long")
+
+plot_data <- subset(plot_data, select=c("ID","attitude","time","choice_cond", "Slope_Up","Slope_Down","Slope_Neutral"))
+
+#write.csv(plot_data, "data/plot_data.csv")
 
 
 
