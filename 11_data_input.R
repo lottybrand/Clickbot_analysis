@@ -7,7 +7,7 @@
 # remember to select "more options" and "export viewing order data for randomised surveys" and "recode seen but unanswered questions as -99" in Qualtrics
 
 # load full raw Qualtrics output 
-qualtrics_clickbot <- read.csv("anonymised_click_bot_abcd_May_25_2021_14.25.csv", stringsAsFactors=FALSE)
+qualtrics_clickbot <- read.csv("data/anonymised_click_bot_abcd_May_25_2021_14.25.csv", stringsAsFactors=FALSE)
 
 # these top three rows provide a key to what the variables are (sort of)
 key <- qualtrics_clickbot[1:3,]
@@ -46,10 +46,10 @@ raw_clickbot$ID <- 1:(nrow(raw_clickbot))
 rm(qualtrics_clickbot)
 
 # save raw_clickbot for future
-write.csv(raw_clickbot, file="raw_clickbot.csv", row.names=FALSE)
+#write.csv(raw_clickbot, file="raw_clickbot.csv", row.names=FALSE)
 
 # create clean_clickbot ready for processing in data_processing.R
-clean_clickbot <- raw_clickbot
+#clean_clickbot <- raw_clickbot
 
 ####
 #### save the comments and their demogs in a separate file ##### 
