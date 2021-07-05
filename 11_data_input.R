@@ -46,10 +46,10 @@ raw_clickbot$ID <- 1:(nrow(raw_clickbot))
 rm(qualtrics_clickbot)
 
 # save raw_clickbot for future
-write.csv(raw_clickbot, file="raw_clickbot.csv", row.names=FALSE)
+#write.csv(raw_clickbot, file="raw_clickbot.csv", row.names=FALSE)
 
 # create clean_clickbot ready for processing in data_processing.R
-clean_clickbot <- raw_clickbot
+#clean_clickbot <- raw_clickbot
 
 ####
 #### save the comments and their demogs in a separate file ##### 

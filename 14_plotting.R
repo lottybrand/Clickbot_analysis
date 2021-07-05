@@ -1,7 +1,8 @@
 
 #### Plotting ####
 
-##### load plot_data (created in data_processing script) ####
+##### load plot_data (created in data_processing script)
+##### unless you've already loaded it in data_processing script ####
 plot_data <- read.csv("data/plot_data.csv")
 
 
@@ -83,7 +84,7 @@ choice_violin <- ggplot(data=choice_plot, aes(y=attitude)) +
 choice_violin
 
 
-#### I would like to try the above with the raw data not means here #####
+#### I would like to try the above with the raw data (not means) here #####
 
 #### Their Density Plots (they used means again)  #####
 

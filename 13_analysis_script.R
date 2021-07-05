@@ -1,5 +1,8 @@
 
-##### To run our analysis, you must first load these three datasets, and install rethinking:
+##### To run our analysis, you must first load the three datasets below, and install rethinking:
+##### If you have already run the data_input or data_processing scripts, the below should already be loaded for you, so you can skip loading them here. 
+##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
+# using the "model_objects" folder to interrogate the model results yourself. 
 
 ##### Load data files #####
 
@@ -14,8 +17,6 @@ engagement_clickbot <- read.csv("engagement_clickbot.csv")
 
 library(rethinking)
 
-##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
-# using the "model_objects" folder to interrogate the model results yourself. 
 
 ####
 #### dataframe for hypothesis 1 - more likely to vaccinate after choice condition? (Intention Change) ####
@@ -276,36 +277,4 @@ saveRDS(h3_model, "h3_model.rds")
 
 theMeansEng = tapply(h_3_data$engagement_1, list(h_3_data$choice_cond),mean)
 theMeansEng
-
-
-#### Plotting ####
-
-h_3_data$choice_cond <- as.factor(h_3_data$choice_cond)
-
-DensityPlot_eng <- ggplot(data=h_3_data, aes(x=engagement_1, color=choice_cond)) + 
-  geom_density(adjust=1.9, alpha=1)+
-  scale_x_continuous(name = "Engagement", breaks = seq(1, 7), limits=c(1, 7))
-DensityPlot_eng
-
-h_2_data$choice_cond <- as.factor(h_2_data$choice_cond)
-h_2_pre <- h_2_data[h_2_data$post_rating==0,]
-h_2_post <- h_2_data[h_2_data$post_rating==1,]
-
-DensityPlot_Pre_att <- ggplot(data=h_2_pre, aes(x=attitude, color=choice_cond)) + 
-  geom_density(adjust=1.9, alpha=1)+
-  scale_x_continuous(name = "Vax Attitude", breaks = seq(1, 7), limits=c(1, 7))
-DensityPlot_Pre_att
-
-DensityPlot_Post_att <- ggplot(data=h_2_post, aes(x=attitude, color=choice_cond)) + 
-  geom_density(adjust=1.9, alpha=1)+
-  scale_x_continuous(name = "Vax Attitude", breaks = seq(1, 7), limits=c(1, 7))
-DensityPlot_Post_att
-
-h_2_data$post_rating <- as.factor(h_2_data$post_rating)
-
-DensityPlot_Post_att <- ggplot(data=h_2_data, aes(x=attitude, color=post_rating)) + 
-  geom_density(adjust=1.9, alpha=1, size=2)+
-  scale_x_continuous(name = "Vax Attitude", breaks = seq(1, 7), limits=c(1, 7)) +
-  theme_bw()
-DensityPlot_Post_att
 

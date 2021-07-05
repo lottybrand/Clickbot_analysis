@@ -3,9 +3,10 @@
 #### processing the data for analysis ####
 ####
 
-# can start here if haven't run data_input.R first
+# run this line below if you haven't run data_input.R first
 # raw_clickbot <- read.csv("raw_clickbot.csv", stringsAsFactors = FALSE )
-# clean_clickbot <- raw_clickbot 
+
+clean_clickbot <- raw_clickbot 
 
 # have they had at least one dose of the vaccine yet? yes/no 1/0 
 clean_clickbot$vax_yet_1 <- ifelse((clean_clickbot$vax_yet=="Yes"),1,0)
@@ -200,7 +201,7 @@ engagement_clickbot$engagement_1 <- ifelse(((engagement_clickbot$eng_type=="Frus
 # write to csv
 #engagement_clickbot <- write.csv(engagement_clickbot, "engagement_clickbot.csv", row.names=FALSE)
 
-####
+##### PROCESSING DATA FOR PLOTTING #####
 ##### Converting data to be equivalent to Altay's for plotting #####
 ####
 
@@ -262,16 +263,16 @@ clean_clickbot$post_vax_att_p5 <- mapvalues(clean_clickbot$post_vax_att_5, from 
                                             to = c(7,6,5,4,3,2,1))
 
 
-# f*&^ng character class strikes again... using numeric on its own screws the order, need as.character first too
-# haven't checked if same problem occurs in Altay delta... will put on to do list...
-fckng_chars <- clean_clickbot[,grepl("vax_att_p", colnames(clean_clickbot))]
-fckng_chars <- colnames(fckng_chars)
-clean_clickbot[fckng_chars] <- sapply(clean_clickbot[fckng_chars],as.character)
+# character class strikes again... using numeric on its own screws the order, need as.character first too
+# haven't checked if same problem occurs in Altay data... will put on to do list...
+f_chars <- clean_clickbot[,grepl("vax_att_p", colnames(clean_clickbot))]
+f_chars <- colnames(f_chars)
+clean_clickbot[f_chars] <- sapply(clean_clickbot[f_chars],as.character)
 
 # Now numeric too..
-clean_clickbot[fckng_chars] <- sapply(clean_clickbot[fckng_chars],as.numeric)
+clean_clickbot[f_chars] <- sapply(clean_clickbot[f_chars],as.numeric)
 # thank god 
-rm(fckng_chars)
+rm(f_chars)
 
 clean_clickbot$Att_Pre = (clean_clickbot$vax_att_p1 + clean_clickbot$vax_att_p2 + clean_clickbot$vax_att_p3 + clean_clickbot$vax_att_p4 + clean_clickbot$vax_att_p5)/5
 clean_clickbot$Att_Post = (clean_clickbot$post_vax_att_p1 + clean_clickbot$post_vax_att_p2 + clean_clickbot$post_vax_att_p3 + clean_clickbot$post_vax_att_p4 + clean_clickbot$post_vax_att_p5)/5
