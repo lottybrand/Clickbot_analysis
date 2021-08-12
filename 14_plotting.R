@@ -145,6 +145,48 @@ DensityPlot_raw <- ggplot(data=h_2_data, aes(x=attitude, color=time)) +
 DensityPlot_raw
 DensityPlot_raw + scale_color_manual(values=c("navajowhite3", "lightsteelblue3"))
 
+#### Can I get density plots for each item? what does this tell us? 
+
+safe_subset <- h_2_data[h_2_data$att_type=="Safe",]
+safe_density <- ggplot(data=safe_subset, aes(x=attitude, color=time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Attitudes towards Covid-19 vaccines", breaks = seq(1, 7), limits=c(1, 7)) +
+  ggtitle("SAFE") +
+  theme_pubr() 
+safe_density
+
+effective_subset <- h_2_data[h_2_data$att_type=="Effective",]
+effective_density <- ggplot(data=effective_subset, aes(x=attitude, color=time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Attitudes towards Covid-19 vaccines", breaks = seq(1, 7), limits=c(1, 7)) +
+  ggtitle("EFFECTIVE") +
+  theme_pubr() 
+effective_density
+
+Enough_time_sub <- h_2_data[h_2_data$att_type=="Enough_time",]
+time_density <- ggplot(data=Enough_time_sub, aes(x=attitude, color=time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Attitudes towards Covid-19 vaccines", breaks = seq(1, 7), limits=c(1, 7)) +
+  ggtitle("Enough Time") +
+  theme_pubr() 
+time_density
+
+trust_subset <- h_2_data[h_2_data$att_type=="Trust",]
+trust_density <- ggplot(data=trust_subset, aes(x=attitude, color=time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Attitudes towards Covid-19 vaccines", breaks = seq(1, 7), limits=c(1, 7)) +
+  ggtitle("Trust") +
+  theme_pubr() 
+trust_density
+
+important_subset <- h_2_data[h_2_data$att_type=="Important",]
+important_density <- ggplot(data=important_subset, aes(x=attitude, color=time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Attitudes towards Covid-19 vaccines", breaks = seq(1, 7), limits=c(1, 7)) +
+  ggtitle("Important") +
+  theme_pubr() 
+important_density
+
 #### Want to do same for Violins here: ####
 
 

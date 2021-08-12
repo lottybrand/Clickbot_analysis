@@ -2,7 +2,8 @@
 ##### To run our analysis, you must first load the three datasets below, and install rethinking:
 ##### If you have already run the data_input or data_processing scripts, the below should already be loaded for you, so you can skip loading them here. 
 ##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
-# using the "model_objects" folder to interrogate the model results yourself. 
+##### using the "model_objects" folder to explore the model results yourself. 
+model1 <- readRDS("model_objects/model_1.rds")
 
 ##### Load data files #####
 
