@@ -180,6 +180,34 @@ raw_both_violin <- ggplot(data=raw_violin_data, aes(y=attitude)) +
   ggtitle('Attitudes before and after')
 raw_both_violin
 
+# attitude change measure is helpful like this 
+ggplot(data = wide_clickbot, aes(x= attitude_change)) + 
+  geom_bar(stat="count",fill="aquamarine4") +
+  xlab("Change in attitude") + ylab("No. of responses") +
+  theme_bw() +
+  theme(strip.background =element_rect(fill="aquamarine4")) +
+  theme(strip.text = element_text(colour = 'yellow3', size=12))
+
+
+Change_direction <- c("Increased", "Stayed_The_Same","Decreased", "Increased","Stayed_The_Same","Decreased")  
+Position <- c("Against", "Against","Against", "Neutral","Neutral","Neutral")
+Proportion <- c(0.268, 0.632, 0.093, 0.342, 0.574, 0.084)
+
+att_change_frame <- (data.frame(Change_direction,Position,Proportion))
+
+ggplot(data = att_change_frame, aes(x= Change_direction)) + 
+  geom_bar(stat="count",fill="aquamarine4") +
+  xlab("Change in attitude") + ylab("No. of responses") +
+  theme_bw() +
+  theme(strip.background =element_rect(fill="aquamarine4")) +
+  theme(strip.text = element_text(colour = 'yellow3', size=12))
+
+rawPlot <- ggplot(att_change_frame, aes(Change_direction, Proportion, color = Position)) +
+  geom_point(size=2.8) +
+  theme_bw() + theme(text = element_text(size=12), axis.title.x=element_blank(), axis.title.y=element_text(margin=margin(0,12,0,0))) + 
+  ylab("Proportion of Responses")
+rawPlot
+
 #### Their Density Plots (they used means again)  #####
 
 before = filter(plot_data, time == "1")
