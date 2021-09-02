@@ -295,6 +295,12 @@ plot_data <- subset(plot_data, select=c("ID","attitude","time","choice_cond", "S
 
 #write.csv(plot_data, "data/plot_data.csv")
 
+# make long to wide for the raw violin (long already numeric)
 
+wide_clickbot <- reshape(long_clickbot,  
+                     timevar = c("post_rating"),
+                     v.names = c("attitude"),
+                     idvar = c("ID", "att_type"),
+                     direction = "wide")
 
 
