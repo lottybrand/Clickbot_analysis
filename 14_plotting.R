@@ -124,45 +124,55 @@ both_violin
 
 #### I would like to try the above with the raw data (not means) here #####
 
-# think this means using "long clickbot"
+# this means using "long clickbot" to make "wide clickbot"
 
-long_clickbot <- read.csv("data/long_clickbot.csv")
-h_2_data <- subset(long_clickbot, select=c("ID","attitude","att_type","post_rating","choice_cond"))
+wide_clickbot <- read.csv("data/wide_clickbot.csv", stringsAsFactors = FALSE)
 
-h_2_data$choice_cond <- as.factor(h_2_data$choice_cond)
-h_2_data$time <- ifelse(h_2_data$post_rating==0,"Before","After")
-h_2_data$time <- factor(h_2_data$time, levels=c("Before", "After"))
+wide_clickbot$attitude_change = wide_clickbot$attitude.1 - wide_clickbot$attitude.0
+
+# make the slopes same as Altay 
+wide_clickbot$Slope_Up = ifelse(wide_clickbot$attitude_change >=1, "Up", "0") # 0.2 to do 1pts
+wide_clickbot$Slope_Down = ifelse(wide_clickbot$attitude_change <=-1, "Down", "0")
+wide_clickbot$Slope_Neutral = ifelse(wide_clickbot$attitude_change < 0 & wide_clickbot$attitude_change > -0.2, "Neutral", "0")
+
+raw_violin_data <- reshape(wide_clickbot,  
+                     varying = list(c("attitude.0","attitude.1")),
+                     v.names = c("attitude"), 
+                     direction = "long")
+
+raw_violin_data <- subset(raw_violin_data, select=c("ID","attitude","time","choice_cond", "Slope_Up","Slope_Down","Slope_Neutral"))
+
 
 # now need to create the slopes for h2 data. think we said 1 instead of .2 now?
 
 # they do a time jitter thing and don't know what set.seed is for here 
 set.seed(300)
-h_2_data$time <- as.numeric(h_2_data$time)
-h_2_data$AA <- jitter(h_2_data$time, amount=.10)
+raw_violin_data$time <- as.numeric(raw_violin_data$time)
+raw_violin_data$AA <- jitter(raw_violin_data$time, amount=.10)
 
 # plot
-raw_both_violin <- ggplot(data=h_2_data, aes(y=attitude)) +
-  geom_point(data = h_2_data %>% filter(time =="1"), aes(x = AA), color = 'navajowhite1', size = 1.5, 
+raw_both_violin <- ggplot(data=raw_violin_data, aes(y=attitude)) +
+  geom_point(data = raw_violin_data %>% filter(time =="1"), aes(x = AA), color = 'navajowhite1', size = 1.5, 
              alpha = .75) +
-  geom_point(data = h_2_data %>% filter(time =="2"), aes(x = AA), color = 'navajowhite1', size = 1.5, 
+  geom_point(data = raw_violin_data %>% filter(time =="2"), aes(x = AA), color = 'navajowhite1', size = 1.5, 
              alpha = .75) +
-  geom_line(data = h_2_data %>% filter(Slope_Up =="Up"), aes(x = AA, group = ID), color = 'forestgreen', 
+  geom_line(data = raw_violin_data %>% filter(Slope_Up =="Up"), aes(x = AA, group = ID), color = 'forestgreen', 
             alpha = .25,  size = 0.25)+
-  geom_line(data = h_2_data %>% filter(Slope_Neutral =="Neutral"), aes(x = AA, group = ID), color = 'black', 
+  geom_line(data = raw_violin_data %>% filter(Slope_Neutral =="Neutral"), aes(x = AA, group = ID), color = 'black', 
             alpha = .15,  size = 0.25)+
-  geom_line(data = h_2_data %>% filter(Slope_Down =="Down"), aes(x = AA, group = ID), color = 'firebrick3', 
+  geom_line(data = raw_violin_data %>% filter(Slope_Down =="Down"), aes(x = AA, group = ID), color = 'firebrick3', 
             alpha = .25,  size = 0.25)+
-  geom_half_boxplot(data = h_2_data %>% filter(time=="1"), aes(x=time, y = attitude), 
+  geom_half_boxplot(data = raw_violin_data %>% filter(time=="1"), aes(x=time, y = attitude), 
                     position = position_nudge(x = -.25),
                     side = "r",outlier.shape = NA, center = TRUE, 
                     errorbar.draw = FALSE, width = .2, fill = 'moccasin')+
-  geom_half_boxplot(data = h_2_data %>% filter(time=="2"), aes(x=time, y = attitude), 
+  geom_half_boxplot(data = raw_violin_data %>% filter(time=="2"), aes(x=time, y = attitude), 
                     position = position_nudge(x = .15), side = "r",outlier.shape = NA, center = TRUE, 
                     errorbar.draw = FALSE, width = .2, fill = 'moccasin')+
-  geom_half_violin(data = h_2_data %>% filter(time=="1"),aes(x=time, y = attitude), 
+  geom_half_violin(data = raw_violin_data %>% filter(time=="1"),aes(x=time, y = attitude), 
                    position = position_nudge(x = -.3), 
                    side = "l", fill = 'moccasin')+
-  geom_half_violin(data = h_2_data %>% filter(time=="2"),aes(x = time, y = attitude), 
+  geom_half_violin(data = raw_violin_data %>% filter(time=="2"),aes(x = time, y = attitude), 
                    position = position_nudge(x = .3), side = "r", fill = "moccasin")+
   xlab("Time") + ylab("Attitudes towards Vaccines")+
   theme_classic()+
