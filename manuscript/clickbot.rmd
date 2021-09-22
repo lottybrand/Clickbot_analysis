@@ -84,117 +84,64 @@ A recent study found that exposure to a chatbot increases positive attitudes tow
 To address this, we used the same information but created two conditions in which the only difference was the interactivity of the information, but the amount of information, time spent on the information and trustworthiness of the information was the same for both conditions.
 
 
-## Example Subheading
-
-Here are some example references in the following sentence. For reviews of this topic see @wickelgren1977speed; @heitz2014speed. Here is another example reference [e.g. @stafford2020] 
+For reviews of this topic see @wickelgren1977speed; @heitz2014speed. Here is another example reference [e.g. @stafford2020] 
 
 
 
 # Method
 
+## Participants
 
 
-## Requirements
-
-You should install R, RStudio and tex and papaja [@aust2020]. More details here https://crsh.github.io/papaja_man/introduction.html#getting-started
 
 
-```{r}
-#Once you've installed R/RStudio
-#install.packages('tinytex')
-#tinytex::install_tinytex()
-#install.packages("devtools") 
-#devtools::install_github("crsh/papaja")
+# Analysis
 
-#imo computational reproducibility / dependency management in R is a mess, but there we are
-```
+Our hypotheses, predictions and analyses were preregistered before data collection at https://osf.io/t4gav. All of our data, code and analysis scripts are available at www.github.com/lottybrand/clickbot_analysis 
+
+In line with our preregistration, we analysed whether participants changed their intention to be vaccinated using a Bayesian binomial regression model with the Rethinking package in R (@mcelreath2018statistical). 
+
 
 # Results
-
-Now let's integrate some R code to generate/import some data, run and analyse and integrate it into the document:
-
-Analysis done following @mcelreath2018statistical and his very nice book
 
 ```{r results='hide'}
 #copying from https://bookdown.org/yihui/rmarkdown/r-code.html
 #this is some R code which evaluates when you make the document
 #
-
-#----------------Code for generating some random data
-
-#parameters of our variables
-meanA <- 100
-sdA <- 15
-d <- .5
-sdB <- sdA
-pooledSD <- sdA
-meanB <- meanA + (d * pooledSD)
-n1 <- 300
-n2 <- 300
-
-#create random data, put into dataframe
-groupA <- rnorm(n1, meanA, sdA)
-groupB <- rnorm(n2, meanB, sdB)
-sub <- 1:length(n1+n2)
-group <- c(rep(0,n1) ,rep(1,n2))
-values <- c(groupA, groupB)
-df <- data.frame(sub, group, values)
-
-#add some missing values
-index <- sample(1:(n1+n2),5)
-df[index, 3] <- NA
-
-#export to a file
-write.csv(df, file = "generateddata.csv")
+source("../results/loading_saved_models.R")
+precis(modelnos)[2,1]
+precis(modelnos)[2,3]
+precis(modelnos)[2,4]
+precis(model1)[2,1]
+precis(model1)[2,3]
+precis(model1)[2,4]
 ```
 
-Rmarkdown also lets us track figure labels, and updates them automatically. Look! Kittens! Illustrated in Figure \@ref(fig:examplefigurename).
+## Preregistered hypotheses
 
-```{r examplefigurename, fig.cap="Example figure caption", fig.align="center", out.width="75%"}
-knitr::include_graphics("../plots/ChoiceViolin.png")
+We found that participants’ unwillingness to have the vaccine decreased after both conditions (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). This was against prediction 1; those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). 
+
+(mention the model comparison here?) This change in vaccination attitudes can be seen in Figure 1 \@ref(fig1:figure1), which shows the raw vaccination attitude ratings before and after the experiment. Figures displaying the differences in vaccination attitudes between different scale items can be found in the supplementary material. 
+
+Increase in average vaccination attitude can be seen in the violin plot. 
+
+```{r figure1, fig1.cap="Density plot of vaccination attitudes before and after the experiment", fig.align="center", out.width="75%"}
+knitr::include_graphics("../plots/raw_density.png")
 ```
 
-You can't see it, but in between this paragraph and the last we asked R to generate some random data and save it to a CSV file. Now we're going to import the data from the CSV file, as if it was independently created data - from an experiment or similar - and plot a graph.
-
-```{r ourhistogram, fig.cap="Histogram of all data, grouped", fig.align="center", out.width="75%",fig.height=4}
-#load data
-df=read.csv("generateddata.csv")
 
 
-#make histogram
-#cribbing from https://www.statmethods.net/graphs/density.html
-x <- df$values
-x <- na.omit(x) #drop missing values
-h<-hist(x, breaks=20, col="red", xlab="value")
-xfit<-seq(min(x),max(x),length=40)
-yfit<-dnorm(xfit,mean=mean(x),sd=sd(x))
-yfit <- yfit*diff(h$mids[1:2])*length(x)
-lines(xfit, yfit, col="blue", lwd=2) 
-```
+
 
 See Figure \@ref(fig:ourhistogram). Of course we could draw all sorts of things, but this is a proof-of-concept. Finally, let's run a t-test and integrate the results into the text.
 
 ```{r}
 #note that seperate code chunks remember variables from previous chunks, so we don't need to reload the data
-df$group <- as.factor(df$group)
-model1<-t.test(df$values ~ df$group)
 
-p<- model1$p.value
-t<- model1$statistic
-df<- model1$parameter
-if(p<0.05){
-  word<-"a"
-} else {
-  word<-"no"
-}
 
-model_1 <- readRDS("../model_objects/model1.rds")
+
 ```
 
-mean = `r precis(model1)[2,1] ` and our credible intervals are from `r precis(model1)[2,3] ` to `r precis(model1)[2,4] `
-    
-
-We found there was `r word` statistically significant difference between the two groups (t=`r t` (`r df`), p = `r p`). Note how the exact values in the previous sentence change every time we re-make the document (because the document also re-generates the underlying data).
 
 Unanswered questions: Is this the best way to integrate values into text? Why is the df not an integer? What is the best way to define figure sizes so you get nice and/or consistent sizing across document formats?
 
