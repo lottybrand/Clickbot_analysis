@@ -3,18 +3,18 @@
 ##### If you have already run the data_input or data_processing scripts, the below should already be loaded for you, so you can skip loading them here. 
 ##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
 ##### using the "model_objects" folder to explore the model results yourself. 
-model1 <- readRDS("model_objects/model_1.rds")
+model1 <- readRDS("./model_objects/model_1.rds")
 
 ##### Load data files #####
 
 # load cleaned, processed data file
-clean_clickbot <- read.csv("clean_clickbot.csv")
+clean_clickbot <- read.csv("./data/clean_clickbot.csv")
 
 # load long version for attitude analyses
-long_clickbot <- read.csv("long_clickbot.csv")
+long_clickbot <- read.csv("./data/long_clickbot.csv")
 
 # load engagement dataframe
-engagement_clickbot <- read.csv("engagement_clickbot.csv")
+engagement_clickbot <- read.csv("./data/engagement_clickbot.csv")
 
 library(rethinking)
 
