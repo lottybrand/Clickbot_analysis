@@ -7,8 +7,8 @@
   ,jou,floatsintext]{apa6}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -69,29 +69,6 @@
   \let\oldsubparagraph\subparagraph
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
-  \fi
-  % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -138,7 +115,7 @@
 
 
 \usepackage{csquotes}
-\ifXeTeX
+\ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{english}
@@ -148,9 +125,29 @@
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
 \fi
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{Time spent with fact-checked Covid-19 vaccine dialogues lead to a 15\% increase in intentions to get vaccinated in a UK-based anti-vaccination population}
 \author{Charlotte O. Brand\textsuperscript{1} \& Tom Stafford\textsuperscript{1}}
@@ -169,7 +166,7 @@ Correspondence concerning this article should be addressed to Charlotte O. Brand
 
 }
 
-\affiliation{\vspace{0.5cm}\textsuperscript{1} University of Sheffield, Department of Psychology, Faculty of Science}
+\affiliation{\vspace{0.5cm}\textsuperscript{1} University of Sheffield, Department of Psychology}
 
 \abstract{
 A recent study found that interacting with a chatbot for around five minutes led to an increase in Covid-19 vaccination attitudes and intentions in a French population, compared to a control condition (Altay et al.~2020). We wanted test this effect with a UK population whilst making some key modifications. Firstly we wanted to control the amount of information provided by the chatbot compared to the control condition, as well as the time spent with the information, how the trustworthiness of the information was communicated, and the interactivity of the information. By isolating the effect of the `choice of information' in our experimental condition, we wished to discover what it was about the chatbot that was more effective than their control. In our control condition, participants were randomly exposed to four dialogues of Covid-19 vaccination information in a Q\&A format of 200-500 words each, each containing two-three follow-up questions. Our experimental condition differed only in that participants could choose the four dialogues they were exposed to, and were given a choice of Five Question topics to choose from. Like the Altay Chatbot, we saw an increase in positive attitudes towards vaccination, as well as an increase in intention to get vaccinated, after viewing the information. Crucially, we found no difference in our conditions, in that choosing the questions did not increase vaccine attitudes, nor did it increase vaccine intentions, compared to randomly displaying the information. This is in contrast to Altay's experiment in which the Chatbot had a significantly greater effect than their Control. Importantly, in Altay's experiment their Control condition a) consisted of significantly less information b) did not provide information about the trustworthiness of the information and c) led to participants spending less time with the information. Similarly to the previous study, we also found an effect of time spent with the information, across both conditions, in that those who spent between 4 and 16 minutes (above the median) with the information were more likely to increase both their attitudes and their vaccination intentions. Another crucial difference is our sample, in that we specifically targeted those who were already either against or neutral towards covid-19 vaccinations specifically, and screened-out any who were already positive towards covid-19 vaccinations
@@ -180,14 +177,6 @@ A recent study found that interacting with a chatbot for around five minutes led
 \begin{document}
 \maketitle
 
-\begin{verbatim}
-## Warning: package 'knitr' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'ggplot2' was built under R version 3.6.2
-\end{verbatim}
-
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -197,7 +186,7 @@ Although chatbots are usually used for aiding the completion of tasks, for examp
 
 This idea that choice of information is important chimes with research into people's apparent preference for choosing their own actions, making their own decisions, and choosing what path to take, even foregoing monetary rewards to retain agency (Bobadilla-Suarez, Sunstein, and Sharot (2017)). Should I talk more about choice here, or merge this with the above? Could we add the ``ikea effect'' idea here? I couldn't find any refs to back it up though.
 
-This paper focuses on a recent study that found that information delivered by a chatbot increased positive attitudes towards Covid-19 vaccination compared to a control condition in which participants read 90 words (Altay et al. (2021)). The chatbot enabled participants to select frequently asked questions about Covid-19 vaccinations, and then presented participants with information to those questions. The chatbot would then present follow-up questions and further counter-arguments. We wanted to investigate precisely what it was about the chatbot that increased vaccination attitudes, specifically whether it is the a) amount of information b) time spent with the information c) interactivity or choice of information or d) trustworthiness of the information. The most obvious differences between the chatbot condition and the control condition was the amount of information presented, and consequently the time spent with that information. However, two other important differences could have also been driving the effect: the role of trust and the role of choice.
+This paper focuses on a recent study that found that information delivered by a chatbot increased positive attitudes towards Covid-19 vaccination compared to a control condition in which participants read 90 words (Altay, Hacquin, Chevallier, and Mercier (2021)). The chatbot enabled participants to select frequently asked questions about Covid-19 vaccinations, and then presented participants with information to those questions. The chatbot would then present follow-up questions and further counter-arguments. We wanted to investigate precisely what it was about the chatbot that increased vaccination attitudes, specifically whether it is the a) amount of information b) time spent with the information c) interactivity or choice of information or d) trustworthiness of the information. The most obvious differences between the chatbot condition and the control condition was the amount of information presented, and consequently the time spent with that information. However, two other important differences could have also been driving the effect: the role of trust and the role of choice.
 
 Role of trust ``why should I trust you'' section here (Eiser, Stafford, Henneberry, and Catney (2009)). Should I put the choice part down here instead?
 
@@ -247,7 +236,7 @@ This is because this was one of the main questions present in the French chatbot
 
 Our post exposure questionnaire consisted of the same covid attitude questions as the pre-exposure questionnaire, as well as questions on how engaging the experience was and how clear the information was. We also asked how often they discuss vaccination with those who disagree with them and how often they actively learn about vaccines (e.g.~via reading articles, listening to podcasts). Would recommend to a friend? Take part again in a month's time? Age, gender, education level.
 
-We also had an attention check question amongst both the pre-exposure questionnaire and our post-exposure questionnaire (``We would like to check that you are paying careful attention to the information in this study. Please respond to the following item with `Somewhat agree'.''). We used both of these attention check answers alongside a free-response answer to check that participants were attending to the study information carefully.
+We also had an attention check question amongst both the pre-exposure questionnaire and our post-exposure questionnaire (``We would like to check that you are paying careful attention to the information in this study. Please respond to the following item with `Somewhat agree.'\,''). We used both of these attention check answers alongside a free-response answer to check that participants were attending to the study information carefully.
 
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
@@ -272,7 +261,7 @@ All models were run using the Rethinking package in R (McElreath (2018)).
 We include model parameters based on a-priori preregistered hypotheses. Model parameters were said to have an effect on the model outcome if their 89\% credible interval did not cross zero. 89\% intervals are the default credible interval setting for the Rethinking package, as they discourage interpreting results in terms of binary null-hypothesis-significance-testing (McElreath (2018)). 95\% intervals would not alter the interpretation of our results. When relevant, we used model comparison to aid interpretation of results. Models were said to be a better fit to the data if their WAIC (widely-applicable, or Wanatabe-Aike information criterion) value held the most weight out of all models tested.
 Priors were chosen to be weakly regularizing, in order to control for both under- and overfitting the model to the data (McElreath (2018)). All models were checked for convergence using convergence criteria such as Rhat values and effective sample sizes, as well as visual inspection of trace plots.
 
-In line with our preregistration, we analysed whether participants increased their intention to be vaccinated using a Bayesian binomial regression model with an increase (either from `No' to `Undecided', or from `Undecided' to `Yes') coded as a 1 (did increase intention), and all other instances as zero (did not increase intention). We also analysed whether there was a reduction in the number of participants reporting that they would not get vaccinated, by modelling `No's' as 1, and all other responses as zero. The second approach was included as it allowed us to more directly compare our results with Altay's, after we failed to find a condition effect. Both of these approaches are reported below.
+In line with our preregistration, we analysed whether participants increased their intention to be vaccinated using a Bayesian binomial regression model with an increase (either from `No' to `Undecided,' or from `Undecided' to `Yes') coded as a 1 (did increase intention), and all other instances as zero (did not increase intention). We also analysed whether there was a reduction in the number of participants reporting that they would not get vaccinated, by modelling `No's' as 1, and all other responses as zero. The second approach was included as it allowed us to more directly compare our results with Altay's, after we failed to find a condition effect. Both of these approaches are reported below.
 
 In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was, and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data. (Bürkner and Vuorre (2019), (\textbf{lidell2019analyzing?}))
 
@@ -290,7 +279,7 @@ This change in vaccination attitudes is displayed in Figure 1 \ref{fig:figure1},
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{../plots/raw_density} 
+{\centering \includegraphics[width=1\linewidth]{../plots/raw_density} 
 
 }
 
@@ -301,7 +290,7 @@ Increase in average vaccination attitude can be seen in the violin plot in Figur
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{../plots/before_and_after_violin} 
+{\centering \includegraphics[width=1\linewidth]{../plots/before_and_after_violin} 
 
 }
 
@@ -317,7 +306,7 @@ Against prediction 3, we did not find that the Choice Condition was rated as mor
 
 Although the majority of participants did not change their mind, overall we saw a 13\% reduction in the number of people reporting that they did not intend to get vaccinated. In those who spent between 4 and 16 minutes reading the information, this increased to 15\%
 
-As (Altay et al. (2021)) found a stronger effect for those who spent the most time with the chatbot, we wanted to check whether a condition effect was present in those who spent more time with the information. The median amount of time spent viewing the information was 4 minutes, however we found no difference in the effect of the conditions in those who spent above the median amount of time (between 4 and 16 minutes, so between 1 - 4 minutes per dialogue), with the information (mean: -0.17 , 89\% CI: -0.64, 0.30 ).
+As (Altay, Hacquin, Chevallier, and Mercier (2021)) found a stronger effect for those who spent the most time with the chatbot, we wanted to check whether a condition effect was present in those who spent more time with the information. The median amount of time spent viewing the information was 4 minutes, however we found no difference in the effect of the conditions in those who spent above the median amount of time (between 4 and 16 minutes, so between 1 - 4 minutes per dialogue), with the information (mean: -0.17 , 89\% CI: -0.64, 0.30 ).
 
 Participants who spent above the average amount of time viewing the information were not more likely to show an increase in their intention to get vaccinated (mean: 0.21 , 89\% CI: -0.15, 0.57 ).
 
@@ -353,37 +342,37 @@ Thank you also to Dr Sacha Altay for openly sharing the data and analysis script
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-altay2021information}{}}%
+\leavevmode\hypertarget{ref-altay2021information}{}%
 Altay, S., Hacquin, A.-S., Chevallier, C., \& Mercier, H. (2021). Information delivered by a chatbot has a positive impact on COVID-19 vaccines attitudes and intentions.
 
-\leavevmode\vadjust pre{\hypertarget{ref-altay_scaling_2020}{}}%
+\leavevmode\hypertarget{ref-altay_scaling_2020}{}%
 Altay, S., Schwartz, M., Hacquin, A.-S., Allard, A., Blancke, S., \& Mercier, H. (2020). Scaling up {Interactive} {Argumentation} by {Providing} {Counterarguments} with a {Chatbot} {[}{Registered} {Report} {Stage} 1 {Protocol}{]}. \url{https://doi.org/10.6084/m9.figshare.13122527.v1}
 
-\leavevmode\vadjust pre{\hypertarget{ref-bobadilla-suarez_intrinsic_2017}{}}%
+\leavevmode\hypertarget{ref-bobadilla-suarez_intrinsic_2017}{}%
 Bobadilla-Suarez, S., Sunstein, C. R., \& Sharot, T. (2017). The intrinsic value of choice: {The} propensity to under-delegate in the face of potential gains and losses. \emph{Journal of Risk and Uncertainty}, \emph{54}(3), 187--202. \url{https://doi.org/10.1007/s11166-017-9259-x}
 
-\leavevmode\vadjust pre{\hypertarget{ref-burkner2019ordinal}{}}%
+\leavevmode\hypertarget{ref-burkner2019ordinal}{}%
 Bürkner, P.-C., \& Vuorre, M. (2019). Ordinal regression models in psychology: A tutorial. \emph{Advances in Methods and Practices in Psychological Science}, \emph{2}(1), 77--101.
 
-\leavevmode\vadjust pre{\hypertarget{ref-challenger_covid-19_2021}{}}%
+\leavevmode\hypertarget{ref-challenger_covid-19_2021}{}%
 Challenger, A. R., Sumner, P., \& Bott, L. (2021). \emph{{COVID}-19 myth-busting: An experimental study} (preprint). In Review. \url{https://doi.org/10.21203/rs.3.rs-790299/v1}
 
-\leavevmode\vadjust pre{\hypertarget{ref-eiser_trust_2009}{}}%
+\leavevmode\hypertarget{ref-eiser_trust_2009}{}%
 Eiser, J. R., Stafford, T., Henneberry, J., \& Catney, P. (2009). {``{Trust} me, {I}'m a {Scientist} ({Not} a {Developer})''}: {Perceived} {Expertise} and {Motives} as {Predictors} of {Trust} in {Assessment} of {Risk} from {Contaminated} {Land}. \emph{Risk Analysis}, \emph{29}(2), 288--297. \url{https://doi.org/10.1111/j.1539-6924.2008.01131.x}
 
-\leavevmode\vadjust pre{\hypertarget{ref-mcelreath2018statistical}{}}%
+\leavevmode\hypertarget{ref-mcelreath2018statistical}{}%
 McElreath, R. (2018). \emph{Statistical rethinking: A bayesian course with examples in r and stan}. Chapman; Hall/CRC.
 
-\leavevmode\vadjust pre{\hypertarget{ref-moehring_surfacing_nodate}{}}%
+\leavevmode\hypertarget{ref-moehring_surfacing_nodate}{}%
 Moehring, A., Collis, A., Garimella, K., Rahimian, M. A., Aral, S., \& Eckles, D. (n.d.). Surfacing norms to increase vaccine acceptance, 39.
 
-\leavevmode\vadjust pre{\hypertarget{ref-thorpe_communicating_2021}{}}%
+\leavevmode\hypertarget{ref-thorpe_communicating_2021}{}%
 Thorpe, A., Fagerlin, A., Butler, J., Stevens, V., Drews, F. A., Shoemaker, H., \ldots{} Scherer, L. D. (2021). \emph{Communicating about {COVID}-19 vaccine development and safety} (p. 2021.06.25.21259519). \url{https://doi.org/10.1101/2021.06.25.21259519}
 
-\leavevmode\vadjust pre{\hypertarget{ref-trueblood_role_2020}{}}%
+\leavevmode\hypertarget{ref-trueblood_role_2020}{}%
 Trueblood, J. S., Sussman, A. B., \& O'Leary, D. (2020). \emph{The {Role} of {General} {Risk} {Preferences} in {Messaging} {About} {COVID}-19 {Vaccine} {Take}-{Up}} (\{SSRN\} \{Scholarly\} \{Paper\} No. ID 3649654). Rochester, NY: Social Science Research Network. \url{https://doi.org/10.2139/ssrn.3649654}
 
-\leavevmode\vadjust pre{\hypertarget{ref-vraga_addressing_2021}{}}%
+\leavevmode\hypertarget{ref-vraga_addressing_2021}{}%
 Vraga, E. K., \& Bode, L. (2021). Addressing {COVID}-19 {Misinformation} on {Social} {Media} {Preemptively} and {Responsively}. \emph{Emerging Infectious Diseases}, \emph{27}(2), 396--403. \url{https://doi.org/10.3201/eid2702.203139}
 
 \end{CSLReferences}

@@ -27,7 +27,7 @@ author:
 
 affiliation:
   - id: '1'
-    institution: University of Sheffield, Department of Psychology, Faculty of Science
+    institution: University of Sheffield, Department of Psychology
 
     
 authornote: |
@@ -64,7 +64,7 @@ library(rethinking)
 #library(here)
 ```
 
-`r figsize<-'78%'`
+`r figsize<-'100%'`
 
 # Introduction
 
@@ -166,13 +166,13 @@ We found that participants’ intention to have the vaccine increased after our 
 This change in vaccination attitudes is displayed in Figure 1 \@ref(fig:figure1), which shows the raw vaccination attitude ratings before and after the experiment. Figures displaying the differences in vaccination attitudes between different scale items can be found in the supplementary material. 
 
 
-```{r figure1, fig.cap="Density plot of raw vaccination attitudes before and after the experiment", fig.align="center", out.width="75%"}
+```{r figure1, fig.cap="Density plot of raw vaccination attitudes before and after the experiment", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/raw_density.png")
 ```
 
 Increase in average vaccination attitude can be seen in the violin plot in Figure 2 \@ref(fig:figure2). 
 
-```{r figure2, fig.cap="Violin plot of average vaccination attitudes before and after the experiment", fig.align="center", out.width="75%"}
+```{r figure2, fig.cap="Violin plot of average vaccination attitudes before and after the experiment", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/before_and_after_violin.png")
 ```
 
