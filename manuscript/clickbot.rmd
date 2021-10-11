@@ -152,6 +152,7 @@ In line with our preregistration, when modelling Likert scale vaccination attitu
 #this is some R code which evaluates when you make the document
 #
 source("../results/loading_saved_models.R")
+clean_clickbot <- read.csv("../data/clean_clickbot.csv")
 
 ```
 
@@ -161,7 +162,7 @@ We found that participants’ intention to have the vaccine increased after our 
 
 TK tables! https://rmarkdown.rstudio.com/lesson-7.html and https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
 
-(How to make this table? couldn't find example in your example. For it to be comparable to Altay's you'd want to stack ``` r table(clean_clickbot$choice_cond, clean_clickbot$vax_future_1)``` and ``` table(clean_clickbot$choice_cond, clean_clickbot$vax_future_2)``` on top of each other)
+(How to make this table? couldn't find example in your example. For it to be comparable to Altay's you'd want to stack `r table(clean_clickbot$choice_cond, clean_clickbot$vax_future_1)` and `r table(clean_clickbot$choice_cond, clean_clickbot$vax_future_2)` on top of each other)
 
 This change in vaccination attitudes is displayed in Figure 1 \@ref(fig:figure1), which shows the raw vaccination attitude ratings before and after the experiment. Figures displaying the differences in vaccination attitudes between different scale items can be found in the supplementary material. 
 

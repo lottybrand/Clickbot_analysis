@@ -301,3 +301,41 @@ compare(h2_full_time,h2_int_time,h2_time)
 # bPost      0.35 0.06 0.26  0.45  1784    1
 # sigmaR     2.00 0.04 1.93  2.06   585    1
 # sigmaItem  0.44 0.05 0.38  0.52  1453    1
+
+
+#### engagement and most time? 
+
+engagement_clickbot$most_time_ch <- ifelse((engagement_clickbot$choice_info_time<1000 & engagement_clickbot$choice_info_time > 167),1,0)
+table(engagement_clickbot$most_time_ch)
+engagement_clickbot$most_time_cntrl <- ifelse((engagement_clickbot$control_info_time<1000 & engagement_clickbot$control_info_time > 237),1,0)
+table(engagement_clickbot$most_time_cntrl)
+
+engagement_clickbot$most_time <- ifelse(engagement_clickbot$choice_cond==1, engagement_clickbot$most_time_ch,
+                                   ifelse(engagement_clickbot$choice_cond==0, engagement_clickbot$most_time_cntrl,99))
+table(engagement_clickbot$most_time)
+
+h_3_data <- subset(engagement_clickbot, select=c("ID","engagement_1","eng_type","most_time"))
+
+#coerce index for random effect (think this is done alphabetically so will need to check back with long_clickbot
+h_3_data$eng_type <- coerce_index(h_3_data$eng_type)
+
+
+
+eng_time_model <- map2stan(
+  alist(
+    engagement_1 ~ dordlogit(phi, cutpoints),
+    phi <-  bTime*most_time + 
+      aR[ID]*sigmaR +
+      aItem[eng_type]*sigmaItem,
+    bTime ~ dnorm(0,1),
+    aR[ID] ~ dnorm(0,1),
+    aItem[eng_type] ~ dnorm(0,1),
+    c(sigmaR, sigmaItem) ~ normal(0,0.1),
+    cutpoints ~ dnorm(0,10)
+  ),
+  data=h_3_data, 
+  constraints = list(sigmaItem = "lower=0", sigmaR = "lower=0"),
+  start = list(cutpoints=c(-2,-1,0,1,2,2.5)),
+  control=list(adapt_delta=0.99, max_treedepth=13),
+  chains = 3, cores = 3, iter=1200)
+

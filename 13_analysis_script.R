@@ -247,6 +247,8 @@ compare(h2_exp,h2_int,h2_full, h2_null)
 #### dataframe for hypothesis 3 - is choice condition is more engaging? ####
 ####
 
+#engagement_clickbot<-read.csv(".//data/engagement_clickbot.csv")
+
 h_3_data <- subset(engagement_clickbot, select=c("ID","engagement_1","eng_type","choice_cond"))
 
 #coerce index for random effect (think this is done alphabetically so will need to check back with long_clickbot
