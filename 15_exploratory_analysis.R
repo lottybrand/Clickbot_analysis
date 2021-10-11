@@ -339,3 +339,9 @@ eng_time_model <- map2stan(
   control=list(adapt_delta=0.99, max_treedepth=13),
   chains = 3, cores = 3, iter=1200)
 
+precis(eng_time_model)
+#           mean   sd 5.5% 94.5% n_eff Rhat
+#bTime     0.37 0.12 0.18  0.55   779    1
+#sigmaR    1.29 0.05 1.22  1.37   713    1
+#sigmaItem 0.34 0.05 0.27  0.42  1500    1
+
