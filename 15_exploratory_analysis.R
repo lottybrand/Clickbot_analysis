@@ -345,3 +345,15 @@ precis(eng_time_model)
 #sigmaR    1.29 0.05 1.22  1.37   713    1
 #sigmaItem 0.34 0.05 0.27  0.42  1500    1
 
+table(h_3_data$engagement_1, h_3_data$most_time)
+
+theMeansTimeEng = tapply(h_3_data$engagement_1, list(h_3_data$most_time),mean)
+theMeansTimeEng
+h_3_data$most_time <- as.factor(h_3_data$most_time)
+
+DensityPlot_EngTime <- ggplot(data=h_3_data, aes(x=engagement_1, color=most_time)) + 
+  geom_density(adjust=1.9, alpha=1, size=2)+
+  scale_x_continuous(name = "Engagement", breaks = seq(1, 7), limits=c(1, 7)) +
+  theme_pubr() 
+DensityPlot_EngTime
+DensityPlot_EngTime + scale_color_manual(values=c("navajowhite3", "lightsteelblue3"))

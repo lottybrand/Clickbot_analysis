@@ -49,5 +49,8 @@ precis(model1.2)
 h2_full_time <- readRDS("../model_objects/model_h2_full_time.rds")
 precis(h2_full_time)
 
+# load rest of the h2 models for WAIC comparison 
+h2_full <- readRDS("../model_objects/h2_full.rds")
+h2_null <- readRDS("../model_objects/h2_null.rds")
 
 
