@@ -8,13 +8,13 @@ model1 <- readRDS("./model_objects/model_1.rds")
 ##### Load data files #####
 
 # load cleaned, processed data file
-clean_clickbot <- read.csv("./data/clean_clickbot.csv")
+clean_clickbot <- read.csv("../data/clean_clickbot.csv")
 
 # load long version for attitude analyses
-long_clickbot <- read.csv("./data/long_clickbot.csv")
+long_clickbot <- read.csv("../data/long_clickbot.csv")
 
 # load engagement dataframe
-engagement_clickbot <- read.csv("./data/engagement_clickbot.csv")
+engagement_clickbot <- read.csv("../data/engagement_clickbot.csv")
 
 library(rethinking)
 
@@ -53,7 +53,7 @@ model1 <- map2stan(
 precis(model1)
 plot(precis(model1))
 
-saveRDS(model1, "model1.rds")
+saveRDS(model1, "model_objects/model1.rds")
 
 # also analysed it same way as Altay did (see altay_rep.R file) to compare - still no effect of condition, but what about in general, what does its intercept tell us?
 # altay report similar decrease in "no's" to us. See if there are less 'nos' after compared to before exp. 
@@ -96,7 +96,7 @@ model_nos <- map2stan(
   warmup=1000, iter=4000, chains=3, cores=3)
 
 precis(model_nos)
-saveRDS(model_nos, "model_nos.rds")
+saveRDS(model_nos, "model_objects/model_nos.rds")
 
 # Okay there were less no's after the treatment.
 
@@ -140,7 +140,7 @@ h2_null <- map2stan(
 
 precis(h2_null)
 #model testing just the effect of the experiment in general, ie do attitudes change after both conditions
-saveRDS(h2_null, "h2_null.rds")
+saveRDS(h2_null, "model_objects/h2_null.rds")
 
 h2_exp <- map2stan(
   alist(
@@ -247,7 +247,7 @@ compare(h2_exp,h2_int,h2_full, h2_null)
 #### dataframe for hypothesis 3 - is choice condition is more engaging? ####
 ####
 
-#engagement_clickbot<-read.csv(".//data/engagement_clickbot.csv")
+#engagement_clickbot<-read.csv("../data/engagement_clickbot.csv")
 
 h_3_data <- subset(engagement_clickbot, select=c("ID","engagement_1","eng_type","choice_cond"))
 

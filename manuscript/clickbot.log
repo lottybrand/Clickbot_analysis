@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.28)  28 OCT 2021 11:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.28)  28 OCT 2021 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -742,7 +742,7 @@ Package rerunfilecheck Info: File `clickbot.out' has not changed.
 Here is how much of TeX's memory you used:
  14429 strings out of 480539
  217119 string characters out of 5902823
- 564726 words of memory out of 5000000
+ 564737 words of memory out of 5000000
  31726 multiletter control sequences out of 15000+600000
  455053 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -751,7 +751,7 @@ Here is how much of TeX's memory you used:
 X/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/tom/.TinyTeX/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></home/tom/.TinyTeX/texmf-dist/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on clickbot.pdf (8 pages, 320039 bytes).
+Output written on clickbot.pdf (8 pages, 320035 bytes).
 PDF statistics:
  200 PDF objects out of 1000 (max. 8388607)
  178 compressed objects within 2 object streams
