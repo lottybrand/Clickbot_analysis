@@ -8,13 +8,13 @@ model1 <- readRDS("./model_objects/model_1.rds")
 ##### Load data files #####
 
 # load cleaned, processed data file
-clean_clickbot <- read.csv("../data/clean_clickbot.csv")
+clean_clickbot <- read.csv("data/clean_clickbot.csv")
 
 # load long version for attitude analyses
-long_clickbot <- read.csv("../data/long_clickbot.csv")
+long_clickbot <- read.csv("data/long_clickbot.csv")
 
 # load engagement dataframe
-engagement_clickbot <- read.csv("../data/engagement_clickbot.csv")
+engagement_clickbot <- read.csv("data/engagement_clickbot.csv")
 
 library(rethinking)
 
@@ -161,7 +161,7 @@ h2_exp <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_exp)
-saveRDS(h2_exp, "h2_exp.rds")
+saveRDS(h2_exp, "model_objects/h2_exp.rds")
 
 #model testing just the effect of the interaction, ie do attitudes change more after seeing the choice condition compared to after seeing the control condition?
 
@@ -184,7 +184,7 @@ h2_int <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_int)
-saveRDS(h2_int, "h2_int.rds")
+saveRDS(h2_int, "model_objects/h2_int.rds")
 
 #full model with both interaction and experiment effects
 
@@ -208,7 +208,7 @@ h2_full <- map2stan(
   chains = 3, cores = 3, iter=1200)
 
 precis(h2_full)
-saveRDS(h2_full, "h2_full.rds")
+saveRDS(h2_full, "model_objects/h2_full.rds")
 
 #the change in interaction direction confused me, but it's because the effect of condition is smaller than the effect of experiment (= neg interaction effect) 
 
