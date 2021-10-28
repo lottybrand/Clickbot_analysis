@@ -145,8 +145,6 @@ In line with our preregistration, we analysed whether participants increased the
 
 In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was <!-- who the rater was? You mean including participant/individual as a grouping variable?? --> , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data [@burkner2019ordinal, @liddell2018analyzing].
 
-This line should be in the block below #h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int) 
-
 
 # Results
 
@@ -158,7 +156,7 @@ source("../results/loading_saved_models.R")
 clean_clickbot <- read.csv("../data/clean_clickbot.csv")
 
 # table of model comparison for vaccine attitudes
-# YK COMMENTED OUT BECAUSE IT BREAKS KNIT
+h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int) 
 
 
 #making table from scratch to refer to later
@@ -176,7 +174,7 @@ setDT(intentionChangeTable)
 
 ## Preregistered hypotheses
 
-We found that participants’ intention to have the vaccine increased after our experiment, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). This can be seen in Table \@ref(table:intchange).. 
+We found that participants’ intention to have the vaccine increased after our experiment, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). This can be seen in Table \@ref(tab:intchange). 
 
 TK tables! https://rmarkdown.rstudio.com/lesson-7.html and https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
 
@@ -200,9 +198,12 @@ Increase in average vaccination attitude can be seen in the violin plot in Figur
 knitr::include_graphics("../plots/before_and_after_violin.png")
 ```
 
-Vaccine attitudes increased similarly across both conditions (mean <!-- TK what's this? mean increase?? --> : `r precis(h2_exp)[2,1]` , 89% CI: `r precis(h2_exp)[2,3]` , `r precis(h2_exp)[2,4]` ). This was against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean <!-- TK what's this?? why is there one mean for two (albeit similar) increases? --> : `r precis(h2_int)[1,1]` , 89% CI: `r precis(h2_int)[1,3]`, `r precis(h2_int)[1,4]` ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes
+Vaccine attitudes increased similarly across both conditions (mean <!-- TK what's this? mean increase?? --> : `r precis(h2_exp)[2,1]` , 89% CI: `r precis(h2_exp)[2,3]` , `r precis(h2_exp)[2,4]` ). This was against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean <!-- TK what's this?? why is there one mean for two (albeit similar) increases? --> : `r precis(h2_int)[1,1]` , 89% CI: `r precis(h2_int)[1,3]`, `r precis(h2_int)[1,4]` ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes (Table \@ref(tab:h2waics)).
 
-<!-- (table 2: `r `). --> this line should have reference to h2_waics
+```{r h2waics, echo = FALSE, results = 'asis'}
+library(knitr)
+kable(h2_waics, caption = "Whatever this is TK")
+```
 
 Against prediction 3, we did not find that the Choice Condition was rated as more engaging than the Control Condition (mean: `r precis(h3_model)[1,1]` , 89% CI: `r precis(h3_model)[1,3]`, `r precis(h3_model)[1,4]` ). 
 
@@ -216,7 +217,7 @@ As [@altay2021information] found a stronger effect for those who spent the most 
 
 Participants who spent above the average amount of time viewing the information were not more likely to show an increase in their intention to get vaccinated (mean: `r precis(model1.2)[2,1]` , 89% CI: `r precis(model1.2)[2,3]`, `r precis(model1.2)[2,4]` ).  <!-- how does this square with the 13% vs 15%? And the first line below?? TK -->
 
-However, participants who spent above the average amount of time viewing the information were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: `r precis(h2_full_time)[1,1]` , 89% CI: `r precis(h2_full_time)[1,3]`, `r precis(h2_full_time)[1,4]` ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model `r #compare(h2_int, h2_exp, h2_full, h2_null)` 
+However, participants who spent above the average amount of time viewing the information were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: `r precis(h2_full_time)[1,1]` , 89% CI: `r precis(h2_full_time)[1,3]`, `r precis(h2_full_time)[1,4]` ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model `r compare(h2_int, h2_exp, h2_full, h2_null)` 
 
 TK What about a direct comparison of the size of effects between Altays chatbot condition and our conditions?
 

@@ -259,15 +259,13 @@ In line with our preregistration, we analysed whether participants increased the
 
 In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data Liddell \& Kruschke (2018).
 
-This line should be in the block below \#h2\_waics \textless-compare(h2\_null, h2\_full, h2\_exp, h2\_int)
-
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
 \hypertarget{preregistered-hypotheses-1}{%
 \subsection{Preregistered hypotheses}\label{preregistered-hypotheses-1}}
 
-We found that participants' intention to have the vaccine increased after our experiment, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: -0.37, 89\% Credible Interval: -0.54, -0.20 ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: -0.23, 89\% CI: -0.57, 0.11). This can be seen in Table \ref{table:intchange}..
+We found that participants' intention to have the vaccine increased after our experiment, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: -0.36, 89\% Credible Interval: -0.53, -0.19 ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: -0.22, 89\% CI: -0.57, 0.14). This can be seen in Table \ref{tab:intchange}.
 
 TK tables! \url{https://rmarkdown.rstudio.com/lesson-7.html} and \url{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html}
 
@@ -314,22 +312,109 @@ Increase in average vaccination attitude can be seen in the violin plot in Figur
 \caption{Violin plot of average vaccination attitudes before and after the experiment}\label{fig:beforeafter}
 \end{figure}
 
-Vaccine attitudes increased similarly across both conditions (mean: 2.00 , 89\% CI: 1.93 , 2.07 ). This was against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean: 0.50 , 89\% CI: 0.40, 0.59 ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes
+Vaccine attitudes increased similarly across both conditions (mean : 2.00 , 89\% CI: 1.93 , 2.07 ). This was against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean : 0.50 , 89\% CI: 0.41, 0.59 ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes (Table \ref{tab:h2waics}).
 
-this line should have reference to h2\_waics
+\begin{table}
+\caption{\label{tab:h2waics}Whatever this is TK}
 
-Against prediction 3, we did not find that the Choice Condition was rated as more engaging than the Control Condition (mean: 0.15 , 89\% CI: -0.04, 0.35 ).
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+18183.76\\
+\hline
+18188.56\\
+\hline
+18299.71\\
+\hline
+18384.08\\
+\hline
+\end{tabular}
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+142.8002\\
+\hline
+142.8715\\
+\hline
+142.3391\\
+\hline
+141.8764\\
+\hline
+\end{tabular}
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.000000\\
+\hline
+4.798864\\
+\hline
+115.953379\\
+\hline
+200.325044\\
+\hline
+\end{tabular}
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+NA\\
+\hline
+2.692305\\
+\hline
+18.147754\\
+\hline
+24.901844\\
+\hline
+\end{tabular}
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+593.7446\\
+\hline
+597.3657\\
+\hline
+594.1336\\
+\hline
+595.8885\\
+\hline
+\end{tabular}
+\centering
+\begin{tabular}[t]{r}
+\hline
+x\\
+\hline
+0.916784\\
+\hline
+0.083216\\
+\hline
+0.000000\\
+\hline
+0.000000\\
+\hline
+\end{tabular}
+\end{table}
+
+Against prediction 3, we did not find that the Choice Condition was rated as more engaging than the Control Condition (mean: 0.16 , 89\% CI: -0.03, 0.35 ).
 
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory analysis}\label{exploratory-analysis}}
 
-Although the majority of participants did not change their mind, overall we saw a 13\% reduction in the number of people reporting that they did not intend to get vaccinated. In those who spent between 4 and 16 minutes reading the information, this increased to 15\%
+Overall, we found that the number of people who said that ``No'' they would not get a vaccination when one was offered to them decreased after taking part in our experiment. Out of 716 people, 93 were more likely to get vaccinated after the experiment. Out of these 93, 6 went directly from a ``No'' to a ``Yes,'' 25 went from an ``Undecided'' to a ``Yes,'' and 62 went from a ``No'' to an ``Undecided.'' Although the majority of participants did not change their mind, overall we saw a 13\% reduction in the number of people reporting that they did not intend to get vaccinated. In those who spent between 4 and 16 minutes reading the information, this increased to 15\%.
 
 As (Altay, Hacquin, Chevallier, \& Mercier, 2021) found a stronger effect for those who spent the most time with the chatbot, we wanted to check whether a condition effect was present in those who spent more time with the information. The median amount of time spent viewing the information was 4 minutes, however we found no difference in the effect of the conditions in those who spent above the median amount of time (between 4 and 16 minutes, so between 1 - 4 minutes per dialogue), with the information (mean: -0.17 , 89\% CI: -0.64, 0.30 ).
 
 Participants who spent above the average amount of time viewing the information were not more likely to show an increase in their intention to get vaccinated (mean: 0.21 , 89\% CI: -0.15, 0.57 ).
 
-However, participants who spent above the average amount of time viewing the information were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: 0.48 , 89\% CI: 0.34, 0.61 ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model
+However, participants who spent above the average amount of time viewing the information were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: 0.48 , 89\% CI: 0.34, 0.61 ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model c(18183.7595666892, 18188.5584305625, 18299.7129460213, 18384.0846106897), c(142.800162486237, 142.87151243968, 142.339069986015, 141.876371914845), c(0, 4.79886387336228, 115.953379332143, 200.32504400051), c(NA, 2.6923045856557, 18.1477535941164, 24.9018444337662), c(593.744581508463, 597.36574970858, 594.133582523892, 595.888473273103), c(0.916783975580029, 0.083216024419971, 6.07170429996922e-26, 2.89892123444516e-44)
 
 TK What about a direct comparison of the size of effects between Altays chatbot condition and our conditions?
 
@@ -338,18 +423,18 @@ TK also mention the fact that even the vaccine hesitant tended to have mixed pro
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-We ran an experiment to test if choice of information affected the effectiveness of Question and Answer (Q\&A) dialogues on popular Covid-19 vaccination concerns. We recruited over 700 adults based in the UK who had previously said they were ``against'' or ``neutral'' towards Covid-19 vaccines. Based on a chatbot experiment conducted with French participants, we created 20 Q\&A dialogues split across the five topics; how safe the vaccines are, how effective they are; whether there has been enough time to develop them, whether we can trust who makes them; and whether they are necessary for young and healthy people. Participants were randomly assigned to two conditions; in one they could choose the Q\&A dialogues they saw (Choice Condition), in the other the Q\&A dialogues were randomly displayed (Control Condition). Overall, we found that participants' vaccination attitudes shifted in a more positive direction after reading the dialogues in both conditions; we found no difference between the Choice and Control Condition. Crucially we found that participants who spent above the average (median) amount of time viewing the information (between 4 and 16 minutes, or between 1 - 4 minutes per dialogue), were more likely to increase their vaccination attitudes and intentions. We discuss the implications of our results in light of recent interest in using chatbots or other interventions to increase vaccination uptake. We argue that creating an engaging experience for participants that encourages them to spend quality time with the information is key for increasing positive attitudes towards vaccination.
+We ran an experiment to test if choice of information affected the effectiveness of Question and Answer (Q\&A) dialogues on popular Covid-19 vaccination concerns. We recruited over 700 adults based in the UK who had previously said they were ``against'' or ``neutral'' towards Covid-19 vaccines. Based on a chatbot experiment conducted with French participants (Altay, Hacquin, Chevallier, \& Mercier, 2021), we created 20 Q\&A dialogues split across the five topics; how safe the vaccines are, how effective they are; whether there has been enough time to develop them, whether we can trust who makes them; and whether they are necessary for young and healthy people. Participants were randomly assigned to two conditions; in one they could choose the Q\&A dialogues they saw (Choice Condition), in the other the Q\&A dialogues were randomly displayed (Control Condition). Overall, we found that participants' vaccination attitudes shifted in a more positive direction after reading the dialogues in both conditions; we found no difference between the Choice and Control Condition. Crucially we found that participants who spent above the average (median) amount of time viewing the information (between 4 and 16 minutes, or between 1 - 4 minutes per dialogue), were more likely to increase their vaccination attitudes and intentions. We discuss the implications of our results in light of recent interest in using chatbots or other interventions to increase vaccination uptake. We argue that creating an engaging experience for participants that encourages them to spend quality time with the information is key for increasing positive attitudes towards vaccination.
 
-Overall, we found that the number of people who said that ``No'' they would not get a vaccination when one was offered to them decreased after taking part in our experiment. Out of 716 people, 93 were more likely to get vaccinated after the experiment. Out of these 93, 6 went directly from a ``No'' to a ``Yes,'' 25 went from an ``Undecided'' to a ``Yes,'' and 62 went from a ``No'' to an ``Undecided.'' Although the majority of participants did not change their mind, overall we saw a 13\% reduction in the number of people reporting that they did not intend to get vaccinated. In those who spent between 4 and 16 minutes reading the information, this increased to 15\%. These figures are similar to the results of the Altay et al.~chatbot condition that this study was based on, providing a conceptual replication of their results. This is reassuring as we used identical information to theirs, only editing the information to be more appropriate for a UK-based audience and with the latest epidemiological information at the time. In both their and our experiment, we found an effect of time spent with the information, in that those who spent longer with the chatbot were more likely to increase their vaccination intention and attitudes. This has potentially important implications for those designing public health information interventions, in that how engaging (and therefore how long participants are willing to attend to the information) is crucial.
+The size of the shift in intentions we observed was similar to the results of the Altay et al.~chatbot condition. In this sense we provide a conceptual replication of their results. This is reassuring as we used identical information to theirs, only editing the information to be more appropriate for a UK-based audience and with the latest epidemiological information at the time. In both their and our experiment, we found an effect of time spent with the information, in that those who spent longer with the chatbot were more likely to increase their vaccination intention and attitudes. This has potentially important implications for those designing public health information interventions, in that how engaging (and therefore how long participants are willing to attend to the information) is crucial.
 
 TK here there is room to cite studies showing that anti-vaccination attitudes are hard to shift. Thus highlighting the encouraging nature of our result
 
 In contrast to the Altay experiment, we found no difference between our conditions. However, there were crucial differences between our conditions and those of Altay's. The most obvious is that all of our participants saw information of the same length and quality. The fact that our conditions were equally effective then suggests that Altay's chatbot may have been more effective than their control condition not because there is something inherently effective about chatbots, but simply because it delivered more information than the control condition.\\
-The second most crucial difference between our experiment and Altay's is that we controlled for trustworthiness of information across both of our conditions. In Altay's chatbot experiment, the chatbot included a question ``why should I trust you?'' in which the participant saw information about who the researchers were and what their motives were. Previous research suggests trust plays a huge role in how effective science communication is (Tom's paper? Other ones? ). The information in Altay's control condition was therefore implicitly less trustworthy than the chatbot information, given the control condition had no source and was anonymous. In contrast, both of our conditions included the ``Why should I trust you?'' question and answer dialogue right at the start of the experiment, before any of the other dialogues were displayed. This dialogue included information about who we (the authors) were, where the information came from, and what our motives were. We also stated that we had no links to pharmaceutical companies or something else, similar to the Altay design. The fact that both of our conditions included this trustworthiness information, and we found no difference between the effectiveness of our conditions, suggests that the trustworthiness of information and/or being transparent about the source of information could be playing an important role.
+The second most crucial difference between our experiment and Altay's is that we controlled for trustworthiness of information across both of our conditions. In Altay's chatbot experiment, the chatbot included a question ``why should I trust you?'' in which the participant saw information about who the researchers were and what their motives were. Previous research suggests trust plays a huge role in how effective science communication is . The information in Altay's control condition was therefore implicitly less trustworthy than the chatbot information, given the control condition had no source and was anonymous. In contrast, both of our conditions included the ``Why should I trust you?'' question and answer dialogue right at the start of the experiment, before any of the other dialogues were displayed. This dialogue included information about who we (the authors) were, where the information came from, and what our motives were. We also stated that we had no links to pharmaceutical companies or something else, similar to the Altay design. The fact that both of our conditions included this trustworthiness information, and we found no difference between the effectiveness of our conditions, suggests that the trustworthiness of information and/or being transparent about the source of information could be playing an important role.
 
-By design, the only difference between the current study's two conditions was that in one participants had a choice of which information they saw, whereas in the other the information was shown at random. This suggests that having agency or ``choice'' over the information you engage with may not be the most crucial aspect of why chatbots are effective. Furthermore it suggests that addressing the concerns that are of most importance or interest to the participant may not be as crucial as previously thought (although check this with our choice data against our density plots per item. Put those in supplementary info). Previous research suggests participants prefer choice and agency over information when given the choice, but perhaps this preference isn't enough to override the effectiveness of the information when it is given to them without their actively choosing it. Furthermore, we did not find a difference in engagement ratings between our conditions. This suggests that our conditions were not different enough to cause one to be more engaging than the other. Indeed, participants spent a similar amount of time across both conditions. This suggests that making information engaging may be of crucial importance. Seemingly unimportant details of chatbots may account for their being engaging, or at least their ability to hold the attention of the participant. One aspect is the ability to go back and forth between different arguments, or the ability to select numerous counterarguments of interest. Another is the display of the information, which is often more `bitesize' with one sentence delivered at a time, or the ``human'' element of interacting with another `agent' may be inherently more engaging.
+By design, the only difference between the current study's two conditions was that in one participants had a choice of which information they saw, whereas in the other the information was shown at random. This suggests that having agency or ``choice'' over the information you engage with may not be the most crucial aspect of why chatbots are effective. Furthermore it suggests that addressing the concerns that are of most importance or interest to the participant may not be as crucial as previously thought . Previous research suggests participants prefer choice and agency over information when given the choice, but perhaps this preference isn't enough to override the effectiveness of the information when it is given to them without their actively choosing it. Furthermore, we did not find a difference in engagement ratings between our conditions. This suggests that our conditions were not different enough to cause one to be more engaging than the other. Indeed, participants spent a similar amount of time across both conditions. This suggests that making information engaging may be of crucial importance. Seemingly unimportant details of chatbots may account for their being engaging, or at least their ability to hold the attention of the participant. One aspect is the ability to go back and forth between different arguments, or the ability to select numerous counterarguments of interest. Another is the display of the information, which is often more `bitesize' with one sentence delivered at a time, or the ``human'' element of interacting with another `agent' may be inherently more engaging.
 
-It could be argued that in our data all we are seeing is regression to the mean, particularly because we recruited from one end of the vaccination attitude spectrum, and we saw similar effects across both conditions. However, after investigating this possibility, it seems unlikely given that those who were rated as ``against'' vaccination as opposed to ``neutral'' were actually more likely to stay the same in their attitude ratings than the neutral participants, and were less likely than the neutral participants to increase their attitudes (i.e the opposite of what you would expect with regression to the mean, see plot TK reference in supplementary material). Furthermore, not only are our effect sizes similar to Altay's chatbot condition effects, but also much greater than those in previous studies, for example when influenced by norms, participants only showed a 5\% decline in the number of participants who were `undecided' or `against' vaccination Moehring et al. (n.d.), whereas we found a 15\% decline. Previous research also suggests that using Q\&A style information is more effective than presenting pure fact-based information, again reporting similar effects to ours Challenger, Sumner, and Bott (2021).
+It could be argued that in our data all we are seeing is regression to the mean, particularly because we recruited from one end of the vaccination attitude spectrum, and we saw similar effects across both conditions. However, after investigating this possibility, it seems unlikely given that those who were rated as ``against'' vaccination as opposed to ``neutral'' were actually more likely to stay the same in their attitude ratings than the neutral participants, and were less likely than the neutral participants to increase their attitudes (i.e the opposite of what you would expect with regression to the mean, Furthermore, not only are our effect sizes similar to Altay's chatbot condition effects, but also much greater than those in previous studies, for example when influenced by norms, participants only showed a 5\% decline in the number of participants who were `undecided' or `against' vaccination Moehring et al. (n.d.), whereas we found a 15\% decline. Previous research also suggests that using Q\&A style information is more effective than presenting pure fact-based information, again reporting similar effects to ours Challenger, Sumner, and Bott (2021).
 
 One aspect of our study worth noting is how the information was framed and how the participants were addressed throughout the study. Participants were asked if they were against, for, neutral, as is worded in Prolific. We thus used this as our prescreening criteria, so advertised the study as ``your opinions on covid-19 vaccinations.'' Part of our study (results not included for this publication) was to ask participants to give their reasons for and against vaccination, and, to imagine and put forward the opposite side's reasons for and against vaccination (this was conducted after their second round of attitudes, so would not influence the results of this study). We also offered participants an opportunity to provide any other feedback they had. These comments were insightful, and often suggested participants were keen to discuss their views and opinions, and did not have a reliable outlet for this. Anonymity perhaps allowed them to be honest. We also noted many thanked us for not referring to them, or anyone, as ``anti vaccination'' or ``anti-vaxxers.'' We refrained from using this term throughout due to the knowledge that this community is often stereotyped and villainised. We wish to follow-up these comments, respond where necessary, and share them with the rest of the research community to help further destigmatise the anti vaccination community and help create an atmosphere of constructive dialogue and conversational receptiveness about these issues. (Yeomans, Minson, Collins, Chen, and Gino (2020))
 
