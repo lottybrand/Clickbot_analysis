@@ -244,6 +244,8 @@ One aspect of our study worth noting is how the information was framed and how t
 
 Overall, we suggest it is important when designing science communication interventions to control for the amount of information and time spent with the information, and consequently to ensure a high level of engagement with the information. Simply providing Q&A-style dialogues appeared to be as effective as delivering the same information via a chatbot, and more effective than using norms or merely fact-based interventions. 
 
+Other studies showing increased knowledge about covid-19 increased vaccination intentions [@pfattheicher2021information]
+
 
 ```{r results="hide"}
 #how to get a citation for packages you use
