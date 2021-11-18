@@ -1,10 +1,14 @@
 ---
 title: "Supp Info"
-output: pdf_document
+output: bookdown::pdf_document2
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+
+# note to get figure referencing you need to change the output to bookdown::pdf_document2
+# and use \ not /
+# to have figure captions containing quotes you need to define them as variables (see below)
 ```
 
 ## Supplementary material 
@@ -13,31 +17,47 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Plots showing the variation in vaccine attitudes in our population that reported being anti or neutral towards covid-19 vaccines. 
 
-Safety: /@ref(fig:figure1)
+Safety: Figure \@ref(fig:figure1)
 
-```{r figure1, fig.cap="Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think Covid-19 vaccines are safe.'" fig.align="center", out.width="100%"}
+
+(ref:figcap1) Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think Covid-19 vaccines are safe.'
+
+
+```{r figure1, fig.cap='(ref:figcap1)', fig.align='center', out.width='100%'}
 knitr::include_graphics("../plots/safe_dense.png")
 ```
 
-Effectiveness: /@ref(fig:figure2)
 
-```{r figure2, fig.cap="Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think Covid-19 vaccines are effective,'" fig.align="center", out.width="100%"}
+Effectiveness: \@ref(fig:figure2)
+
+(ref:figcap2) Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think Covid-19 vaccines are effective,'
+
+```{r figure2, fig.cap="(ref:figcap2)", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/effective_dense.png")
 ```
 
-Enough time: /@ref(fig:figure3)
-```{r figure3, fig.cap="Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think we've had enough time to develop Covid-19 vaccines'", fig.align="center", out.width="100%"}
+Enough time: \@ref(fig:figure3)
+
+(ref:figcap3) Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think we've had enough time to develop Covid-19 vaccines'
+
+```{r figure3, fig.cap="(ref:figcap3)", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/time_dense.png")
 ```
 
-Trust: /@ref(fig:figure4)
-```{r figure4, fig.cap="Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think we can trust those who produce Covid-19 Vaccines'", fig.align="center", out.width="100%"}
-  knitr::include_graphics("../plots/trust_dens.png")
+Trust: \@ref(fig:figure4)
+
+(ref:figcap4) Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think we can trust those who produce Covid-19 Vaccines'
+
+```{r figure4, fig.cap="(ref:figcap4)", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/trust_dens.png")
 ```
 
-Important: /@ref(fig:figure5)
-```{r figure5, fig.cap="Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think it is important to be vaccinated against Covid-19'", fig.align="center", out.width="100%"}
-  knitr::include_graphics("../plots/importance_dens.png")
+Important: \@ref(fig:figure5)
+
+(ref:figcap5) Density plot of raw vaccination attitudes when asked 'how strongly do you agree with the following statement: I think it is important to be vaccinated against Covid-19'
+
+```{r figure5, fig.cap="(ref:figcap5)", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/importance_dens.png")
 ```
 
 
@@ -46,7 +66,7 @@ Important: /@ref(fig:figure5)
 Plot suggesting that those who previously answered they were "against" Covid-19 vaccines were less likely to change their vaccination intentions and more likely to stay the same, compared to those who answered that they were "neutral" towards Covid-19 vaccines. This is the opposite of what we would expect if we were simply witnessing regression to the mean rather than an effect of the information. /@ref(fig:figure6)
 
 ```{r figure6, fig.cap="Plot showing the proportion of responses that either increased, decreased, or stayed the same when asked if they would take an approved Covid-19 vaccination in the future compared to when they were asked at the beginning of the experiment. The plot compares those who answered that they were Against Covid-19 vaccines or Neutral towards Covid-19 vaccines (as opposed to Positive towards Covid-19 vaccines in the Prolific Profiles used for Prescreening)", fig.align="center", out.width="100%"}
-  knitr::include_graphics("../plots/regression_to_mean.png")
+knitr::include_graphics("../plots/regression_to_mean.png")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
