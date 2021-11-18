@@ -89,7 +89,9 @@ To address our question of what precisely about the chatbot drove the increase i
 
 ## Preregistered hypotheses
 
-<!-- TK link to preregistration here? Perhaps even some introductory words about the value of preregistration? -->
+<!-- TK link to preregistration here? Perhaps even some introductory words about the value of preregistration? LB: It's linked at the start of the analysis section? But I'll put it here too?-->
+
+Our hypotheses, predictions and analyses were preregistered before data collection at <https://osf.io/t4gav>. All of our data, code and analysis scripts are available at <https://github.com/lottybrand/clickbot_analysis>.
 
 We predict that the choice condition will show a greater effect due to the ability of participants to address the concerns most important to them. If we do find a difference, this is strong evidence that one of the important aspects of chatbots in changing attitudes is that it allows the participant to choose what information is addressed, aside from trust and amount of information. 
 
@@ -141,12 +143,13 @@ Our hypotheses, predictions and analyses were preregistered before data collecti
 
 All models were run using the Rethinking package in R [@mcelreath2018statistical].
 
-We include model parameters based on a priori preregistered hypotheses. Model parameters were said to have an effect on the model outcome if their 89% credible interval did not cross zero. 89% intervals are the default credible interval setting for the Rethinking package, as they discourage interpreting results in terms of binary null-hypothesis-significance-testing [@mcelreath2018statistical]. 95% intervals would not alter the interpretation of our results. When relevant, we used model comparison to aid interpretation of results. Models were said to be a better fit to the data if their WAIC (widely-applicable, or Wanatabe-Aike information criterion) value held the most weight out of all models tested (e.g. Table 2).
-Priors were chosen to be weakly regularizing, in order to control for both under- and overfitting the model to the data [@mcelreath2018statistical]. All models were checked for convergence using convergence criteria such as Rhat ($\hat{r}$ ? TK )values and effective sample sizes, as well as visual inspection of trace plots. 
+We include model parameters based on a priori preregistered hypotheses. Throughout the manuscript we report mean model coefficients with their 89% credible intervals. Model parameters were said to have an effect on the model outcome if their 89% credible interval did not cross zero. 89% intervals are the default credible interval setting for the Rethinking package, as they discourage interpreting results in terms of binary null-hypothesis-significance-testing [@mcelreath2018statistical]. 95% intervals would not alter the interpretation of our results. When relevant, we used model comparison to aid interpretation of results. Models were said to be a better fit to the data if their WAIC (widely-applicable, or Wanatabe-Aike information criterion) value held the most weight out of all models tested (e.g. Table 2).
+
+Priors were chosen to be weakly regularizing, in order to control for both under- and overfitting the model to the data [@mcelreath2018statistical]. All models were checked for convergence using convergence criteria such as Rhat (LB: no it's Rhat!) values and effective sample sizes, as well as visual inspection of trace plots. 
 
 In line with our preregistration, we analysed whether participants increased their intention to be vaccinated using a Bayesian binomial regression model with an increase (either from 'No' to 'Undecided', or from 'Undecided' to 'Yes') coded as a 1 (did increase intention), and all other instances as zero (did not increase intention). We also analysed whether there was a reduction in the number of participants reporting that they would not get vaccinated, by modelling 'No's' as 1, and all other responses as zero. The second approach was included as it allowed us to more directly compare our results with Altay et al's, after we failed to find a condition effect. Both of these approaches are reported below. 
 
-In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was <!-- who the rater was? You mean including participant/individual as a grouping variable?? --> , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data [@burkner2019ordinal, @liddell2018analyzing].
+In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was <!-- who the rater was? You mean including participant/individual as a grouping variable?? Yep. the term 'varying intercepts' is statistically more accurate than 'random effects' but it's the same thing--> , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data [@burkner2019ordinal, @liddell2018analyzing].
 
 
 # Results
@@ -177,7 +180,7 @@ setDT(intentionChangeTable)
 
 ## Preregistered hypotheses
 
-We found that participants’ intention to have the vaccine increased after our experiment, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). This can be seen in Table \@ref(tab:intchange). 
+We found that participants’ intention to have the vaccine increased after our experiment, regardless of condition, as the number of those reporting they would not get the vaccine decreased overall (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). Against prediction 1, those in the choice condition were not more likely to show an increase in their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). This can be seen in Table \@ref(tab:intchange). 
 
 TK tables! https://rmarkdown.rstudio.com/lesson-7.html and https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
 

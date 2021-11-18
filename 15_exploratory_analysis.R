@@ -109,9 +109,9 @@ precis(model1.1)
 
 saveRDS(model1.1, "model1.1_timing.rds")
 
-# so no effect of condition on intention change just when looking at those spending over 4 minutes 
+# so this is saying, there is still no effect of condition on intention change, even when just looking at those who spent over 4 minutes 
 
-# need to do same for attitude model 
+# need to do same for attitude model? 
 
 # now B) 
 
@@ -125,6 +125,7 @@ clean_clickbot$most_time <- ifelse(clean_clickbot$choice_cond==1, clean_clickbot
                                    ifelse(clean_clickbot$choice_cond==0, clean_clickbot$most_time_cntrl,99))
 table(clean_clickbot$most_time)
 
+#this is taking away those who had already said yes
 subset_time2 <- subset(clean_clickbot, select=c("ID","vax_positive","most_time","vax_future_1","vax_future_2"))
 subset_time2 <- subset_time2[!(subset_time2$vax_future_1==1),]
 
@@ -147,6 +148,83 @@ precis(model1.2)
 saveRDS(model1.2, "model1.2_timing.rds")
 
 # so spending over 4 minutes doens't increase likelihood of changing intention. 
+
+# can we do the same here with the "less no's" data?
+
+# repeat above but for the NOs data. won't work for no_data, will for clickbot_NOs, need to get head around this
+clean_clickbot_NOs$most_time_ch <- ifelse((clean_clickbot_NOs$choice_info_time<1000 & clean_clickbot_NOs$choice_info_time > 167),1,0)
+table(clean_clickbot_NOs$most_time_ch)
+clean_clickbot_NOs$most_time_cntrl <- ifelse((clean_clickbot_NOs$control_info_time<1000 & clean_clickbot_NOs$control_info_time > 237),1,0)
+table(clean_clickbot_NOs$most_time_cntrl)
+
+clean_clickbot_NOs$most_time <- ifelse(clean_clickbot_NOs$choice_cond==1, clean_clickbot_NOs$most_time_ch,
+                                   ifelse(clean_clickbot_NOs$choice_cond==0, clean_clickbot_NOs$most_time_cntrl,99))
+table(clean_clickbot_NOs$most_time)
+
+#change vax_future_1 and vax_future_2 to intention as before
+subset_time2_nos <- subset(clean_clickbot_NOs, select=c("ID","vax_positive","most_time","intention"))
+
+#I don't think this model makes any sense
+
+model1.3 <- map2stan(
+  alist(
+    intention ~ dbinom(1, p),
+    logit(p) <- a + b*most_time,
+    a ~ dnorm(0,1),
+    b ~ dnorm(0,1)
+  ),
+  data=subset_time2_nos, 
+  warmup=1000, iter=4000, chains=3, cores=3)
+
+precis(model1.3)
+# makes sense that there's no diff because this includes both pre and post ratings
+
+# mean   sd  5.5% 94.5% n_eff Rhat
+# a  0.04 0.07 -0.08  0.15  3309    1
+# b -0.17 0.11 -0.34  0.00  3309    1
+
+#add interaction term (still think this is probably wrong)
+subset_time2_nos <- subset(clean_clickbot_NOs, select=c("ID","vax_positive","most_time","intention","post_intention"))
+
+model1.3.1 <- map2stan(
+  alist(
+    intention ~ dbinom(1, p),
+    logit(p) <- a + bPost_Time*post_intention*most_time,
+    a ~ dnorm(0,1),
+    bPost_Time ~ dnorm(0,1)
+  ),
+  data=subset_time2_nos, 
+  warmup=1000, iter=4000, chains=3, cores=3)
+
+precis(model1.3.1)
+# okay negative interaction. Does this make sense?? not sure
+
+# mean   sd  5.5% 94.5% n_eff Rhat
+# a           0.04 0.06 -0.05  0.14  4423    1
+# bPost_Time -0.37 0.12 -0.57 -0.18  4063    1
+
+# look at effect of most time *only* in post ratings?
+
+subset_time2_nos <- subset_time2_nos[subset_time2_nos$post_intention==1,]
+
+model1.3.2 <- map2stan(
+  alist(
+    intention ~ dbinom(1, p),
+    logit(p) <- a + b*most_time,
+    a ~ dnorm(0,1),
+    b ~ dnorm(0,1)
+  ),
+  data=subset_time2_nos, 
+  warmup=1000, iter=4000, chains=3, cores=3)
+
+precis(model1.3.2)
+
+# nope. So. This is saying, within the post ratings, there are not less no's in those who spent most time compared to those who spent average time or less?
+
+# mean   sd  5.5% 94.5% n_eff Rhat
+# a -0.14 0.10 -0.30  0.02  3299    1
+# b -0.19 0.15 -0.42  0.04  3385    1
+
 
 ##### okay now we need to make wide to long again for attitude models #####
 

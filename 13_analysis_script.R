@@ -3,7 +3,7 @@
 ##### If you have already run the data_input or data_processing scripts, the below should already be loaded for you, so you can skip loading them here. 
 ##### ALTERNATIVELY you can load the model objects that correspond to each model below ##### 
 ##### using the "model_objects" folder to explore the model results yourself. 
-model1 <- readRDS("./model_objects/model_1.rds")
+model1 <- readRDS("model1.rds")
 
 ##### Load data files #####
 
@@ -68,10 +68,10 @@ clean_clickbot_NOs <- reshape(clean_clickbot,
                               v.names = c("intention"), 
                               direction = "long")
 
-#change default 'time' column name to post intention (0 = pre, 1 = post)
+#change default 'time' column name to post intention (1 = vax_future_1, 2 = vax_future_2)
 colnames(clean_clickbot_NOs)[colnames(clean_clickbot_NOs) == "time"] <- "post_intention"
 
-#make binary (1 = post rating, 0 = pre rating)
+#make binary (1 = vax_future_1, = pre-rating, = 0. 2=vax_future_2 = post rating, =1)
 clean_clickbot_NOs$post_intention <- ifelse((clean_clickbot_NOs$post_intention ==1),0,1)
 
 #make intention binary (1 = No, 0 = everything else)
