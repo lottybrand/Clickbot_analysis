@@ -435,3 +435,9 @@ DensityPlot_EngTime <- ggplot(data=h_3_data, aes(x=engagement_1, color=most_time
   theme_pubr() 
 DensityPlot_EngTime
 DensityPlot_EngTime + scale_color_manual(values=c("navajowhite3", "lightsteelblue3"))
+
+
+##### creating table 1 but for those who spent most time 
+
+subsetMostTime <- clean_clickbot[clean_clickbot$most_time==1,]
+table(subsetMostTime$vax_future_1)
