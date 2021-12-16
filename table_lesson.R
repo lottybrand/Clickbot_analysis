@@ -11,3 +11,9 @@ rownames(table2) = c("No","Undecided","Yes")
 table2
 
 source("loading_saved_models.R")
+h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int)
+waicTable <- subset(h2_waics, select = c("WAIC","SE","weight"))
+
+update.packages(ask = FALSE, checkBuilt = TRUE)
+tinytex::tlmgr_update()
+install.packages('tinytex')

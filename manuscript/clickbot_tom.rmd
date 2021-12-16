@@ -38,7 +38,7 @@ authornote: |
 abstract: |
   Recently, Altay et al (2020) showed that five minutes of interaction with a chatbot led to increases in Covid-19 vaccination attitudes and intentions, compared to a brief control condition. Here we partially replicate and qualify this effect, showing the importance of the choice of control condition. We introduce strict controls between the chatbot and non-chatbot conditions of the amount of information provided, the time spent with the information, how the trustworthiness of the information is communicated, and the level of interactivity. Like Altay et al, our chatbot condition allowed participants to navigate a branching dialogue by choice of set questions, eliciting set answers on aspects of the covid-19 vaccine. Our control condition used the same questions and answers but removed all elements of participant choice. In this way, our experiment isolated the effect of participant choice of information. To maximise the stringency of our study, we specifically targeted those who were already either against or neutral towards covid-19 vaccinations, screening-out those with positive attitudes. Matching Altay et al, we found an increase in positive attitudes towards vaccination, as well as an increase in intention to get vaccinated, after engaging with vaccine information. Unlike Altay et al, we found no difference between our conditions: choosing the questions did not increase vaccine attitudes, nor did it increase vaccine intentions, compared to display of unchoosen information. In common with Altay et al, we found an effect of time spent with the information, across both conditions, in that those who spent between 4 and 16 minutes (above the median) with the information were more likely to increase both their attitudes and their vaccination intentions. These results suggest that the attitudes of the vaccine hesitant are modifiable with exposure to in-depth vaccine information, presented in dialogue form, but that neither control of the interaction, nor the act of choosing the questions to ask, are crucial factors.
 
-
+note              : \textcolor{red}{This paper is a pre-print and has not yet been peer-reviewed}
 
 
 
@@ -52,8 +52,8 @@ lineno            : no
 mask              : no
 
 class             : "jou"
-output            : papaja::apa6_pdf
-#output            : bookdown::html_document2
+#output            : papaja::apa6_pdf
+output            : bookdown::html_document2
 
 ---
 
@@ -89,6 +89,8 @@ To address our question of what precisely about the chatbot drove the increase i
 
 ## Preregistered hypotheses
 
+<!-- TK link to preregistration here? Perhaps even some introductory words about the value of preregistration? LB: It's linked at the start of the analysis section? But I'll put it here too?-->
+
 Our hypotheses, predictions and analyses were preregistered before data collection at <https://osf.io/t4gav>. All of our data, code and analysis scripts are available at <https://github.com/lottybrand/clickbot_analysis>.
 
 We predict that the choice condition will show a greater effect due to the ability of participants to address the concerns most important to them. If we do find a difference, this is strong evidence that one of the important aspects of chatbots in changing attitudes is that it allows the participant to choose what information is addressed, aside from trust and amount of information. 
@@ -122,9 +124,9 @@ At the beginning of each study, participants in both conditions saw a Question-A
 
 Altay et al's chatbot featured trust as one of the main question options in their chatbot condition (“why should I trust you?”). If trust drives effectiveness of vaccine interventions then this could have driven the difference between their conditions, rather than the presence/absence of a chatbot per se. We therefore removed this question and answer from the dialogue options and inserted it at the beginning of both conditions, to ensure all participants would see it regardless of condition or choice of information. This ensured the communication of trustworthiness of our information was consistent across both conditions. 
 
-Our post exposure questionnaire consisted of the same covid attitude questions as the pre-exposure questionnaire, as well as questions on how engaging the experience was and how clear the information was. We also asked how often they discuss vaccination with those who disagree with them and how often they actively learn about vaccines (e.g. via reading articles, listening to podcasts). Participants were finally asked if they would recommend our study to a friend (if yes they were given the option to share a link via Twitter or Facebook- and we recorded the proportion that did), whether they would take part again in a month’s time, age, gender and education level.
+Our post exposure questionnaire consisted of the same covid attitude questions as the pre-exposure questionnaire, as well as questions on how engaging the experience was and how clear the information was. We also asked how often they discuss vaccination with those who disagree with them and how often they actively learn about vaccines (e.g. via reading articles, listening to podcasts). Would recommend to a friend? Take part again in a month’s time? Age, gender, education level. <!-- TK these need making into sentences -->
 
-We included an attention check question amongst both the pre-exposure questionnaire and our post-exposure questionnaire (“We would like to check that you are paying careful attention to the information in this study. Please respond to the following item with ‘Somewhat agree’.”). We used both of these attention check answers alongside a free-response answer to check that participants were attending to the study information, i.e. we only included those that passed both attention checks and provided coherent, relevant information in the free-response text boxes that were recorded as part of a different study.  
+We also had an attention check question amongst both the pre-exposure questionnaire and our post-exposure questionnaire (“We would like to check that you are paying careful attention to the information in this study. Please respond to the following item with ‘Somewhat agree’.”). We used both of these attention check answers alongside a free-response answer <!-- TK ??? --> to check that participants were attending to the study information.  
 
 ## Procedure
 
@@ -132,7 +134,7 @@ Participants were randomly assigned to either the Control or Choice Condition. P
 
 In our Control Condition, participants viewed four randomly chosen dialogues of between 200-500 words each, out of 5 possible domains of vaccination concern (*are they safe?*, *are they effective?*, *were they rushed?*, *can we trust who makes them?*, *do I need to get one?*). 
 
-In our Choice Condition, participants were able to choose four dialogues in total of between 200-500 words each, out of 5 possible domains of vaccination concern, as above. Therefore the amount of information that the participants were exposed to was equivalent between the Control and the Choice condition. The information is displayed identically, in 200-500 word chunks at a time, thus the information itself should be equally engaging and easy to read. Exposure to equivalent amounts of information also has the effect of more closely equating the engagement time across the conditions <!-- but this is not necessarily, so right? Like there could still have been a diffrence TK. I didn't actually write the preceding sentence (why tracked changes helps!) so feel free to delete-->. These controls attempt to isolate any effect of choice of information  ‘interactivity’) as a cause of difference between the conditions.
+In our Choice Condition, participants were able to choose four dialogues in total of between 200-500 words each, out of 5 possible domains of vaccination concern, as above. Therefore the amount of information that the participants were exposed to was equivalent between the Control and the Choice condition. The information is displayed identically, in 200-500 word chunks at a time, thus the information itself should be equally engaging and easy to read. Exposure to equivalent amounts of information also has the effect of more closely equating the engagement time across the conditions <!-- but this is not necessarily, so right? Like there could still have been a diffrence TK -->. These controls isolate any effect of choice of information  ‘interactivity’) as a cause of difference between the conditions.
 
 
 # Analysis
@@ -147,7 +149,7 @@ Priors were chosen to be weakly regularizing, in order to control for both under
 
 In line with our preregistration, we analysed whether participants increased their intention to be vaccinated using a Bayesian binomial regression model with an increase (either from 'No' to 'Undecided', or from 'Undecided' to 'Yes') coded as a 1 (did increase intention), and all other instances as zero (did not increase intention). We also analysed whether there was a reduction in the number of participants reporting that they would not get vaccinated, by modelling 'No's' as 1, and all other responses as zero. The second approach was included as it allowed us to more directly compare our results with Altay et al's, after we failed to find a condition effect. Both of these approaches are reported below. 
 
-In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was <!-- who the rater was? You mean including participant/individual as a grouping variable?? Yep. the term 'varying intercepts' is statistically more accurate than 'random effects' but it's the same thing. --> , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data. It also allows us to preserve and use all of the information and variation, and account for pseudoreplication within items and individuals [@burkner2019ordinal, @liddell2018analyzing].
+In line with our preregistration, when modelling Likert scale vaccination attitude responses, as well as Likert scale engagement ratings, we used ordinal categorical multi-level models, with varying intercepts for who the rater was <!-- who the rater was? You mean including participant/individual as a grouping variable?? Yep. the term 'varying intercepts' is statistically more accurate than 'random effects' but it's the same thing--> , and for Likert scale item. This allowed us to use each Likert scale item as the unit of analysis, rather than average over several items, in accordance with recent recommendations on how to treat Likert scale data [@burkner2019ordinal, @liddell2018analyzing].
 
 
 # Results
@@ -160,8 +162,8 @@ source("../results/loading_saved_models.R")
 clean_clickbot <- read.csv("../data/clean_clickbot.csv")
 
 # table of model comparison for vaccine attitudes
-h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int)
-waicTable <- subset(h2_waics, select = c("WAIC","SE","weight"))
+h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int) 
+
 
 #making table from scratch to refer to later
 Condition <- c("Control Pre", "Control Post","Choice Pre","Choice Post")  
@@ -200,7 +202,7 @@ knitr::include_graphics("../plots/raw_density.png")
 knitr::include_graphics("../plots/before_and_after_violin.png")
 ```
 
-Vaccine attitudes increased similarly across both conditions (mean <!-- TK what's this? mean increase?? it's the experiment effect, eg the effect of having been in the experiment, pre versus post ratings across both conditions--> : `r precis(h2_exp)[2,1]` , 89% CI: `r precis(h2_exp)[2,3]` , `r precis(h2_exp)[2,4]` ). Against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean <!-- TK what's this?? why is there one mean for two (albeit similar) increases? it's the interaction term for post rating and condition. maybe the below details of model comparison help clear that up?--> : `r precis(h2_int)[1,1]` , 89% CI: `r precis(h2_int)[1,3]`, `r precis(h2_int)[1,4]` ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes (Table \@ref(tab:waicTable)).
+Vaccine attitudes increased similarly across both conditions (mean <!-- TK what's this? mean increase?? --> : `r precis(h2_exp)[2,1]` , 89% CI: `r precis(h2_exp)[2,3]` , `r precis(h2_exp)[2,4]` ). This was against prediction 2, as there was not an interaction between condition and time of ratings; vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions (mean <!-- TK what's this?? why is there one mean for two (albeit similar) increases? --> : `r precis(h2_int)[1,1]` , 89% CI: `r precis(h2_int)[1,3]`, `r precis(h2_int)[1,4]` ). This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (across both conditions) was most informative in predicting the difference in vaccination attitudes (Table \@ref(tab:h2waics)).
 
 This change in vaccination attitudes is displayed in Figure \@ref(fig:rawdensity), which shows the raw vaccination attitude ratings before and after the experiment. Figures displaying the differences in vaccination attitudes between different scale items can be found in the supplementary material. 
 
