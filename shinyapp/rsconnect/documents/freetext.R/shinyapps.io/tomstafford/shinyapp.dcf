@@ -1,0 +1,13 @@
+name: shinyapp
+title: shinyapp
+username:
+account: tomstafford
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5338515
+bundleId: 5381454
+url: https://tomstafford.shinyapps.io/shinyapp/
+when: 1639685111.77453
+lastSyncTime: 1639685111.77456
+asMultiple: FALSE
+asStatic: FALSE

@@ -14,7 +14,7 @@ library(shiny)
 #https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/
 
 #load comments etc from file
-df <- read.csv('../data/comments_and_demogs.csv')
+df <- read.csv('comments_and_demogs.csv')
 
 #count 'em
 n_items <- nrow(df)
