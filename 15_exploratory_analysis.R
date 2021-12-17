@@ -66,7 +66,7 @@ summary(subset_time$choice_info_time)
 
 #ugh using which helps I guess but this feels a dumb way to do it:  
 subset_time2 <- clean_clickbot[which(clean_clickbot$control_info_time<1000 & clean_clickbot$control_info_time > 237),]
-summary(subset_time$control_info_time)
+summary(subset_time2$control_info_time)
 
 #now merge subset_time and subset_time2 ... but we don't want this! we just want to add a column in the original dataframe denoting above median time, to compare to the rest, right? 
 # now my brain has stopped for the day... continue tomorrow
