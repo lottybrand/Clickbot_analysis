@@ -158,8 +158,8 @@ table_pre<-table(clean_clickbot$vax_future_1,clean_clickbot$condition)
 rownames(table_pre) = c("No (pre)","Undecided (pre)","Yes (pre)")
 table_post<-table(clean_clickbot$vax_future_2,clean_clickbot$condition)
 rownames(table_post) = c("No (post)","Undecided (post)","Yes (post)")
-table1 <- data.frame(rbind(table_pre,table_post))
-rownames(table1) <- rbind(rownames(table_pre),rownames(table_post))
+table1 <- rbind(table_pre,table_post)
+#rownames(table1) <- rbind(rownames(table_pre),rownames(table_post))
 # want to shift table1 round, to display the same as Altay's. Maybe add percentages in brackets too
 
 library(data.table)
@@ -183,12 +183,12 @@ kable(table1, caption = "Intention to get vaccinated")
 ```
 
 
-```{r rawdensity, fig.align="center", out.width="100%", fig.cap="Density plot of raw vaccination attitudes before and after the experiment"}
+```{r rawdensity, fig.align="center", out.width="100%", fig.cap="Density plot of raw vaccination attitudes before and after the experiment. 7 = stronlgy agree and 1 = strongly disagree with the 5 vaccination items: vaccines are safe, effective, have not been rushed, those who make them can be trusted, and they are necessary" "}
 knitr::include_graphics("../plots/raw_density.png")
 ```
 
 
-```{r beforeafter, fig.cap="Violin plot of average vaccination attitudes before and after the experiment", fig.align="center", out.width="100%"}
+```{r beforeafter, fig.cap="Violin plot of average vaccination attitudes before and after the experiment. The green lines show an increase in positive vaccination attitudes, and red lines show a decrease", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/before_and_after_violin.png")
 ```
 
@@ -212,7 +212,7 @@ Against prediction 3, we did not find that the Choice Condition was rated as mor
 
 Overall, we found that the number of people who said that “No” they would not get a vaccination when one was offered to them decreased after taking part in our experiment. Out of 571 participants reporting that they either wouldn't, or were undecided, about getting the vaccine, 93 reported being more likely to get vaccinated after the experiment (16% increase). Out of these 93, 6 changed directly from a “No” to a “Yes,” 25 went from an “Undecided” to a “Yes,” and 62 went from a “No” to an “Undecided.” In those who spent between 4 and 16 minutes reading the information, this increased to 18%. 
 
-As [@altay2021information] found a stronger effect for those who spent the most time with the chatbot, we wanted to check whether a condition effect was present in those who spent more time with the information. The median amount of time spent viewing the information was 4 minutes, and we found that participants who spent above the median amount of time viewing the information (between 4 and 16 minutes, so between 1 - 4 minutes per dialogue), were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: `r precis(h2_full_time)[1,1]` , 89% CI: `r precis(h2_full_time)[1,3]`, `r precis(h2_full_time)[1,4]` ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model `r compare(h2_int, h2_exp, h2_full, h2_null)`
+As [@altay2021information] found a stronger effect for those who spent the most time with the chatbot, we wanted to check whether a condition effect was present in those who spent more time with the information. The median amount of time spent viewing the information was 4 minutes, and we found that participants who spent above the median amount of time viewing the information (between 4 and 16 minutes, so between 1 - 4 minutes per dialogue), were more likely to increase their vaccination attitudes and intentions as we found a positive interaction between those who spent above the average amount of time and the post experiment rating (mean: `r precis(h2_full_time)[1,1]` , 89% CI: `r precis(h2_full_time)[1,3]`, `r precis(h2_full_time)[1,4]` ). This was confirmed by model comparison, in which the model including an interaction effect for post-treatment rating and above median time, as well as a main effect for post-treatment rating, was the best fitting model (details in supplementary material).
 
 We again found no difference between the conditions in those who spent above the median amount of time  with the information (mean: `r precis(model1.1)[2,1]` , 89% CI: `r precis(model1.1)[2,3]`, `r precis(model1.1)[2,4]` ).   
 
