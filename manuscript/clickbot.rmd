@@ -1,5 +1,5 @@
 ---
-title             : "Trustworthy and engaging Covid-19 vaccine dialogues increase vaccination intentions and attitudes in a vaccine-hesitant UK population"
+title             : "Covid-19 vaccine dialogues increase vaccination intentions and attitudes in a vaccine-hesitant UK population"
 #title             : "Fact-checked Covid-19 vaccine dialogues led to a 16% reduction in a UK-based population reporting they do not want to get vaccinated"
 shorttitle        : "Clickbot replication"
 
