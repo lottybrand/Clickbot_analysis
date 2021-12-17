@@ -1,14 +1,15 @@
+
 #### table lesson
 
-table1<-table(clean_clickbot$vax_future_1,clean_clickbot$condition)
-table2<-table(clean_clickbot$vax_future_2,clean_clickbot$condition)
+table_pre<-table(clean_clickbot$vax_future_1,clean_clickbot$condition)
+rownames(table_pre) = c("No (pre)","Undecided (pre)","Yes (pre)")
+table_post<-table(clean_clickbot$vax_future_2,clean_clickbot$condition)
+rownames(table_post) = c("No (post)","Undecided (post)","Yes (post)")
 
+table1 <- rbind(table_pre,table_post)
 
-rownames(table1) = c("No","Undecided","Yes")
-table1
+table1 %>% arrange(factor(Intention, levels = c('No (pre)', 'No (post)', 'Undecided (pre)', 'Undecided (post)', 'Yes (pre)', 'Yes (post)')))
 
-rownames(table2) = c("No","Undecided","Yes")
-table2
 
 source("loading_saved_models.R")
 h2_waics <-compare(h2_null, h2_full, h2_exp, h2_int)
