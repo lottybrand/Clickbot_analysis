@@ -269,6 +269,6 @@ citation('papaja')
 # Acknowledgements
 
 Thank you to Dr Andrew Lee from the University of Sheffield who kindly donated his epidemiological expertise and proof-read our updated Covid-19 vaccination FAQs.
-Thank you also to Dr Sacha Altay for openly sharing the data and analysis scripts, and being forthcoming with more details and extra information to help run this replication.  
+Thank you also to Dr Sacha Altay for openly sharing the data and analysis scripts, and being forthcoming with more details and extra information to help run this replication.  The authors are funded by the EPSRC project EP/T024666/1 "Opening Up Minds: Engaging Dialogue Generated From Argument Maps"
 
 # References
