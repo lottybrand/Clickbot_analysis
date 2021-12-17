@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.11.25)  17 DEC 2021 14:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.11.25)  17 DEC 2021 14:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -721,22 +721,22 @@ File: ../plots/before_and_after_violin.png Graphic file (type png)
 Package pdftex.def Info: ../plots/before_and_after_violin.png  used on input li
 ne 306.
 (pdftex.def)             Requested size: 241.74117pt x 201.45097pt.
-
-Package hyperref Warning: Suppressing empty link on input line 313.
-
 [5 <../plots/raw_density.png> <../plots/before_and_after_violin.png>] [6]
+Underfull \vbox (badness 1215) has occurred while \output is active []
+
+
 Underfull \vbox (badness 1215) has occurred while \output is active []
 
 [7] [8] [9
 
 ] (./clickbot.aux)
 Package rerunfilecheck Info: File `clickbot.out' has not changed.
-(rerunfilecheck)             Checksum: FC551F8BE296DFEFC0D34194963CA4FF;1485.
+(rerunfilecheck)             Checksum: 360362134653A24201C06D7F12FD2A47;1485.
  ) 
 Here is how much of TeX's memory you used:
- 15139 strings out of 480313
- 243453 string characters out of 5897466
- 568521 words of memory out of 5000000
+ 15140 strings out of 480313
+ 243469 string characters out of 5897466
+ 568943 words of memory out of 5000000
  32659 multiletter control sequences out of 15000+600000
  454723 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -745,10 +745,10 @@ Here is how much of TeX's memory you used:
 X/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/tom/.TinyTeX/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></home/tom/.TinyTeX/texmf-dist/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on clickbot.pdf (9 pages, 319110 bytes).
+Output written on clickbot.pdf (9 pages, 321717 bytes).
 PDF statistics:
- 204 PDF objects out of 1000 (max. 8388607)
- 181 compressed objects within 2 object streams
- 69 named destinations out of 1000 (max. 500000)
+ 211 PDF objects out of 1000 (max. 8388607)
+ 188 compressed objects within 2 object streams
+ 70 named destinations out of 1000 (max. 500000)
  115 words of extra memory for PDF output out of 10000 (max. 10000000)
 
