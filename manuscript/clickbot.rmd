@@ -158,7 +158,7 @@ table_pre<-table(clean_clickbot$vax_future_1,clean_clickbot$condition)
 rownames(table_pre) = c("No (pre)","Undecided (pre)","Yes (pre)")
 table_post<-table(clean_clickbot$vax_future_2,clean_clickbot$condition)
 rownames(table_post) = c("No (post)","Undecided (post)","Yes (post)")
-table1 <- rbind(table_pre,table_post)
+table1 <- data.frame(rbind(table_pre,table_post))
 
 # want to shift table1 round, to display the same as Altay's. Maybe add percentages in brackets too
 
