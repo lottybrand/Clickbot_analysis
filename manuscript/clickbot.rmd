@@ -198,8 +198,12 @@ waicTable <- subset(h2_waics, select = c("WAIC","SE","weight"))
 We found that participants reporting that they did not intend to get the vaccine decreased after our experiment, regardless of condition, as the number of those reporting they would not get the vaccine decreased in the post-exposure measure (mean model estimate: `r precis(modelnos)[2,1] `, 89% Credible Interval: `r precis(modelnos)[2,3] `, `r precis(modelnos)[2,4] ` ). Against prediction 1, those in the choice condition were not more likely to increase their intention to have the vaccine compared to the control condition (mean: `r precis(model1)[2,1] `, 89% CI: `r precis(model1)[2,3] `, `r precis(model1)[2,4] `). These shifts in intention can be seen in Table \@ref(tab:intchange) and are equivalent to those found in Altay et al's chatbot condition; in Altay et al's chatbot condition 36% of participants reported that they did not inted to get vaccinated, and this dropped to 29% afterwards. Across both our conditions, 53% reported that they did not intend to get vaccinated and this dropped to 44% afterwards. 
 
 ```{r intchange, echo = FALSE, results = 'asis'}
-#c("Choice (Pre)","Choice (Post)","Control (Pre)","Control (Post)")
-kable(table1, row.names= TRUE,caption = "Intention to get vaccinated")
+#
+
+table1 <- data.frame(table1) #you only get rownames displayed if the table is a data.frame object
+rownames(table1) <- c("Choice (Pre)","Choice (Post)","Control (Pre)","Control (Post)")
+
+kable(table1, row.names=TRUE,caption = "Intention to get vaccinated") 
 ```
 
 
@@ -221,7 +225,6 @@ Increase in average vaccination attitudes can be seen in the violin plot in Figu
 
 <!-- can't use underscores in table captions, so ref to h2exp is wrongbelow TK -->
 ```{r h2waics, echo = FALSE, results = 'asis'}
-library(knitr)
 kable(waicTable, caption = "Table showing the model comparison between our attitude models that address hypothesis 2. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the model that contains the experiment effect only (h2exp), i.e. participants attitudes were most affected after taking part in the experiment, regardless of condition or interactions between time and condition  ")
 ```
 
