@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  17 DEC 2021 19:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  18 DEC 2021 07:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -567,24 +567,24 @@ File: l3backend-pdftex.def 2021-12-14 L3 backend support: PDF output (pdfTeX)
 ) (./clickbot.aux)
 \openout1 = `clickbot.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -636,7 +636,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 175.
+Package hyperref Info: Link coloring OFF on input line 177.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -646,9 +646,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count312
 )
-LaTeX Info: Redefining \ref on input line 175.
-LaTeX Info: Redefining \pageref on input line 175.
-LaTeX Info: Redefining \nameref on input line 175.
+LaTeX Info: Redefining \ref on input line 177.
+LaTeX Info: Redefining \pageref on input line 177.
+LaTeX Info: Redefining \nameref on input line 177.
 (./clickbot.out) (./clickbot.out)
 \@outlinefile=\write3
 \openout3 = `clickbot.out'.
@@ -656,56 +656,59 @@ LaTeX Info: Redefining \nameref on input line 175.
 
 Class apa6 Warning: Short title not defined.
 
-Class apa6 Info: Keywords not defined on input line 177.
+Class apa6 Info: Keywords not defined on input line 179.
 LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line
- 177.
+ 179.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
 LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line
- 177.
+ 179.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line
- 177.
+ 179.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+psycm on input line
- 177.
+ 179.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-77.
+79.
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 177
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 179
 .
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 177
+LaTeX Font Info:    Trying to load font information for U+msb on input line 179
 .
 (/home/tom/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
+
+Underfull \vbox (badness 4096) has occurred while \output is active []
+
 [1{/home/tom/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
@@ -713,13 +716,13 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 <../plots/raw_density.png, id=100, 652.4375pt x 501.875pt>
 File: ../plots/raw_density.png Graphic file (type png)
 <use ../plots/raw_density.png>
-Package pdftex.def Info: ../plots/raw_density.png  used on input line 293.
+Package pdftex.def Info: ../plots/raw_density.png  used on input line 295.
 (pdftex.def)             Requested size: 241.74652pt x 185.95886pt.
 <../plots/before_and_after_violin.png, id=102, 602.25pt x 501.875pt>
 File: ../plots/before_and_after_violin.png Graphic file (type png)
 <use ../plots/before_and_after_violin.png>
 Package pdftex.def Info: ../plots/before_and_after_violin.png  used on input li
-ne 302.
+ne 304.
 (pdftex.def)             Requested size: 241.74117pt x 201.45097pt.
 [5 <../plots/raw_density.png> <../plots/before_and_after_violin.png>] [6]
 Underfull \vbox (badness 1215) has occurred while \output is active []
@@ -733,7 +736,7 @@ Package rerunfilecheck Info: File `clickbot.out' has not changed.
 Here is how much of TeX's memory you used:
  15143 strings out of 480313
  243512 string characters out of 5897466
- 569334 words of memory out of 5000000
+ 569404 words of memory out of 5000000
  32662 multiletter control sequences out of 15000+600000
  454723 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -742,7 +745,7 @@ Here is how much of TeX's memory you used:
 X/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/tom/.TinyTeX/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></home/tom/.TinyTeX/texmf-dist/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on clickbot.pdf (9 pages, 321843 bytes).
+Output written on clickbot.pdf (9 pages, 321886 bytes).
 PDF statistics:
  211 PDF objects out of 1000 (max. 8388607)
  188 compressed objects within 2 object streams
