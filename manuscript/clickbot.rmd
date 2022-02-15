@@ -58,10 +58,11 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup,}
-library(knitr)
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, fig.height=2, fig.width=4)
+library(knitr, quietly = TRUE, warn.conflicts = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, include = FALSE, fig.height=2, fig.width=4)
 library(rethinking)
-library(data.table)
+library(data.table, quietly = TRUE, warn.conflicts = FALSE)
+library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 #library(here)
 ```
 
