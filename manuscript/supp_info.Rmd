@@ -13,6 +13,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Supplementary material 
 
+# WAIC comparisons for hypothesis 2
+
+```{r waics}
+h2waics <-compare(h2_null, h2_full, h2_exp, h2_int)
+waicTable <- subset(h2waics, select = c("WAIC","SE","weight")) 
+
+kable(waicTable, caption = "Table showing the model comparison between our attitude models that address hypothesis 2. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the model that contains the experiment effect only (h2exp), i.e. participants attitudes were most affected after taking part in the experiment, regardless of condition or interactions between time and condition  ")
+```
+
+# WAIC comparisons for exploratory time-spent analysis
+
+```{r time_waics}
+# need to load h2_int_time and h2_time from 15_exploratory_analysis.R
+compare(h2_full_time,h2_int_time,h2_time)
+```
+
+
+
 # Vaccine attitudes by attitude type 
 
 Plots showing the variation in vaccine attitudes in our population that reported being anti or neutral towards covid-19 vaccines. 
