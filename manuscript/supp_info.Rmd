@@ -28,6 +28,8 @@ kable(waicTable, caption = "Table showing the model comparison between our attit
 # need to load h2_int_time and h2_time from 15_exploratory_analysis.R
 timewaics <- compare(h2_full_time,h2_int_time,h2_time)
 waictable2 <- subset(timewaics, select = c("WAIC","SE","weight"))
+
+kable(waicTable2, caption = "Table showing the model comparison between our exploratory models that look at the effect of spending more than the average amount of time reading the material. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the full model, which contains both an interaction effect for post-treatment rating and spending above median time, as well as a main effect for post-treatment rating. This is good evidence that those who spend above the average amount of time in the study were more likely to show an increase in positive attitudes towards the Covid-19 vaccines")
 ```
 
 
