@@ -26,7 +26,8 @@ kable(waicTable, caption = "Table showing the model comparison between our attit
 
 ```{r time_waics}
 # need to load h2_int_time and h2_time from 15_exploratory_analysis.R
-compare(h2_full_time,h2_int_time,h2_time)
+timewaics <- compare(h2_full_time,h2_int_time,h2_time)
+waictable2 <- subset(timewaics, select = c("WAIC","SE","weight"))
 ```
 
 
