@@ -59,7 +59,7 @@ output            : papaja::apa6_pdf
 
 ```{r setup,}
 library(knitr, quietly = TRUE, warn.conflicts = FALSE)
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, include = FALSE, fig.height=2, fig.width=4)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, fig.height=2, fig.width=4)
 library(rethinking)
 library(data.table, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
@@ -146,7 +146,7 @@ In line with our preregistration, when modelling Likert scale vaccination attitu
 
 # Results
 
-```{r results='hide'}
+```{r tabletab, results = 'asis'}
 #copying from https://bookdown.org/yihui/rmarkdown/r-code.html
 #this is some R code which evaluates when you make the document
 #
