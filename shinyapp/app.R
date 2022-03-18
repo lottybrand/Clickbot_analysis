@@ -21,22 +21,23 @@ n_items <- nrow(df)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
+    
     # Application title
-    titlePanel("free text responses from vaccine hesitant participants after taking part in our study. They were asked: 'If you have any other feedback about this study, please include it here: ' "),
-
+    titlePanel("Comments from vaccine hesitant participants after taking part in our study. They were asked: 'If you have any other feedback about this study, please include it here: "),
+    
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            h5("Free text responses from participants, all reporting as either 'against' or 'neutral' towards Covid-19 vaccines as reported in Prolific pre-screening. Click 'Generate' to see a random selection"),
-            actionButton("do", "Generate!") # thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
+            h5("The buttons below display all comments containing that word, or you can view a random sample"),
+            actionButton("gov", "Government"),
+            actionButton("rand", "Random sample"),# thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
         ),
-
+        
         # Show a plot of the generated distribution
         mainPanel(
-           #plotOutput("distPlot")
-            textOutput("text"),
-            tableOutput("randNumbers")
+            #plotOutput("distPlot")
+            tableOutput("govNumbers"),
+            tableOutput("randNumbers"),
         )
     )
 )
@@ -45,7 +46,14 @@ ui <- fluidPage(
 server <- function(input, output) {
     
     # Use an action button as an event to generate the list of random numbers
-    random_data <- eventReactive(input$do, {  
+    govern_data <- eventReactive(input$gov, {  
+        
+        #find all instances of govern
+        df$anything_else[(grepl("govern",df$anything_else, ignore.case = TRUE))]
+        
+    })
+    
+    random_data <- eventReactive(input$rand, {  
         
         # Randomly sample values from the specified range
         numbers <- seq(1:n_items)
@@ -54,6 +62,10 @@ server <- function(input, output) {
     })
     
     # Output the list of random numbers only AFTER the "Generate!" button is pressed
+    output$govNumbers <- renderTable({
+        df$anything_else[govern_data()]
+    }, rownames = FALSE, colnames = FALSE)
+    
     output$randNumbers <- renderTable({
         df$anything_else[random_data()]
     }, rownames = FALSE, colnames = FALSE)
