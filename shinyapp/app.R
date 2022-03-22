@@ -9,12 +9,29 @@
 # This was useful https://shiny.rstudio.com/articles/debugging.html
 
 library(shiny)
+library(shinydashboard)
 
 # this code runs once, when the app is launched
 #https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/
 
 #load comments etc from file
-df <- read.csv('comments_and_demogs.csv')
+full_table <- read.csv("comments_and_demogs.csv")
+#full_table$anything_else <- str_replace_all(full_table$anything_else, "[^[:alnum:]]", " ")
+full_table$anything_else <- str_replace_all(full_table$anything_else, "(<|>)", "")
+
+full_table <- full_table$anything_else
+
+#find themes 
+All <- full_table
+
+Government <- full_table[(grepl("govern",full_table, ignore.case = TRUE, useBytes = TRUE))]
+
+Trust <- full_table[(grepl("trust",full_table, ignore.case = TRUE, useBytes = TRUE))]
+
+Science <- full_table[(grepl("scien",full_table, ignore.case = TRUE, useBytes = TRUE))]
+
+Safe <- full_table[(grepl("safe|risk",full_table, ignore.case = TRUE, useBytes = TRUE))]
+
 
 #count 'em
 n_items <- nrow(df)
@@ -28,46 +45,41 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            h5("The buttons below display all comments containing that word, or you can view a random sample"),
-            actionButton("gov", "Government"),
-            actionButton("rand", "Random sample"),# thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
+            h5("Use the buttons to see comments including that theme"),
+            actionButton("showGov", "Government"),
+            actionButton("showAll", "All Comments")
         ),
         
-        # Show a plot of the generated distribution
+        
         mainPanel(
-            #plotOutput("distPlot")
-            tableOutput("govNumbers"),
-            tableOutput("randNumbers"),
+            tableOutput("govComms"),
+            tableOutput("allcomms")
         )
     )
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
     
-    # Use an action button as an event to generate the list of random numbers
-    govern_data <- eventReactive(input$gov, {  
+    # Use an action button as an event to display the Gov comments
+    govern_data <- eventReactive(input$showGov, {  
         
         #find all instances of govern
-        df$anything_else[(grepl("govern",df$anything_else, ignore.case = TRUE))]
-        
+        Government
+    
     })
     
-    random_data <- eventReactive(input$rand, {  
-        
-        # Randomly sample values from the specified range
-        numbers <- seq(1:n_items)
-        sample(numbers, 5)
-        
+    all_data <- eventReactive(input$showAll, {
+      full_table
     })
     
     # Output the list of random numbers only AFTER the "Generate!" button is pressed
-    output$govNumbers <- renderTable({
-        df$anything_else[govern_data()]
+    output$govComms <- renderTable({
+        Government
     }, rownames = FALSE, colnames = FALSE)
     
-    output$randNumbers <- renderTable({
-        df$anything_else[random_data()]
+    output$allComms <- renderTable({
+      full_table
     }, rownames = FALSE, colnames = FALSE)
     
 }
