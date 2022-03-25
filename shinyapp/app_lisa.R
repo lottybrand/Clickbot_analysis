@@ -14,6 +14,7 @@ library(googlesheets4)
 library(tidyverse)
 library(dplyr)
 library(tidyr)
+library(DT)
 
 #read in data ----
 url <- "1KzLoJSakrpr3nY2KiFMOd9jn1DEwKKNbw2QibnW_aXg"
@@ -38,7 +39,7 @@ ui <- dashboardPage(
                        label=NULL,
                        choices = colnames(full_table),
                        selected=colnames(full_table)),
-    tableOutput(outputId = "book_table")
+    DTOutput(outputId = "book_table")
   ),
   title="Book recs",
   skin = "yellow"
@@ -57,7 +58,7 @@ server <- function(input, output, session) {
   })
   
   # book_table ----
-  output$book_table<- renderTable({
+  output$book_table<- renderDT({
     display_table()
     
   })

@@ -14,8 +14,9 @@ library(shiny)
 #https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/
 
 #load comments etc from file
-df <- read.csv('comments_and_demogs.csv')
-df$anything_else <- str_replace_all(df$anything_else, "(<|>)", "")
+full_table <- read.csv('comments_and_demogs.csv')
+full_table$anything_else <- str_replace_all(full_table$anything_else, "(<|>)", "")
+full_table <- full_table$anything_else
 #count 'em
 n_items <- nrow(df)
 
@@ -36,27 +37,27 @@ ui <- fluidPage(
     mainPanel(
       #plotOutput("distPlot")
       #textOutput("text"),
-      tableOutput("randNumbers")
+      tableOutput("book_table")
     )
   )
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
-  
+server <- function(input, output, session) {
+  display_table <- reactiveVal(full_table)
   # Use an action button as an event to generate the list of random numbers
-  random_data <- eventReactive(input$do, {  
-    
+  eventReactive(input$do, {  
     # Randomly sample values from the specified range
-    numbers <- seq(1:n_items)
-    sample(numbers, 5)
-    
+    #random_data <- sample(seq(1:n_items), 5)
+    full_table[1] %>%
+      display_table()
   })
   
   # Output the list of random numbers only AFTER the "Generate!" button is pressed
-  output$randNumbers <- renderTable({
-    df$anything_else[random_data()]
-  }, rownames = FALSE, colnames = FALSE)
+  output$book_table <- renderTable({
+    display_table()
+  
+})
   
 }
 
