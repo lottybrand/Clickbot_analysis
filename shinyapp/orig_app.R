@@ -18,7 +18,12 @@ full_table <- read.csv('comments_and_demogs.csv')
 full_table$anything_else <- str_replace_all(full_table$anything_else, "(<|>)", "")
 full_table <- full_table$anything_else
 #count 'em
-n_items <- nrow(df)
+n_items <- nrow(full_table)
+random_sample <- function(n_items){
+  numbers <- seq(1:n_items)
+  return(sample(numbers, 5))
+  
+} 
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -46,10 +51,9 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   display_table <- reactiveVal(full_table)
   # Use an action button as an event to generate the list of random numbers
-  eventReactive(input$do, {  
+  observeEvent(input$do, {  
     # Randomly sample values from the specified range
-    #random_data <- sample(seq(1:n_items), 5)
-    full_table[1] %>%
+    full_table[5] %>%
       display_table()
   })
   
