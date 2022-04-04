@@ -38,9 +38,12 @@ ui <- dashboardPage(
   sidebar = dashboardSidebar(
       h5("Use these buttons to see comments including the following words, or to see all comments:"),
       actionButton("findGov", "Government"),
+      actionButton("findMedia", "Media"),
       actionButton("findTrust", "Trust"),
       actionButton("findPharma", "Big Pharma"),
       actionButton("findSci", "Science"),
+      actionButton("findRes","Research"),
+      actionButton("findTime","Time"),
       actionButton("findHealth", "Health"),
       actionButton("findSafe", "Safety"),
       actionButton("findAll", "See All Comments")
@@ -77,6 +80,24 @@ server <- function(input, output, session) {
   observeEvent(input$findTrust, {  
     # Randomly sample values from the specified range
     full_table$Comments[(grepl("trust",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
+      display_table()
+  })
+  
+  observeEvent(input$findRes, {  
+    # Randomly sample values from the specified range
+    full_table$Comments[(grepl("research",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
+      display_table()
+  })
+  
+  observeEvent(input$findMedia, {  
+    # Randomly sample values from the specified range
+    full_table$Comments[(grepl("media",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
+      display_table()
+  })
+  
+  observeEvent(input$findTime, {  
+    # Randomly sample values from the specified range
+    full_table$Comments[(grepl("time",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
       display_table()
   })
   
