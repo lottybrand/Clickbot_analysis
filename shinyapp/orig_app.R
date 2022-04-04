@@ -38,7 +38,7 @@ full_table$Comments <- str_replace_all(full_table$Comments, "(<|>)", "")
 ui <- dashboardPage(
   header = dashboardHeader(title="Participant Comments"),
   
-  # Sidebar with loadsa buttons
+  # Sidebar with loadsa buttons:
   sidebar = dashboardSidebar(
       h5("Use these buttons to see comments including the following words, or to see all comments:"),
       actionButton("findGov", "Government"),
@@ -54,7 +54,7 @@ ui <- dashboardPage(
       # thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
     ),
     
-    # Show a plot of the generated distribution
+    # what's in the body of the app?
     body = dashboardBody(
       #plotOutput("you could put plots here"),
       #textOutput("you could have text output"),
@@ -65,12 +65,12 @@ ui <- dashboardPage(
   )
 
 
-# Define server logic required to draw a histogram
+# Define server logic below. This does the stuff behind the scenes, connecting the user (ui) to the content
 server <- function(input, output, session) {
   #create a display table made up of the comments column, that can react to events
   display_table <- reactiveVal(full_table$Comments)
   
-  # when findGov button pressed - do the following
+  # when findGov button is pressed - do the following:
   observeEvent(input$findGov, {  
     # find all instances of governm and pass to display table
     full_table$Comments[(grepl("govern",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
