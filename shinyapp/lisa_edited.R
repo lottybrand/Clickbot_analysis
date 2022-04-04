@@ -18,11 +18,10 @@ library(stringr)
 
 #read in data ----
 
-full_table <- read.csv("comments_and_demogs.csv")
+full_table <- read.csv("cut_comments_and_demogs.csv")
 #full_table$anything_else <- str_replace_all(full_table$anything_else, "[^[:alnum:]]", " ")
-full_table$anything_else <- str_replace_all(full_table$anything_else, "(<|>)", "")
+full_table$Comments <- str_replace_all(full_table$Comments, "(<|>)", "")
 
-full_table <- full_table$anything_else
 
 #find themes 
 All <- full_table
