@@ -24,7 +24,7 @@ library(DT)
 full_table <- read.csv('cut_comments_and_demogs.csv')
 # attempt to sort out the funny characters
 full_table$Comments <- str_replace_all(full_table$Comments, "(<|>)", "")
-
+#full_table <- full_table$Comments
 #full_table <- full_table$anything_else
 #count 'em
 # n_items <- nrow(full_table)
@@ -135,7 +135,9 @@ server <- function(input, output, session) {
   output$comms_table <- renderTable({
     display_table()
   
-})
+  }, 
+  colnames = TRUE
+  )
   
 }
 
