@@ -50,6 +50,7 @@ ui <- dashboardPage(
       actionButton("findTime","Time"),
       actionButton("findHealth", "Health"),
       actionButton("findSafe", "Safety"),
+      actionButton("findThank", "Thanks"),
       actionButton("findAll", "See All Comments")
       # thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
     ),
@@ -125,6 +126,12 @@ server <- function(input, output, session) {
       display_table()
   })
   
+  observeEvent(input$findThank, {  
+    # find all instances of trust and pass to display table
+    full_table$Comments[(grepl("thank",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
+      display_table()
+  })
+  
   observeEvent(input$findAll, {  
     # pass full column to display table
     full_table$Comments %>%
@@ -143,3 +150,4 @@ server <- function(input, output, session) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
