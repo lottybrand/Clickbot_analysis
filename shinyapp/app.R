@@ -16,6 +16,7 @@ library(tidyverse)
 library(dplyr)
 library(tidyr)
 library(DT)
+#library(shinyWidgets)
 
 # this code runs once, when the app is launched
 #https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/
@@ -36,11 +37,10 @@ full_table$Comments <- str_replace_all(full_table$Comments, "(<|>)", "")
 
 # Define UI for application that draws a histogram
 ui <- dashboardPage(
-  header = dashboardHeader(title="Participant Comments"),
-  
+  header = dashboardHeader(titleWidth = "calc(100% - 44px)",title="Comments from vaccine hesitant participants after taking part in our study"),
   # Sidebar with loadsa buttons:
   sidebar = dashboardSidebar(
-      h5("Use these buttons to see comments including the following words, or to see all comments:"),
+      p("Use these buttons to see comments including the following words, or to see all comments:", style="padding:1em;"),
       actionButton("findGov", "Government"),
       actionButton("findMedia", "Media"),
       actionButton("findTrust", "Trust"),
@@ -52,16 +52,14 @@ ui <- dashboardPage(
       actionButton("findSafe", "Safety"),
       actionButton("findThank", "Thanks"),
       actionButton("findAll", "See All Comments")
-      # thanks https://www.rdataguy.com/2019/11/lesson-9-random-number-generator-part-2.html
     ),
     
     # what's in the body of the app?
     body = dashboardBody(
       #plotOutput("you could put plots here"),
       #textOutput("you could have text output"),
-      tableOutput("comms_table")
+      DTOutput("comms_table")
     ),
-  title="Comments from vaccine hesitant participants after taking part in our study",
   skin="yellow"
   )
 
@@ -69,81 +67,82 @@ ui <- dashboardPage(
 # Define server logic below. This does the stuff behind the scenes, connecting the user (ui) to the content
 server <- function(input, output, session) {
   #create a display table made up of the comments column, that can react to events
-  display_table <- reactiveVal(full_table$Comments)
+  display_table <- reactiveVal(full_table%>%
+                                 select(Comments))
+  
+  # function for filtering the table for certain words
+  filter_table = function (word) {
+    full_table %>% 
+      filter(grepl(word, Comments, ignore.case = TRUE, useBytes = TRUE)) %>% 
+      select(Comments) %>%
+      display_table()
+  }
   
   # when findGov button is pressed - do the following:
   observeEvent(input$findGov, {  
     # find all instances of governm and pass to display table
-    full_table$Comments[(grepl("govern",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("govern")
   })
   
   observeEvent(input$findHealth, {  
     # find all instances of health and pass to display table
-    full_table$Comments[(grepl("health",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("health")
   })
   
   observeEvent(input$findTrust, {  
     # find all instances of trust and pass to display table
-    full_table$Comments[(grepl("trust",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("trust")
   })
   
   observeEvent(input$findRes, {  
     # find all instances of research and pass to display table
-    full_table$Comments[(grepl("research",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("research")
   })
   
   observeEvent(input$findMedia, {  
     # find all instances of media and pass to display table
-    full_table$Comments[(grepl("media",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("media")
   })
   
   observeEvent(input$findTime, {  
     # find all instances of time and pass to display table
-    full_table$Comments[(grepl("time",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("time")
   })
   
   observeEvent(input$findSafe, {  
     # find all instances of safe/ty and pass to display table
-    full_table$Comments[(grepl("safe",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("safe")
   })
   
   observeEvent(input$findSci, {  
     # find all instances of science/tists and pass to display table
-    full_table$Comments[(grepl("scien",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("scien")
   })
   
   observeEvent(input$findPharma, {  
     # find all instances of phara and pass to display table
-    full_table$Comments[(grepl("pharma",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table("pharma")
   })
   
   observeEvent(input$findThank, {  
     # find all instances of trust and pass to display table
-    full_table$Comments[(grepl("thank",full_table$Comments, ignore.case = TRUE, useBytes = TRUE))] %>%
-      display_table()
+    filter_table ("thank")
   })
   
   observeEvent(input$findAll, {  
     # pass full column to display table
-    full_table$Comments %>%
+    full_table %>%
+      select(Comments) %>%
       display_table()
   })
   
   # The output is the comms table which is made up of the latest display_table
-  output$comms_table <- renderTable({
+  output$comms_table <- renderDT({
     display_table()
   
   }, 
-  colnames = TRUE
+  rownames=FALSE,
+  options= list(paging=FALSE,searching=TRUE,info=TRUE,ordering=FALSE)
   )
   
 }
