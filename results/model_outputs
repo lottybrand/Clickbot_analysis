@@ -38,10 +38,16 @@ This makes sense:
 a is the amount of No's (1 = no) before the experiment, there are mainly No's.
 b is the effect of the experiment, negative, so we reduced nos. :) 
 
+modelnos:
     mean   sd  5.5% 94.5% n_eff Rhat
 a  0.14 0.07  0.02  0.26  3057    1
 b -0.37 0.11 -0.54 -0.20  3329    1
 
+
+Model1: 
+mean   sd  5.5% 94.5% n_eff Rhat
+a -1.52 0.16 -1.77 -1.28  3238    1
+b -0.22 0.22 -0.57  0.14  3433    1
 
 
 H2: Experiment effect on vax attitudes! nice! 

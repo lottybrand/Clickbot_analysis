@@ -11,7 +11,7 @@ model1 <- readRDS("model1.rds")
 clean_clickbot <- read.csv("data/clean_clickbot.csv")
 
 # load long version for attitude analyses
-long_clickbot <- read.csv("data/long_clickbot.csv")
+long_clickbot <- read.csv("long_clickbot.csv")
 
 # load engagement dataframe
 engagement_clickbot <- read.csv("data/engagement_clickbot.csv")

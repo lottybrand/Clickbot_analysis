@@ -91,3 +91,36 @@ knitr::include_graphics("../plots/regression_to_mean.png")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Example images of what participants see
+
+:
+```{r figure7, fig.cap=" Example image of one of four choices in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/one_choice.png")
+```
+
+```{r figure8, fig.cap=" Example image of one of four choices in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/choice_two.png")
+```
+
+```{r figure9, fig.cap=" Example image of an information chunk that participants could see", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/one_info.png")
+```
+
+# Distribution of choices for each of the four choices
+
+```{r figure10, fig.cap="Distribution of choices for the first choice in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/choicedist1.png")
+```
+
+```{r figure10, fig.cap="Distribution of choices for the second choice in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/choicedist2.png")
+```
+
+```{r figure10, fig.cap="Distribution of choices for the third choice in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/choicedist3.png")
+```
+
+```{r figure10, fig.cap="Distribution of choices for the fourth choice in the choice condition", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/supp/choicedist4.png")
+```

@@ -51,14 +51,17 @@ ui <- dashboardPage(
       actionButton("findHealth", "Health"),
       actionButton("findSafe", "Safety"),
       actionButton("findThank", "Thanks"),
-      actionButton("findAll", "See All Comments")
+      actionButton("findAll", "See All Comments"),
+      h5("For more information on this study please see the preprint: www.psyarxiv.com/kz2yh Or the blog: tinyletter.com/LottyBrand/archive", style="padding:1em;")
     ),
+    
     
     # what's in the body of the app?
     body = dashboardBody(
       #plotOutput("you could put plots here"),
       #textOutput("you could have text output"),
-      DTOutput("comms_table")
+      DTOutput("comms_table"),
+      textOutput("more_info")
     ),
   skin="yellow"
   )
@@ -144,6 +147,7 @@ server <- function(input, output, session) {
   rownames=FALSE,
   options= list(paging=FALSE,searching=TRUE,info=TRUE,ordering=FALSE)
   )
+  output$more_info <- renderText("For more information on this study please see the preprint: www.psyarxiv.com/kz2yh Or the blog: tinyletter.com/LottyBrand/archive")
   
 }
 
