@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r waics}
 
 library(rethinking)
-#source("../results/loading_saved_models.R")
+source("../results/loading_saved_models.R")
 h2waics <-compare(h2_null, h2_full, h2_exp, h2_int)
 waicTable <- subset(h2waics, select = c("WAIC","SE","weight")) 
 

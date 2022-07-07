@@ -47,6 +47,9 @@ precis(model1.2)
 # in that vaccination attitudes increase after seeing the info, but increase more in those who spent most time with the info
 
 h2_full_time <- readRDS("../model_objects/model_h2_full_time.rds")
+h2_int_time <- readRDS("../model_objects/model_h2_int_time.rds")
+h2_time <- readRDS("../model_objects/model_h2_time.rds")
+
 precis(h2_full_time)
 
 # load rest of the h2 models for WAIC comparison 
