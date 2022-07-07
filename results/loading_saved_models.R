@@ -5,7 +5,7 @@
 
 # model 1: effect of condition on likelihood of taking vaccine in the future
 
-model1 <- readRDS("model1.rds")
+model1 <- readRDS("../model_objects/model1.rds")
 precis(model1)
 precis(model1)[2,1]
 precis(model1)[2,3]
@@ -13,7 +13,7 @@ precis(model1)[2,4]
 
 # model nos: effect of experiment in general on likelihood of taking vaccine
 
-modelnos <- readRDS("model_nos.rds")
+modelnos <- readRDS("../model_objects/model_nos.rds")
 precis(modelnos)
 
 # model 2: best fitting model for looking at attitude change. single experiment effect stronger than interaction

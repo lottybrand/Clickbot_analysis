@@ -16,6 +16,9 @@ knitr::opts_chunk$set(echo = FALSE)
 # WAIC comparisons for hypothesis 2
 
 ```{r waics}
+
+library(rethinking)
+#source("../results/loading_saved_models.R")
 h2waics <-compare(h2_null, h2_full, h2_exp, h2_int)
 waicTable <- subset(h2waics, select = c("WAIC","SE","weight")) 
 
@@ -113,14 +116,14 @@ knitr::include_graphics("../plots/supp/one_info.png")
 knitr::include_graphics("../plots/supp/choicedist1.png")
 ```
 
-```{r figure10, fig.cap="Distribution of choices for the second choice in the choice condition", fig.align="center", out.width="100%"}
+```{r figure11, fig.cap="Distribution of choices for the second choice in the choice condition", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/supp/choicedist2.png")
 ```
 
-```{r figure10, fig.cap="Distribution of choices for the third choice in the choice condition", fig.align="center", out.width="100%"}
+```{r figure12, fig.cap="Distribution of choices for the third choice in the choice condition", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/supp/choicedist3.png")
 ```
 
-```{r figure10, fig.cap="Distribution of choices for the fourth choice in the choice condition", fig.align="center", out.width="100%"}
+```{r figure13, fig.cap="Distribution of choices for the fourth choice in the choice condition", fig.align="center", out.width="100%"}
 knitr::include_graphics("../plots/supp/choicedist4.png")
 ```
