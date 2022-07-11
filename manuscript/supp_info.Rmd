@@ -4,7 +4,7 @@ output: bookdown::pdf_document2
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, fig.height=2, fig.width=4)
 
 # note to get figure referencing you need to change the output to bookdown::pdf_document2
 # and use \ not /
@@ -15,26 +15,47 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # WAIC comparisons for hypothesis 2
 
+Below are the results of the model comparison between our attitude models that address hypothesis 2. The results include the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights respectively. The model holding the most weight is the model that contains the experiment effect only (h2exp), i.e. participants attitudes were most affected after taking part in the experiment, regardless of condition or interactions between time and condition.
+
+h2_exp: (WAIC: 18187.4, SE: 142.88, weight: 0.6) 
+
+h2_full: (WAIC: 18188.2, SE: 142.76, weight: 0.4)  
+
+h2_int: (WAIC: 18302.0 , SE: 142.38, weight: 0.0) 
+
+h2_null: (WAIC: 18382.7 , SE: 141.84, weight: 0.0)        
+
+
 ```{r waics}
 
 library(rethinking)
-source("../results/loading_saved_models.R")
-h2waics <-compare(h2_null, h2_full, h2_exp, h2_int)
-waicTable <- subset(h2waics, select = c("WAIC","SE","weight")) 
+#source("../results/loading_saved_models.R")
+#h2waics <-compare(h2_null, h2_full, h2_exp, h2_int)
+#waicTable <- subset(h2waics, select = c("WAIC","SE","weight")) 
 
-kable(waicTable, caption = "Table showing the model comparison between our attitude models that address hypothesis 2. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the model that contains the experiment effect only (h2exp), i.e. participants attitudes were most affected after taking part in the experiment, regardless of condition or interactions between time and condition  ")
+#kable(waicTable, caption = "Table showing the model comparison between our attitude models that address hypothesis 2. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the model that contains the experiment effect only (h2exp), i.e. participants attitudes were most affected after taking part in the experiment, regardless of condition or interactions between time and condition  ")
 ```
 
 # WAIC comparisons for exploratory time-spent analysis
 
+Below are the results of our model comparison between our exploratory models that look at the effect of spending more than the average amount of time reading the material. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the full model, which contains both an interaction effect for post-treatment rating and spending above median time, as well as a main effect for post-treatment rating. This is good evidence that those who spend above the average amount of time in the study were more likely to show an increase in positive attitudes towards the Covid-19 vaccines
+
+h2_full_time: (WAIC: 18152.1, SE: 142.94, weight: 1)        
+
+h2_int_time: (WAIC: 18186.1, SE: 142.58, weight: 0)
+
+h2_time: (WAIC: 18380.6, SE: 141.88, weight: 0) 
+
+
 ```{r time_waics}
 # need to load h2_int_time and h2_time from 15_exploratory_analysis.R
-timewaics <- compare(h2_full_time,h2_int_time,h2_time)
-waictable2 <- subset(timewaics, select = c("WAIC","SE","weight"))
+#timewaics <- compare(h2_full_time,h2_int_time,h2_time)
+#waictable2 <- subset(timewaics, select = c("WAIC","SE","weight"))
 
-kable(waicTable2, caption = "Table showing the model comparison between our exploratory models that look at the effect of spending more than the average amount of time reading the material. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the full model, which contains both an interaction effect for post-treatment rating and spending above median time, as well as a main effect for post-treatment rating. This is good evidence that those who spend above the average amount of time in the study were more likely to show an increase in positive attitudes towards the Covid-19 vaccines")
+
+
+#kable(waicTable2, caption = "Table showing the model comparison between our exploratory models that look at the effect of spending more than the average amount of time reading the material. The table includes the Wanatabe-Akaike Information Criteria as well as their SEs and their akaike weights. The model holding the most weight is the full model, which contains both an interaction effect for post-treatment rating and spending above median time, as well as a main effect for post-treatment rating. This is good evidence that those who spend above the average amount of time in the study were more likely to show an increase in positive attitudes towards the Covid-19 vaccines")
 ```
-
 
 
 # Vaccine attitudes by attitude type 

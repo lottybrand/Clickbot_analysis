@@ -1,5 +1,5 @@
 ---
-title             : "Covid-19 vaccine dialogues increase vaccination intentions and attitudes in a vaccine-hesitant UK population"
+title             : "Using dialogues to increase positive attitudes towards Covid-19 vaccines in a vaccine-hesitant UK population"
 #title             : "Fact-checked Covid-19 vaccine dialogues led to a 16% reduction in a UK-based population reporting they do not want to get vaccinated"
 shorttitle        : "Clickbot replication"
 
@@ -57,9 +57,9 @@ output            : papaja::apa6_pdf
 
 ---
 
-```{r setup,}
+```{r setup, include=FALSE}
 library(knitr, quietly = TRUE, warn.conflicts = FALSE)
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, fig.height=2, fig.width=4)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE, fig.height=2, fig.width=4)
 library(rethinking)
 library(data.table, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
