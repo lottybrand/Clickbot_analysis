@@ -203,8 +203,8 @@ knitr::include_graphics("../plots/raw_density.png")
 ```
 
 
-```{r beforeafter, fig.cap="Violin plot of average vaccination attitudes before and after the experiment. The green lines show an increase in positive vaccination attitudes, and red lines show a decrease", fig.align="center", out.width="100%"}
-knitr::include_graphics("../plots/before_and_after_violin.png")
+```{r beforeafter, fig.cap="Violin plot of average vaccination attitudes before and after the experiment. 1 = negative attitudes, 7 = positive attitudes. The green lines show an increase in positive vaccination attitudes, and red lines show a decrease.", fig.align="center", out.width="100%"}
+knitr::include_graphics("../plots/before_and_after_violin2.png")
 ```
 
 We also found that vaccine attitudes increased across both conditions (mean: `r precis(h2_exp)[2,1]` , 89% CI: `r precis(h2_exp)[2,3]` , `r precis(h2_exp)[2,4]` ). Against prediction 2, as there was not an interaction between condition and time of ratings in our full model (mean: `r precis(h2_full)[1,1]` , 89% CI: `r precis(h2_full)[1,3]`, `r precis(h2_full)[1,4]` ); vaccine attitudes were not most positive in the Post-Treatment ratings of the Choice Condition, but increased similarly in both conditions. This interpretation was confirmed by a model comparison approach, in which we compared models including parameters for condition, post-treatment rating, and an interaction between condition and post-treatment rating. The best fitting model included only the experiment effect, with the worst fitting models containing the interaction effect, and just varying intercepts (null model), suggesting that the experiment effect (change across both conditions) was most informative in predicting the difference in vaccination attitudes (see supplementary material)). Increase in average vaccination attitudes can be seen in the violin plot in Figure \@ref(fig:beforeafter). 

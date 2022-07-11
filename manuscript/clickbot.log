@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.2)  11 JUL 2022 12:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.2)  11 JUL 2022 15:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -770,16 +770,16 @@ File: ../plots/raw_density.png Graphic file (type png)
 <use ../plots/raw_density.png>
 Package pdftex.def Info: ../plots/raw_density.png  used on input line 296.
 (pdftex.def)             Requested size: 241.74652pt x 185.95886pt.
-<../plots/before_and_after_violin.png, id=99, 602.25pt x 501.875pt>
-File: ../plots/before_and_after_violin.png Graphic file (type png)
-<use ../plots/before_and_after_violin.png>
-Package pdftex.def Info: ../plots/before_and_after_violin.png  used on input li
-ne 305.
+<../plots/before_and_after_violin2.png, id=99, 602.25pt x 501.875pt>
+File: ../plots/before_and_after_violin2.png Graphic file (type png)
+<use ../plots/before_and_after_violin2.png>
+Package pdftex.def Info: ../plots/before_and_after_violin2.png  used on input l
+ine 305.
 (pdftex.def)             Requested size: 241.74117pt x 201.45097pt.
 
 Underfull \vbox (badness 1803) has occurred while \output is active []
 
-[5 <../plots/raw_density.png> <../plots/before_and_after_violin.png>] [6]
+[5 <../plots/raw_density.png> <../plots/before_and_after_violin2.png>] [6]
 Underfull \vbox (badness 1215) has occurred while \output is active []
 
 [7]
@@ -793,8 +793,8 @@ Package rerunfilecheck Info: File `clickbot.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  14441 strings out of 480559
- 220888 string characters out of 5902208
- 563625 words of memory out of 5000000
+ 220899 string characters out of 5902208
+ 563674 words of memory out of 5000000
  31713 multiletter control sequences out of 15000+600000
  454723 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -803,7 +803,7 @@ Here is how much of TeX's memory you used:
 sers/LottyBrand/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></U
 sers/LottyBrand/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></U
 sers/LottyBrand/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on clickbot.pdf (9 pages, 322874 bytes).
+Output written on clickbot.pdf (9 pages, 319209 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  185 compressed objects within 2 object streams

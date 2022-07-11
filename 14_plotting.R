@@ -115,10 +115,11 @@ both_violin <- ggplot(data=plot_data, aes(y=attitude)) +
                    side = "l", fill = 'moccasin')+
   geom_half_violin(data = plot_data %>% filter(time=="2"),aes(x = time, y = attitude), 
                    position = position_nudge(x = .3), side = "r", fill = "moccasin")+
-  xlab("Time") + ylab("Attitudes towards Vaccines")+
+  xlab("Time") + ylab("Average attitudes towards Covid-19 vaccines")+
   theme_classic()+
-  scale_y_continuous(breaks=c(1,2,3,4,5,6,7))+
-  ggtitle('Attitudes before and after')
+  scale_y_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1))+
+  ggtitle('Attitudes before and after dialogue exposure') +
+  theme(plot.title = element_text(hjust = 0.5))
 both_violin
 
 
